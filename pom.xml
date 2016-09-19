@@ -24,6 +24,7 @@
 		<module>proxy-server</module>
 		<module>web-server</module>
 		<module>catalog-service</module>
+		<module>inventory-service</module>
 	</modules>
 	<dependencies>
 		<dependency>

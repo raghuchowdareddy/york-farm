@@ -47,18 +47,10 @@ public class UserRole implements Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn (name = ColumnType.USER_ID)
 	public User getUser() {
 		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -66,11 +58,19 @@ public class UserRole implements Serializable {
 	public Role getRole() {
 		return role;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 	public static class Builder {
 		private Integer id;
 		private User user;

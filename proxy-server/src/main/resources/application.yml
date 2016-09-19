@@ -9,6 +9,7 @@ zuul:
   routes:
     oauth2-server: /oauth2/**
     catalog-service: /catalog/**
+    inventory-service: /inventory/**
 security:
   oauth2:
     resource:

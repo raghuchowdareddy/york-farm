@@ -20,8 +20,8 @@
 				<h4 class="title">Sign in to start your session</h4>
 				<div class="comments-area">
 					<form action="login" method="post">
-						<p><label>Username</label><span>*</span><input type="text" /></p>
-						<p><label>Password</label><span>*</span><input type="password" /></p>
+						<p><label>Username</label><span>*</span><input type="text" name="username"/></p>
+						<p><label>Password</label><span>*</span><input type="password" name="password"/></p>
 						<p><#--<input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>--></p>
 						<p><input type="submit" value="Login" /></p>
 					</form>

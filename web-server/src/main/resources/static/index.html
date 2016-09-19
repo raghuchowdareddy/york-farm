@@ -12,14 +12,24 @@
 <style type="text/css">[ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; }</style>
 </head>
 <body ng-cloak>
-<div class="header-top">
+<div class="header-top" ng-controller="HeaderController">
 	<div class="wrap">
 		<div class="logo"><a href="#"><img src="resources/images/logo.png" /></a></div>
 		<div class="cssmenu">
 		   <ul>
+		   	 <li ng-if="user.id != undefined">
+		   	 	<span class="ng-binding welcome-tag">
+		   	 		<span>Welcome,</span>
+		   	 		<span>{{ user.firstName }} {{ user.lastName }}!</span>
+		   	 	</span>
+		   	 </li>
+             <li ng-if="user.id != undefined"><a href="/#/orders">Orders</a></li>
+             <li ng-if="user.id != undefined"><a href="/#/settings">Settings</a></li>
+		     <li ng-if="user.id != undefined"><a href="/#/cart"><i class="fa fa-shopping-cart"></i><span class="cart-icon">Cart</span></a></li>
 			 <li><a href="#">Store Locator</a></li>
-			 <li><a href="/login">My Account</a></li>
+			 <li ng-if="user.id == undefined"><a href="/login">My Account</a></li>
 			 <li><a href="#">CheckOut</a></li> 
+           	 <li ng-if="user.id != undefined"><a ng-click="logout()" href="#">Logout</a></li>
 		   </ul>
 		</div>
 		<div class="clear"></div>
@@ -64,6 +74,7 @@ jQuery(document).ready(function($) {
 	});
 });
 </script>
+<script type="text/javascript" src="resources/services/user.service.js"></script>
 <script type="text/javascript" src="resources/app.js"></script>
 </body>
 </html>

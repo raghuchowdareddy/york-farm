@@ -40,6 +40,10 @@ public class Product implements Serializable {
 	private Category category;
 	private Collection<Catalog> catalogs;
 
+	private Product() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Product(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;

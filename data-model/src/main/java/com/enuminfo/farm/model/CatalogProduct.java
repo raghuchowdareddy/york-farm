@@ -34,6 +34,10 @@ public class CatalogProduct implements Serializable {
 	private Catalog catalog;
 	private Product product;
 	
+	private CatalogProduct() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private CatalogProduct(Builder builder) {
 		this.id = builder.id;
 		this.catalog = builder.catalog;

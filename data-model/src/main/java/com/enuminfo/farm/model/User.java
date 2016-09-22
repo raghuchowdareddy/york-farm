@@ -37,6 +37,10 @@ public class User implements Serializable {
 	private String password;
 	private Collection<Role> roles;
 	
+	private User() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private User(Builder builder) {
 		this.id = builder.id;
 		this.username = builder.username;

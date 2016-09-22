@@ -29,6 +29,10 @@ public class Category implements Serializable {
 	private Integer id;
 	private String name;
 
+	private Category() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Category(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;

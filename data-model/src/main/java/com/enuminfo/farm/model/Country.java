@@ -34,6 +34,10 @@ public class Country implements Serializable {
 	private String name, isd;
 	private Collection<Location> locations;
 
+	private Country() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Country(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;

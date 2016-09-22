@@ -7,14 +7,8 @@ zuul:
   ignored-services: '*'
   ignoredPatterns: /**/api/**
   routes:
-    oauth2-server: /oauth2/**
     catalog-service: /catalog/**
     inventory-service: /inventory/**
-security:
-  oauth2:
-    resource:
-      userInfoUri: http://localhost:8181/secure/user
-  ignored: /catalog/**
 eureka:
   instance:
     prefer-ip-address: true

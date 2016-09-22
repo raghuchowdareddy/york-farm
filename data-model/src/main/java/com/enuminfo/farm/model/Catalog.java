@@ -39,6 +39,10 @@ public class Catalog implements Serializable {
 	private Date startDate;
 	private Date endDate;
 
+	private Catalog() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Catalog(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;

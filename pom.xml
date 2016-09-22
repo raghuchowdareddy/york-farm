@@ -19,7 +19,6 @@
 	<modules>
 		<module>commons</module>
 		<module>eureka-server</module>
-		<module>oauth2-server</module>
 		<module>data-model</module>
 		<module>proxy-server</module>
 		<module>web-server</module>

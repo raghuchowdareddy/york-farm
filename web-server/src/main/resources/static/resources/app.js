@@ -1,29 +1,25 @@
 (function() {
 	'use strict';
-	angular.module('app', ['ngRoute', 'ngCookies'])
-		.config(config)
-		.controller('HeaderController', HeaderController);
+	angular.module('app', [ 'ngRoute', 'ngCookies' ]).config(config)
 	
-	config.$inject = ['$routeProvider', '$locationProvider'];
+	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
 		$routeProvider.when('/', {
 			templateUrl : 'resources/default/default.view.html'
+		}).when('/flowers', {
+			controller : 'FlowerController',
+			templateUrl : 'resources/flowers/flowers.view.html',
+			controllerAs : 'vm'
+		}).when('/friuts', {
+			controller : 'FriutController',
+			templateUrl : 'resources/friuts/friuts.view.html',
+			controllerAs : 'vm'
+		}).when('/vegetables', {
+			controller : 'VegetableController',
+			templateUrl : 'resources/vegetables/vegetables.view.html',
+			controllerAs : 'vm'
 		}).otherwise({
 			redirectTo : '/'
 		});
-	}
-	
-	HeaderController.$inject = ['UserService', '$location', '$rootScope'];
-	function HeaderController($rootScope) {
-		var vm = this;
-		vm.user = null;
-		init();
-		
-        function init() {
-	        UserService.loggedUserDetail().then(function (response) {
-	        	vm.user.response;
-	        });
-	        console.log(vm.user);
-        }
 	}
 })();

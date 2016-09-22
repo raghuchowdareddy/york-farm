@@ -34,6 +34,10 @@ public class Address implements Serializable {
 	private String houseNo, street, landmark;
 	private Location location;
 
+	private Address() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Address(Builder builder) {
 		this.id = builder.id;
 		this.houseNo = builder.houseNo;

@@ -35,6 +35,10 @@ public class Location implements Serializable {
 	private Integer pin;
 	private Country country;
 
+	private Location() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Location(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;

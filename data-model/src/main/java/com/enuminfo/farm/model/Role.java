@@ -36,6 +36,10 @@ public class Role implements Serializable {
 	private String name;
 	private Collection<User> users;
 	
+	private Role() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Role(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;

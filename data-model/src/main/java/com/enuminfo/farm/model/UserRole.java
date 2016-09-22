@@ -34,6 +34,10 @@ public class UserRole implements Serializable {
 	private User user;
 	private Role role;
 	
+	private UserRole() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private UserRole(Builder builder) {
 		this.id = builder.id;
 		this.user = builder.user;

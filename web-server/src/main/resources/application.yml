@@ -9,20 +9,6 @@ zuul:
     proxy-server:
       path: /api/**
       url: http://localhost:9999
-    oauth2-server:
-      path: /oauth2/**
-      url: http://localhost:8181/secure/user
-security:
-  enable-csrf: false
-  oauth2:
-    resource:
-      userInfoUri: http://localhost:8181/secure/user
-    client:
-      accessTokenUri: http://localhost:8181/secure/oauth/token
-      userAuthorizationUri: http://localhost:8181/secure/oauth/authorize
-      clientId: acme
-      clientSecret: acmesecret
-  ignored: /resources/**
 eureka:
   instance:
     prefer-ip-address: true

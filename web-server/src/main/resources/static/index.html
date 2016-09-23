@@ -13,18 +13,27 @@
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<style type="text/css">[ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; }</style>
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
 </head>
 <body ng-clock>
 	<div class="header-top">
 		<div class="wrap">
-			<div class="logo"><a href="#"><img src="resources/images/logo.png" /></a></div>
+			<div class="logo">
+				<a href="#"><img src="resources/images/logo.png" width="185" height="45"/></a>
+			</div>
 			<div class="cssmenu">
-		   		<ul>
-			 		<li><a href="#">Store Locator</a></li>
-			 		<li><a href="/login">My Account</a></li>
-			 		<li><a href="#">CheckOut</a></li> 
-			   </ul>
+				<ul>
+					<li><a href="#"><i class="fa fa-cogs"></i>&nbsp;<span
+							class="setting-icon">Settings</span></a></li>
+					<li><a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span
+							class="cart-icon">Orders</span></a></li>
+					<li><a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span
+							class="cart-icon">Cart</span>({{selectedVegetables.length}})</a></li>
+				</ul>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -40,10 +49,10 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-   	<div class="main">
-   		<div ng-view></div>
-   	</div>
-    <!-- <div class="footer">
+	<div class="main">
+		<div ng-view></div>
+	</div>
+	<!-- <div class="footer">
 		<div class="copy">
 			<div class="wrap">
 				<p>&copy; All rights reserved | Template by&nbsp;<a href="http://enuminfo.com/"> from ENUMInfo team</a></p>
@@ -57,16 +66,22 @@
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
-	<script type="text/javascript">$(document).ready(function(){$(".megamenu").megamenu();});</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".megamenu").megamenu();
+		});
+	</script>
 	<script type="text/javascript" src="resources/js/move-top.js"></script>
 	<script type="text/javascript" src="resources/js/easing.js"></script>
 	<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event) {
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop : $(this.hash).offset().top
+				}, 1200);
+			});
 		});
-	});
 	</script>
 	<script type="text/javascript" src="resources/app.js"></script>
 	<script type="text/javascript" src="resources/services/vegetables.service.js"></script>
@@ -76,10 +91,13 @@
 	<script type="text/javascript" src="resources/friuts/friuts.controller.js"></script>
 	<script type="text/javascript" src="resources/flowers/flowers.controller.js"></script>
 	<script type="text/javascript">
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
+		var _gaq = [ [ '_setAccount', 'UA-XXXXX-X' ], [ '_trackPageview' ] ];
+		(function(d, t) {
+			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+			g.src = ('https:' == location.protocol ? '//ssl' : '//www')
+					+ '.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g, s)
+		}(document, 'script'));
+	</script>
 </body>
 </html>

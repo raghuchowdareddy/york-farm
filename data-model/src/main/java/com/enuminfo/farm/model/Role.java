@@ -36,6 +36,10 @@ public class Role implements Serializable {
 	private String name;
 	private Collection<User> users;
 	
+	private Role() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private Role(Builder builder) {
 		this.id = builder.id;
 		this.name = builder.name;
@@ -49,17 +53,9 @@ public class Role implements Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	@Column (name = ColumnType.NAME)
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -67,11 +63,19 @@ public class Role implements Serializable {
 	public Collection<User> getUsers() {
 		return users;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public void setUsers(Collection<User> users) {
 		this.users = users;
 	}
-	
+
 	public static class Builder {
 		private Integer id;
 		private String name;

@@ -37,6 +37,10 @@ public class User implements Serializable {
 	private String password;
 	private Collection<Role> roles;
 	
+	private User() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private User(Builder builder) {
 		this.id = builder.id;
 		this.username = builder.username;
@@ -51,17 +55,9 @@ public class User implements Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	@Column (name = ColumnType.USERNAME)
 	public String getUsername() {
 		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	@Column (name = ColumnType.PASSWORD)
@@ -69,20 +65,28 @@ public class User implements Serializable {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable (name = TableType.T_USER_ROLE, joinColumns = {@JoinColumn(name = ColumnType.ROLE_ID)}, inverseJoinColumns = {@JoinColumn(name = ColumnType.USER_ID)})
 	public Collection<Role> getRoles() {
 		return roles;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 	public static class Builder {
 		private Integer id;
 		private String username;

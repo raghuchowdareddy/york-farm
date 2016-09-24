@@ -35,25 +35,20 @@
 			</div>
 			<div class="cssmenu">
 				<ul>
-					<li ng-if="loggedUser != undefined"><span
-						class="ng-binding welcome-tag">Welcome,
-							{{loggedUser.username}} !</span></li>
-					<li ng-if="loggedUser != undefined"><a href="#/orders"><i
+					<li ng-if="globals.currentUser != undefined"><a href="#/orders"><i
 							class="fa fa-shopping-cart"></i>&nbsp;<span class="signup-icon">Orders</span></a></li>
-					<li
-						ng-if="loggedUser != undefined && access == true"><a
+					<li ng-if="globals.currentUser != undefined && access == true"><a
 						href="#/settings"><i class="fa fa-cogs"></i>&nbsp;<span
 							class="signup-icon">Settings</span></a></li>
-					<li ng-if="loggedUser == undefined"><a href="#/signin"><i
+					<li ng-if="globals.currentUser == undefined"><a href="#/signin"><i
 							class="fa fa-sign-in"></i>&nbsp;<span class="signin-icon">Sign
 								In</span></a></li>
 					<!-- <li ng-if="loggedUser == undefined"><a href="#/signup"><i class="fa fa fa-user-plus"></i>&nbsp;<span
 							class="signup-icon">Sign Up</span></a></li> -->
-					<li><a
-						href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;<span
+					<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;<span
 							class="cart-icon">Checkout</span></a></li>
-					<li ng-if="loggedUser != undefined"><a ng-click="logout()"
-						href="#"><i class="fa fa-sign-out"></i>&nbsp;<span
+					<li ng-if="globals.currentUser != undefined"><a href="#/signout">
+						<i class="fa fa-sign-out"></i>&nbsp;<span
 							class="signup-icon">Sign Out</span></a></li>
 				</ul>
 			</div>
@@ -67,6 +62,8 @@
 				<li><a class="color2" href="#/flowers">Flowers</a></li>
 				<li><a class="color3" href="#/friuts">Fruits</a></li>
 				<li><a class="color4" href="#/vegetables">Vegetables</a></li>
+				<li ng-if="globals.currentUser != undefined"><a class="color5" href="#/">Welcome,
+						{{globals.currentUser.username}} !</a></li>
 			</ul>
 			<div class="clear"></div>
 		</div>
@@ -117,7 +114,7 @@
 	<script type="text/javascript"
 		src="resources/services/flash.service.js"></script>
 	<script type="text/javascript" src="resources/services/user.service.js"></script>
-	<script type="text/javascript" src="resources/user/login.controller.js"></script>
+	<script type="text/javascript" src="resources/user/security.controller.js"></script>
 	<script type="text/javascript"
 		src="resources/services/vegetables.service.js"></script>
 	<script type="text/javascript"

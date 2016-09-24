@@ -48,6 +48,7 @@
 		function clearCredentials() {
 			$rootScope.globals = {};
 			$cookieStore.remove('globals');
+			$rootScope.access = null;
 			$http.defaults.headers.common.Authorization = 'Basic';
 		}
 	}

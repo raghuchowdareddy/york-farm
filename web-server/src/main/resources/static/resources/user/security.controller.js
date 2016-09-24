@@ -1,10 +1,10 @@
 (function() {
 	'use strict';
-	angular.module('app').controller('LoginController', LoginController);
-	LoginController.$inject = [ 'UserService', 'AuthenticationService',
+	angular.module('app').controller('SecurityController', SecurityController);
+	SecurityController.$inject = [ 'UserService', 'AuthenticationService',
 			'FlashService', '$rootScope', '$location' ];
 
-	function LoginController(UserService, AuthenticationService, FlashService,
+	function SecurityController(UserService, AuthenticationService, FlashService,
 			$rootScope, $location) {
 		var vm = this;
 		vm.login = login;
@@ -19,12 +19,6 @@
 				if (response.success) {
 					AuthenticationService.setCredentials(vm.username,
 							vm.password);
-					UserService.getByUsername(
-							$rootScope.globals.currentUser.username).then(
-							function(response) {
-								$rootScope.loggedUser = response.data;
-								$rootScope.access = $rootScope.loggedUser.roles.indexOf('ROLE_ADMIN') == 1;
-							});
 					$location.path('/');
 				} else {
 					FlashService.error(response.message);

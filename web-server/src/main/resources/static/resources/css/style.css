@@ -1083,7 +1083,7 @@ span.orange {
 	-o-transition: all 0.5s ease-out;
 }
 
-.search input[type="submit"] {
+.search input[type="button"] {
 	border: none;
 	text-indent: -9999px;
 	outline: none;
@@ -1094,7 +1094,7 @@ span.orange {
 	padding: 8px;
 }
 
-.search input[type="submit"]:active {
+.search input[type="button"]:active {
 	position: relative;
 }
 
@@ -1417,7 +1417,7 @@ h5.sub_title {
 	margin-top: 3%;
 }
 
-.button1 input[type="submit"] {
+.button1 input[type="button"] {
 	background: #555;
 	color: #FFF;
 	font-size: 0.8em;
@@ -1439,7 +1439,7 @@ h5.sub_title {
 	float: left;
 }
 
-.button1 input[type="submit"]:hover {
+.button1 input[type="button"]:hover {
 	background: #444;
 }
 
@@ -1484,7 +1484,7 @@ h5.sub_title {
 	padding: 8px 0;
 }
 
-.comments-area input[type="submit"] {
+.comments-area input[type="button"] {
 	background: #555;
 	color: #FFF;
 	/* font-size: 0.8em; */
@@ -1506,7 +1506,7 @@ h5.sub_title {
 	float: right;
 }
 
-.comments-area input[type="submit"]:hover {
+.comments-area input[type="button"]:hover {
 	background: #444;
 }
 
@@ -1779,7 +1779,7 @@ h4.m_9 {
 	padding: 4% 0;
 }
 
-.btn_form form input[type="submit"] {
+.btn_form form input[type="button"] {
 	font-family: 'Open Sans', sans-serif;
 	cursor: pointer;
 	border: none;
@@ -1797,7 +1797,7 @@ h4.m_9 {
 	transition: all 0.3s ease-in-out;
 }
 
-.btn_form form input[type="submit"]:hover {
+.btn_form form input[type="button"]:hover {
 	background: #FFAF02;
 	border-bottom: 4px solid #DF9A06;
 }

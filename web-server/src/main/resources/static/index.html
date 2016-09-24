@@ -6,13 +6,20 @@
 <title>York Farm</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+<link href="resources/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="resources/css/megamenu.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
@@ -23,16 +30,31 @@
 	<div class="header-top">
 		<div class="wrap">
 			<div class="logo">
-				<a href="#"><img src="resources/images/logo.png" width="185" height="45"/></a>
+				<a href="#"><img src="resources/images/logo.png" width="185"
+					height="45" /></a>
 			</div>
 			<div class="cssmenu">
 				<ul>
-					<li><a href="#"><i class="fa fa-cogs"></i>&nbsp;<span
-							class="setting-icon">Settings</span></a></li>
-					<li><a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span
-							class="cart-icon">Orders</span></a></li>
-					<li><a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span
-							class="cart-icon">Cart</span>({{selectedVegetables.length}})</a></li>
+					<li ng-if="loggedUser != undefined"><span
+						class="ng-binding welcome-tag">Welcome,
+							{{loggedUser.username}} !</span></li>
+					<li ng-if="loggedUser != undefined"><a href="#/orders"><i
+							class="fa fa-shopping-cart"></i>&nbsp;<span class="signup-icon">Orders</span></a></li>
+					<li
+						ng-if="loggedUser != undefined && access == true"><a
+						href="#/settings"><i class="fa fa-cogs"></i>&nbsp;<span
+							class="signup-icon">Settings</span></a></li>
+					<li ng-if="loggedUser == undefined"><a href="#/signin"><i
+							class="fa fa-sign-in"></i>&nbsp;<span class="signin-icon">Sign
+								In</span></a></li>
+					<!-- <li ng-if="loggedUser == undefined"><a href="#/signup"><i class="fa fa fa-user-plus"></i>&nbsp;<span
+							class="signup-icon">Sign Up</span></a></li> -->
+					<li><a
+						href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;<span
+							class="cart-icon">Checkout</span></a></li>
+					<li ng-if="loggedUser != undefined"><a ng-click="logout()"
+						href="#"><i class="fa fa-sign-out"></i>&nbsp;<span
+							class="signup-icon">Sign Out</span></a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -59,12 +81,18 @@
 			</div>
 		</div>
 	</div> -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
-	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-cookies.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<script type="text/javascript"
+		src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
+	<script type="text/javascript"
+		src="https://code.angularjs.org/1.5.0/angular-cookies.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript"
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -84,12 +112,24 @@
 		});
 	</script>
 	<script type="text/javascript" src="resources/app.js"></script>
-	<script type="text/javascript" src="resources/services/vegetables.service.js"></script>
-	<script type="text/javascript" src="resources/services/friuts.service.js"></script>
-	<script type="text/javascript" src="resources/services/flowers.service.js"></script>
-	<script type="text/javascript" src="resources/vegetables/vegetables.controller.js"></script>
-	<script type="text/javascript" src="resources/friuts/friuts.controller.js"></script>
-	<script type="text/javascript" src="resources/flowers/flowers.controller.js"></script>
+	<script type="text/javascript"
+		src="resources/services/authentication.service.js"></script>
+	<script type="text/javascript"
+		src="resources/services/flash.service.js"></script>
+	<script type="text/javascript" src="resources/services/user.service.js"></script>
+	<script type="text/javascript" src="resources/user/login.controller.js"></script>
+	<script type="text/javascript"
+		src="resources/services/vegetables.service.js"></script>
+	<script type="text/javascript"
+		src="resources/services/friuts.service.js"></script>
+	<script type="text/javascript"
+		src="resources/services/flowers.service.js"></script>
+	<script type="text/javascript"
+		src="resources/vegetables/vegetables.controller.js"></script>
+	<script type="text/javascript"
+		src="resources/friuts/friuts.controller.js"></script>
+	<script type="text/javascript"
+		src="resources/flowers/flowers.controller.js"></script>
 	<script type="text/javascript">
 		var _gaq = [ [ '_setAccount', 'UA-XXXXX-X' ], [ '_trackPageview' ] ];
 		(function(d, t) {

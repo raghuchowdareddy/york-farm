@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
-	angular.module('app', [ 'ngRoute', 'ngCookies' ]).config(config)
-	
+	angular.module('app', [ 'ngRoute', 'ngCookies' ]).config(config);
+
 	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
 		$routeProvider.when('/', {
@@ -17,6 +17,18 @@
 		}).when('/vegetables', {
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',
+			controllerAs : 'vm'
+		}).when('/signin', {
+			controller : 'LoginController',
+			templateUrl : 'resources/user/login.view.html',
+			controllerAs : 'vm'
+		}).when('/signup', {
+			controller : 'RegisterController',
+			templateUrl : 'resources/user/register.view.html',
+			controllerAs : 'vm'
+		}).when('/cart', {
+			controller : 'CartController',
+			templateUrl : 'resources/cart/cart.view.html',
 			controllerAs : 'vm'
 		}).otherwise({
 			redirectTo : '/'

@@ -7,6 +7,7 @@ zuul:
   ignored-services: '*'
   ignoredPatterns: /**/api/**
   routes:
+    user-service: /user/**
     catalog-service: /catalog/**
     inventory-service: /inventory/**
 eureka:

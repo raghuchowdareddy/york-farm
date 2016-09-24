@@ -4,22 +4,22 @@
     UserService.$inject = ['$http'];
     
     function UserService($http) {
-    	console.log('UserService');
     	var service = {};
-        service.loggedUserDetail = loggedUserDetail;
+        service.getAllAdmins = getAllAdmins;
+        service.getSystemName = getSystemName;
+        service.getByUsername = getByUsername;
         return service;
         
-	    function loggedUserDetail() {
-	    	console.log('loggedUserDetail');
-	    	return $http.get('/api/oauth2/user/loggedIn').then(handleSuccess, handleError('Error getting logged user detail'));
+        function getByUsername(username) {
+        	return $http.get('/api/user/loggedIn/' + username);
+        }
+        
+	    function getAllAdmins() {
+	    	return $http.get('/api/user/system/privilage');
 	    }
 	    
-	    function handleSuccess(res) {
-	    	res.data;
-	    }
-	    
-	    function handleError(error) {
-	    	
+	    function getSystemName() {
+	    	return $http.get('/api/user/system/admins');
 	    }
     }
 })();

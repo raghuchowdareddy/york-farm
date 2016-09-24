@@ -5,11 +5,12 @@ package com.enuminfo.farm.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.enuminfo.farm.model.Catalog;
+import com.enuminfo.farm.model.Role;
 
 /**
  * @author Kumar
  */
-public interface ICatalogRepository extends PagingAndSortingRepository<Catalog, Integer> {
+public interface IRoleRepository extends PagingAndSortingRepository<Role, Integer> {
 
+	Role findByName(String name);
 }

@@ -6,11 +6,9 @@
 <title>York Farm</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <style type="text/css">
@@ -31,8 +29,11 @@
 							class="setting-icon">Settings</span></a></li>
 					<li><a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span
 							class="cart-icon">Orders</span></a></li>
-					<li><a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span
-							class="cart-icon">Cart</span>({{selectedVegetables.length}})</a></li>
+					<!-- <li ng-controller="DefaultController"><a ng-click="showAllBaggedItems(selectedVegetables)"><i class="fa fa-shopping-cart"></i>&nbsp;<span
+							class="cart-icon">Cart</span>  ({{selectedVegetables.length}})</a></li> -->
+						<li ng-controller="ModalDemoCtrl as $ctrl"><a ng-click="$ctrl.openBaggedCart(selectedVegetables.length)"><i class="fa fa-shopping-cart"></i>&nbsp;<span
+							class="cart-icon">Cart</span>  ({{selectedVegetables.length}})</a></li>	
+							
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -59,21 +60,23 @@
 			</div>
 		</div>
 	</div> -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
-	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-cookies.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.4.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script type="text/javascript" src="resources/components/angular-cookies/angular-cookies.js"></script>
+	<script type="text/javascript" src="resources/components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ready(function() {
 			$(".megamenu").megamenu();
 		});
-	</script>
+	</script> -->
 	<script type="text/javascript" src="resources/js/move-top.js"></script>
 	<script type="text/javascript" src="resources/js/easing.js"></script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event) {
 				event.preventDefault();
@@ -82,15 +85,18 @@
 				}, 1200);
 			});
 		});
-	</script>
+	</script> -->
 	<script type="text/javascript" src="resources/app.js"></script>
+	
 	<script type="text/javascript" src="resources/services/vegetables.service.js"></script>
 	<script type="text/javascript" src="resources/services/friuts.service.js"></script>
 	<script type="text/javascript" src="resources/services/flowers.service.js"></script>
 	<script type="text/javascript" src="resources/vegetables/vegetables.controller.js"></script>
 	<script type="text/javascript" src="resources/friuts/friuts.controller.js"></script>
 	<script type="text/javascript" src="resources/flowers/flowers.controller.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript" src="resources/default/default.controller.js"></script> 
+	<!-- <script type="text/javascript" src="resources/baggeditems/baggeditems.controller.js"></script> -->
+	<!-- <script type="text/javascript">
 		var _gaq = [ [ '_setAccount', 'UA-XXXXX-X' ], [ '_trackPageview' ] ];
 		(function(d, t) {
 			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
@@ -98,6 +104,6 @@
 					+ '.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g, s)
 		}(document, 'script'));
-	</script>
+	</script> -->
 </body>
 </html>

@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('app', [ 'ngRoute', 'ngCookies' ]).config(config)
+	angular.module('app', [ 'ngRoute', 'ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap' ]).config(config)
 	
 	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
@@ -9,15 +9,20 @@
 		}).when('/flowers', {
 			controller : 'FlowerController',
 			templateUrl : 'resources/flowers/flowers.view.html',
-			controllerAs : 'vm'
+			controllerAs : 'flowerContrl'
 		}).when('/friuts', {
 			controller : 'FriutController',
 			templateUrl : 'resources/friuts/friuts.view.html',
-			controllerAs : 'vm'
+			controllerAs : 'fruitContrl'
 		}).when('/vegetables', {
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',
-			controllerAs : 'vm'
+			controllerAs : 'vegContrl'
+		}).when('/baggeditems',{
+			controller : 'BaggeditemsController',
+			templateUrl : 'resources/baggeditems/baggeditems.view.html',
+			controllerAs : 'baggedContrl'
+			
 		}).otherwise({
 			redirectTo : '/'
 		});

@@ -7,17 +7,15 @@
 				<div class="comments-area">
 					<form name="form" role="form" method="post">
 						<p>
-							<label>Username</label> <span>*</span><input type="text"
-								placeholder="Username" ng-model="vm.username"
-								required="required" />
+							<label>Username</label> <span>*</span>
+							<input type="text" placeholder="Username" ng-model="securityCtrl.username" required="required" />
 						</p>
 						<p>
-							<label>Password</label> <span>*</span><input type="password"
-								placeholder="Password" ng-model="vm.password"
-								required="required" />
+							<label>Password</label> <span>*</span>
+							<input type="password" placeholder="Password" ng-model="securityCtrl.password" required="required" />
 						</p>
 						<p>
-							<input type="button" value="Login" ng-click="vm.login()"/>
+							<input type="button" value="Login" ng-click="securityCtrl.login()"/>
 						</p>
 					</form>
 				</div>

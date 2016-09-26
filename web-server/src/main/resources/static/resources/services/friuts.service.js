@@ -1,5 +1,6 @@
 (function() {
 	'use strict';
+	
 	angular.module('app').factory('FriutService', FriutService);
 	FriutService.$inject = ['$http'];
 	

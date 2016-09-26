@@ -1,15 +1,16 @@
 (function() {
 	'use strict';
+	
 	angular.module('app').controller('FlowerController', FlowerController);
 	FlowerController.$inject = ['FlowerService'];
 	
 	function FlowerController(FlowerService) {
-		var vm = this;
-		vm.flowers = [];
+		var flowerCtrl = this;
+		flowerCtrl.flowers = [];
 		initController();
 		
 		function initController() {
-			vm.flowers = FlowerService.getAll();
+			flowerCtrl.flowers = FlowerService.getAll();
 		}
 	}
 })();

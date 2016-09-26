@@ -1,12 +1,10 @@
 (function() {
 	'use strict';
-	angular.module('app').factory('AuthenticationService',
-			AuthenticationService);
-	AuthenticationService.$inject = [ '$http', '$cookieStore', '$rootScope',
-			'$timeout', 'UserService' ];
+	
+	angular.module('app').factory('AuthenticationService', AuthenticationService);
+	AuthenticationService.$inject = [ '$http', '$cookieStore', '$rootScope', '$timeout', 'UserService' ];
 
-	function AuthenticationService($http, $cookieStore, $rootScope, $timeout,
-			UserService) {
+	function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
 		var service = {};
 		service.login = login;
 		service.setCredentials = setCredentials;
@@ -40,8 +38,7 @@
 					authdata : authdata
 				}
 			};
-			$http.defaults.headers.common['Authorization'] = 'Basic '
-					+ authdata; // jshint ignore:line
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
 			$cookieStore.put('globals', $rootScope.globals);
 		}
 
@@ -73,9 +70,7 @@
 				} else if (isNaN(chr3)) {
 					enc4 = 64;
 				}
-				output = output + this.keyStr.charAt(enc1)
-						+ this.keyStr.charAt(enc2) + this.keyStr.charAt(enc3)
-						+ this.keyStr.charAt(enc4);
+				output = output + this.keyStr.charAt(enc1) + this.keyStr.charAt(enc2) + this.keyStr.charAt(enc3) + this.keyStr.charAt(enc4);
 				chr1 = chr2 = chr3 = "";
 				enc1 = enc2 = enc3 = enc4 = "";
 			} while (i < input.length);
@@ -90,10 +85,7 @@
 			var i = 0;
 			var base64test = /[^A-Za-z0-9\+\/\=]/g;
 			if (base64test.exec(input)) {
-				window
-						.alert("There were invalid base64 characters in the input text.\n"
-								+ "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n"
-								+ "Expect errors in decoding.");
+				window.alert("There were invalid base64 characters in the input text.\n" + "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" + "Expect errors in decoding.");
 			}
 			input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 			do {
@@ -117,5 +109,4 @@
 			return output;
 		}
 	};
-
 })();

@@ -9,10 +9,6 @@
 		var vm = this;
 		vm.login = login;
 
-		(function initController() {
-			AuthenticationService.clearCredentials();
-		});
-
 		function login() {
 			AuthenticationService.login(vm.username, vm.password, function(
 					response) {

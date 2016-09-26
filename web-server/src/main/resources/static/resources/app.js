@@ -36,6 +36,17 @@
 					AuthenticationService.clearCredentials();
 				}]
 			}
+		}).when('/settings', {
+			controller : 'SettingsController',
+			templateUrl : 'resources/admin/settings.view.html',
+			controllerAs : 'vm'
+		}).when('/product', {
+			controller : 'ProductController',
+			templateUrl : 'resources/admin/product.view.html',
+			controllerAs : 'vm'
+		}).when('/catalog', {
+			controller : 'CatalogController',
+			templateUrl : 'resources/admin/catalog.view.html'
 		}).otherwise({
 			redirectTo : '/'
 		});

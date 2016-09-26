@@ -5,13 +5,24 @@
 	VegetableController.$inject = ['VegetableService','$rootScope','$q'];
 	
 	function VegetableController(VegetableService, $rootScope) {
-		var vegetableCtrl = this;
-		vegetableCtrl.vegetables = [];
+		var _this = this;
+		_this.vegetables = [];
+		$rootScope.selectedVegetables = [];
+		_this.add2Bag = add2Bag;
+		_this.show = show;
+		
 		initController();
 		
 		function initController() {
-			vegetableCtrl.vegetables = VegetableService.getAll();
-		}
+			_this.vegetables = VegetableService.getAll();
+		};
+		
+		function add2Bag(selectedVegetable) {
+			$rootScope.selectedVegetables.push(selectedVegetable);
+		};
+		function show(){
+			console.log("hi");
+		};
 		
 	}
 })();

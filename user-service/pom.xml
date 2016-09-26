@@ -10,6 +10,12 @@
 	<name>User Service</name>
 	<description>ENUMINfo | York Farm - User Service</description>
 	<dependencies>
+		<!-- commons dependency -->
+		<dependency>
+			<groupId>com.enuminfo.farm</groupId>
+			<artifactId>commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>

@@ -4,11 +4,11 @@ angular.module('app').controller('Nav', function($scope) {
 angular.module('app').controller('ModalDemoCtrl',['$uibModal', '$log','$scope', function ($uibModal, $log,$scope) {
   var $ctrl = this;
   $ctrl.items = ['item1', 'item2', 'item3'];
-  $ctrl.baggedItems = {};
+  $ctrl.baggedItems = [];
   $ctrl.animationsEnabled = true;
 
-  $ctrl.openBaggedCart = function (size) {
-	  $ctrl.baggedItems = size;
+  $ctrl.openBaggedCart = function (baggedItems) {
+	  $ctrl.baggedItems = baggedItems;
 	  console.log("open"+$ctrl.baggedItems);
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -17,10 +17,13 @@ angular.module('app').controller('ModalDemoCtrl',['$uibModal', '$log','$scope', 
       templateUrl: 'resources/default/modalContent.html',
       controller: 'ModalInstanceCtrl',
       controllerAs: '$ctrl',
-      size: size,
+      //size: size,
       resolve: {
         items: function () {
           return $ctrl.items;
+        },
+        baggedItems : function() {
+        	return $ctrl.baggedItems;
         }
       }
     });
@@ -59,9 +62,10 @@ angular.module('app').controller('ModalDemoCtrl',['$uibModal', '$log','$scope', 
 // Please note that $uibModalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-angular.module('app').controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+angular.module('app').controller('ModalInstanceCtrl', function ($uibModalInstance, items,baggedItems) {
   var $ctrl = this;
   $ctrl.items = items;
+  $ctrl.baggedItems = baggedItems;
   $ctrl.selected = {
     item: $ctrl.items[0]
   };

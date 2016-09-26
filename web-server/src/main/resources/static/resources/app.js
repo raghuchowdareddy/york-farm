@@ -16,7 +16,7 @@
 		}).when('/friuts', {
 			controller : 'FriutController',
 			templateUrl : 'resources/friuts/friuts.view.html',
-			controllerAs : 'fritCtrl'
+			controllerAs : 'fruitCtrl'
 		}).when('/vegetables', {
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',

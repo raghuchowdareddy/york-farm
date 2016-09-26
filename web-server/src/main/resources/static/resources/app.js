@@ -1,7 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('app', [ 'ngRoute', 'ngCookies' ]).config(config).run(run);
-
+	angular.module('app', [ 'ngRoute', 'ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap' ]).config(config)
 	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
 		$routeProvider.when('/', {
@@ -9,11 +8,11 @@
 		}).when('/flowers', {
 			controller : 'FlowerController',
 			templateUrl : 'resources/flowers/flowers.view.html',
-			controllerAs : 'vm'
+			controllerAs : 'flowerContrl'
 		}).when('/friuts', {
 			controller : 'FriutController',
 			templateUrl : 'resources/friuts/friuts.view.html',
-			controllerAs : 'vm'
+			controllerAs : 'fruitContrl'
 		}).when('/vegetables', {
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',
@@ -25,10 +24,6 @@
 		}).when('/signup', {
 			controller : 'RegisterController',
 			templateUrl : 'resources/user/register.view.html',
-			controllerAs : 'vm'
-		}).when('/cart', {
-			controller : 'CartController',
-			templateUrl : 'resources/cart/cart.view.html',
 			controllerAs : 'vm'
 		}).when('/signout', {
 			resolve: {
@@ -46,7 +41,12 @@
 			controllerAs : 'vm'
 		}).when('/catalog', {
 			controller : 'CatalogController',
-			templateUrl : 'resources/admin/catalog.view.html'
+			templateUrl : 'resources/admin/catalog.view.html',
+			controllerAs : 'vm'
+		}).when('/baggedItems',{
+			controller : 'BaggedItemsController',
+			templateUrl : 'resources/baggedItems/baggedItems.view.html',
+			controllerAs : 'vm'
 		}).otherwise({
 			redirectTo : '/'
 		});

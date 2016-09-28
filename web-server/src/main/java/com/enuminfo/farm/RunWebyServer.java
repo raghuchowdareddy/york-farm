@@ -16,9 +16,9 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableEurekaClient
 @EnableZuulProxy
 @EnableHystrix
-public class RunServer {
+public class RunWebyServer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RunServer.class, args);
+		SpringApplication.run(RunWebyServer.class, args);
 	}
 }

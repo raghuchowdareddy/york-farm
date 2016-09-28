@@ -17,10 +17,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableHystrix
-public class RunService {
+public class RunUserService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RunService.class, args);
+		SpringApplication.run(RunUserService.class, args);
 	}
 	
 	@Bean

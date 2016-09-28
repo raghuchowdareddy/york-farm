@@ -9,13 +9,15 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" media="all" />
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
 </style>
 </head>
-<body ng-clock>
+<body ng-clock ng-controller="UserModalController as $userModalCtrl">
 	<div class="header-top">
 		<div class="wrap">
 			<div class="logo">
@@ -23,12 +25,9 @@
 			</div>
 			<div class="cssmenu">
 				<ul>
-					<li ng-if="globals.currentUser != undefined"><a href="#/orders"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">Orders</span></a></li>
-					<!-- <li ng-if="globals.currentUser != undefined && access == true"><a href="#/settings"><i class="fa fa-cogs"></i>&nbsp;<span class="settings-icon">Settings</span></a></li> -->
-					<li ng-if="globals.currentUser == undefined"><a href="#/signin"><i class="fa fa-sign-in"></i>&nbsp;<span class="signin-icon">Sign In</span></a></li>
-					<!-- <li ng-if="loggedUser == undefined"><a href="#/signup"><i class="fa fa fa-user-plus"></i>&nbsp;<span class="signup-icon">Sign Up</span></a></li> -->
-					<li ng-controller="ModalDemoCtrl as $ctrl"><a ng-click="$ctrl.openBaggedCart(selectedVegetables.length)"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">Checkout</span> ({{selectedVegetables.length}})</a></li>
-					<li ng-if="globals.currentUser != undefined"><a href="#/signout"> <i class="fa fa-sign-out"></i>&nbsp;<span class="signup-icon">Sign Out</span></a></li>
+					<li><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">My Orders</span></a></li>
+					<li><a href="#/"><i class="fa fa-cogs"></i>&nbsp;<span class="settings-icon">My Settings</span></a></li>
+					<li ng-controller="ModalDemoCtrl as $ctrl"><a href="#/" ng-click="$ctrl.openBaggedCart(selectedVegetables.length)"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">My Bag</span></a></li>
 					<!-- <li ng-controller="DefaultController"><a ng-click="showAllBaggedItems(selectedVegetables)"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">Cart</span>  ({{selectedVegetables.length}})</a></li> -->
 				</ul>
 			</div>
@@ -60,6 +59,11 @@
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
 	<script type="text/javascript" src="resources/js/move-top.js"></script>
 	<script type="text/javascript" src="resources/js/easing.js"></script>
+	<script type="text/javascript" src="resources/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="resources/plugins/fastclick/fastclick.min.js"></script>
+	<script type="text/javascript" src="resources/dist/js/app.min.js"></script>
+	<script type="text/javascript" src="resources/dist/js/demo.js"></script>
+	<script type="text/javascript" src="resources/plugins/iCheck/icheck.min.js"></script>
 	<script type="text/javascript" src="resources/app.js"></script>
 	<script type="text/javascript" src="resources/services/authentication.service.js"></script>
 	<script type="text/javascript" src="resources/services/flash.service.js"></script>

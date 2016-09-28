@@ -3,7 +3,10 @@
 	
 	angular.module('app', [ 'ngRoute', 'ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap' ])
 		.config(config)
-		.run(run);
+		.run(run)
+		.component('userModalComponent', { templateUrl: 'resources/default/userModal.view.html' })
+		.controller('ModalInstanceController', ModalInstanceController)
+		.controller('UserModalController', UserModalController);
 	
 	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
@@ -21,24 +24,6 @@
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',
 			controllerAs : 'vegetableCtrl'
-		}).when('/signin', {
-			controller : 'SecurityController',
-			templateUrl : 'resources/user/security.view.html',
-			controllerAs : 'securityCtrl'
-		}).when('/signup', {
-			controller : 'RegisterController',
-			templateUrl : 'resources/user/register.view.html',
-			controllerAs : 'registerCtrl'
-		}).when('/signout', {
-			resolve: {
-				logout: ['AuthenticationService', function (AuthenticationService) {
-					AuthenticationService.clearCredentials();
-				}]
-			}
-		}).when('/settings', {
-			controller : 'SettingsController',
-			templateUrl : 'resources/admin/settings.view.html',
-			controllerAs : 'settingsCtrl'
 		}).when('/product', {
 			controller : 'ProductController',
 			templateUrl : 'resources/admin/product.view.html',
@@ -54,6 +39,39 @@
 		}).otherwise({
 			redirectTo : '/'
 		});
+	}
+	
+	ModalInstanceController.$inject = [ '$uibModalInstance' ];
+	function ModalInstanceController($uibModalInstance) {
+		var $userModalCtrl = this;
+		$userModalCtrl.ok = function () {
+			console.log('Mobile Number = ' + $userModalCtrl.mobileNumber);
+			console.log('Email ID = ' + $userModalCtrl.emailId);
+			$uibModalInstance.close();
+		};
+	}
+	
+	UserModalController.$inject = [ '$uibModal', '$log','$scope' ];
+	function UserModalController($uibModal, $log, $scope) {
+		var $userModalCtrl = this;
+		$userModalCtrl.animationsEnabled = true;
+		$uibModal.open({
+			animation: $userModalCtrl.animationsEnabled,
+			templateUrl: 'resources/default/userModal.view.html',
+			controller: 'ModalInstanceController',
+			controllerAs: '$userModalCtrl'
+		});
+		
+		$userModalCtrl.openComponentModal = function () {
+			$uibModal.open({
+				animation: $userModalCtrl.animationsEnabled,
+				component: 'userModalComponent'
+			});
+		};
+		
+		$userModalCtrl.toggleAnimation = function () {
+			$userModalCtrl.animationsEnabled = !$userModalCtrl.animationsEnabled;
+		};
 	}
 
 	run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http', 'UserService' ];

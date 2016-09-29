@@ -31,9 +31,13 @@ public interface ColumnType {
 	public static final String CATALOG_ID = "CATALOG_ID";
 	public static final String START_DATE = "START_DATE";
 	public static final String END_DATE = "END_DATE";
+	public static final String MOBILE_NUMBER = "MOBILE_NUMBER";
+	public static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
+	public static final String ADDRESS_ID = "ADDRESS_ID";
 	
 	public static final String COUNTRY = "country";	
 	public static final String LOCATION = "location";
 	public static final String CATEGORY = "category";
 	public static final String PRODUCT = "product";
+	public static final String ADDRESS = "address";
 }

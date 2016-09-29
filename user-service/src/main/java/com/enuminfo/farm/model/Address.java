@@ -4,6 +4,7 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
@@ -33,6 +35,7 @@ public class Address implements Serializable {
 	private Integer id;
 	private String houseNo, street, landmark;
 	private Location location;
+	private Collection<User> users;
 
 	private Address() {
 		// TODO Auto-generated constructor stub
@@ -44,6 +47,7 @@ public class Address implements Serializable {
 		this.street = builder.street;
 		this.landmark = builder.landmark;
 		this.location = builder.location;
+		this.users = builder.users;
 	}
 
 	@Id
@@ -74,6 +78,11 @@ public class Address implements Serializable {
 		return location;
 	}
 
+	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = ColumnType.ADDRESS)
+	public Collection<User> getUsers() {
+		return users;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -94,10 +103,15 @@ public class Address implements Serializable {
 		this.location = location;
 	}
 
+	public void setUsers(Collection<User> users) {
+		this.users = users;
+	}
+
 	public static class Builder {
 		private Integer id;
 		private String houseNo, street, landmark;
 		private Location location;
+		private Collection<User> users;
 
 		public Builder withId(Integer id) {
 			this.id = id;
@@ -121,6 +135,11 @@ public class Address implements Serializable {
 
 		public Builder withLocation(Location location) {
 			this.location = location;
+			return this;
+		}
+		
+		public Builder withUsers(Collection<User> users) {
+			this.users = users;
 			return this;
 		}
 

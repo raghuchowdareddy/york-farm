@@ -19,13 +19,13 @@ import com.enuminfo.farm.service.IUserService;
  */
 @RestController
 @RequestMapping(value = RequestPath.LOGGED_IN)
-public class LoginController {
+public class SecurityController {
 
 	@Autowired
 	IUserService userService;
 	
-	@RequestMapping(value = RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO handleInternalRequestForLoggedUserDetail(@PathVariable String username) {
-		return userService.loadByName(username);
+	@RequestMapping(value = RequestPath.MOBILE_NO + RequestPath.EMAIL_ID, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public UserDTO handleInternalRequestForLoggedUserDetail(@PathVariable String mobileNo, @PathVariable String emailId) {
+		return null;
 	}
 }

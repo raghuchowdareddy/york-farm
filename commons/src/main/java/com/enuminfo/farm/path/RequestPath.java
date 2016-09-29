@@ -16,4 +16,6 @@ public interface RequestPath {
 	public static final String PRIVILAGE = "/privilage";
 	public static final String ADMINS = "/admins";
 	public static final String USERNAME = "/{username}";
+	public static final String MOBILE_NO = "/{mobileNo}";
+	public static final String EMAIL_ID = "/{emailId}";
 }

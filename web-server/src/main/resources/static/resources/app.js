@@ -4,7 +4,7 @@
 	angular.module('app', [ 'ngRoute', 'ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap' ])
 		.config(config)
 		.run(run)
-		.component('userModalComponent', { templateUrl: 'resources/default/userModal.view.html' })
+		//.component('userModalComponent', { templateUrl: 'resources/default/userModal.view.html' })
 		.controller('ModalInstanceController', ModalInstanceController)
 		.controller('UserModalController', UserModalController);
 	
@@ -41,37 +41,29 @@
 		});
 	}
 	
-	ModalInstanceController.$inject = [ '$uibModalInstance' ];
-	function ModalInstanceController($uibModalInstance) {
+	ModalInstanceController.$inject = [ '$uibModalInstance', 'AuthenticationService' ];
+	function ModalInstanceController($uibModalInstance, AuthenticationService) {
 		var $userModalCtrl = this;
 		$userModalCtrl.ok = function () {
-			console.log('Mobile Number = ' + $userModalCtrl.mobileNumber);
-			console.log('Email ID = ' + $userModalCtrl.emailId);
-			$uibModalInstance.close();
+			if ($userModalCtrl.mobileNumber != null || $userModalCtrl.emailId != null) {
+				AuthenticationService.setDetails(null, $userModalCtrl.mobileNumber, $userModalCtrl.emailId, null);
+				$uibModalInstance.close();
+			}
 		};
 	}
 	
-	UserModalController.$inject = [ '$uibModal', '$log','$scope' ];
-	function UserModalController($uibModal, $log, $scope) {
+	UserModalController.$inject = [ '$uibModal', '$log', '$scope', '$rootScope' ];
+	function UserModalController($uibModal, $log, $scope, $rootScope) {
 		var $userModalCtrl = this;
-		$userModalCtrl.animationsEnabled = true;
-		$uibModal.open({
-			animation: $userModalCtrl.animationsEnabled,
-			templateUrl: 'resources/default/userModal.view.html',
-			controller: 'ModalInstanceController',
-			controllerAs: '$userModalCtrl'
-		});
-		
-		$userModalCtrl.openComponentModal = function () {
+		var loggedIn = $rootScope.globals.currentUser;
+		if (loggedIn == undefined) {
 			$uibModal.open({
 				animation: $userModalCtrl.animationsEnabled,
-				component: 'userModalComponent'
+				templateUrl: 'resources/default/userModal.view.html',
+				controller: 'ModalInstanceController',
+				controllerAs: '$userModalCtrl'
 			});
-		};
-		
-		$userModalCtrl.toggleAnimation = function () {
-			$userModalCtrl.animationsEnabled = !$userModalCtrl.animationsEnabled;
-		};
+		}
 	}
 
 	run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http', 'UserService' ];
@@ -82,10 +74,10 @@
 		}
 		$rootScope.$on('$locationChangeStart', function(event, next, current) {
 			var loggedIn = $rootScope.globals.currentUser;
-			if (loggedIn) {
-				UserService.getByUsername($rootScope.globals.currentUser.username).then(function(response) {
-					$rootScope.access = response.data.roles.indexOf('ROLE_ADMIN') == 1;
-				});
+			if (loggedIn != undefined) {
+				//UserService.getByUsername($rootScope.globals.currentUser.username).then(function(response) {
+				//	$rootScope.access = response.data.roles.indexOf('ROLE_ADMIN') == 1;
+				//});
 			}
 		});
 	}

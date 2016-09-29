@@ -42,11 +42,6 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserDTO loadByName(String name) {
-		return convert2DTO(userRepository.findByUsername(name));
-	}
-
-	@Override
 	public void edit(UserDTO dtoUser) {
 		
 	}
@@ -59,8 +54,10 @@ public class UserService implements IUserService {
 	private UserDTO convert2DTO(User user) {
 		UserDTO dtoUser = new UserDTO();
 		dtoUser.setId(user.getId());
-		dtoUser.setUsername(user.getUsername());
-		dtoUser.setPassword(user.getPassword());
+		dtoUser.setName(user.getName());
+		dtoUser.setEmailId(user.getEmailAddress());
+		dtoUser.setMobileNo(user.getMobileNumber());
+		
 		List<String> roleList = new ArrayList<String>();
 		Collection<Role> roles = user.getRoles();
 		for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext();) {
@@ -69,5 +66,15 @@ public class UserService implements IUserService {
 		}
 		dtoUser.setRoles(roleList);
 		return dtoUser;
+	}
+
+	@Override
+	public UserDTO loadByMobileNo(String mobileNo) {
+		return null;
+	}
+
+	@Override
+	public UserDTO loadByEmailId(String emailId) {
+		return null;
 	}
 }

@@ -12,5 +12,6 @@ import com.enuminfo.farm.model.User;
  */
 public interface IUserRepository extends PagingAndSortingRepository<User, Integer> {
 
-	User findByUsername(String username);
+	User findByMobileNumber(String mobileNo);
+	User findByEmailAddress(String emailId);
 }

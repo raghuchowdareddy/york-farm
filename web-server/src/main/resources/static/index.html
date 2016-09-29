@@ -9,8 +9,6 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<link href="resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" media="all" />
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
@@ -41,7 +39,6 @@
 				<li><a class="color2" href="#/flowers">Flowers</a></li>
 				<li><a class="color3" href="#/friuts">Fruits</a></li>
 				<li><a class="color4" href="#/vegetables">Vegetables</a></li>
-				<li ng-if="globals.currentUser != undefined"><a class="color5" href="#/">Welcome, {{globals.currentUser.username}} !</a></li>
 				<li ng-if="globals.currentUser != undefined && access == true"><a class="color7" href="#/product">Products</span></a></li>
 				<li ng-if="globals.currentUser != undefined && access == true"><a class="color8" href="#/catalog">Catalogs</span></a></li>
 			</ul>
@@ -59,11 +56,6 @@
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
 	<script type="text/javascript" src="resources/js/move-top.js"></script>
 	<script type="text/javascript" src="resources/js/easing.js"></script>
-	<script type="text/javascript" src="resources/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<script type="text/javascript" src="resources/plugins/fastclick/fastclick.min.js"></script>
-	<script type="text/javascript" src="resources/dist/js/app.min.js"></script>
-	<script type="text/javascript" src="resources/dist/js/demo.js"></script>
-	<script type="text/javascript" src="resources/plugins/iCheck/icheck.min.js"></script>
 	<script type="text/javascript" src="resources/app.js"></script>
 	<script type="text/javascript" src="resources/services/authentication.service.js"></script>
 	<script type="text/javascript" src="resources/services/flash.service.js"></script>

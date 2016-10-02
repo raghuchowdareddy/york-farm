@@ -53,11 +53,10 @@ public class UserService implements IUserService {
 	
 	private UserDTO convert2DTO(User user) {
 		UserDTO dtoUser = new UserDTO();
-		dtoUser.setId(user.getId());
+		dtoUser.setUserId(user.getId());
 		dtoUser.setName(user.getName());
 		dtoUser.setEmailId(user.getEmailAddress());
-		dtoUser.setMobileNo(user.getMobileNumber());
-		
+		dtoUser.setMobileNo(user.getMobileNumber());		
 		List<String> roleList = new ArrayList<String>();
 		Collection<Role> roles = user.getRoles();
 		for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext();) {
@@ -70,11 +69,11 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDTO loadByMobileNo(String mobileNo) {
-		return null;
+		return convert2DTO(userRepository.findByMobileNumber(mobileNo));
 	}
 
 	@Override
 	public UserDTO loadByEmailId(String emailId) {
-		return null;
+		return convert2DTO(userRepository.findByEmailAddress(emailId));
 	}
 }

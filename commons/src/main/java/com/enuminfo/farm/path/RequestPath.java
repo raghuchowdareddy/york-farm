@@ -18,4 +18,6 @@ public interface RequestPath {
 	public static final String USERNAME = "/{username}";
 	public static final String MOBILE_NO = "/{mobileNo}";
 	public static final String EMAIL_ID = "/{emailId}";
+	public static final String MOBILE = "/mobile";
+	public static final String EMAIL = "/email";
 }

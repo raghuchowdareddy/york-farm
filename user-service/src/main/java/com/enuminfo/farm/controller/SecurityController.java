@@ -24,8 +24,13 @@ public class SecurityController {
 	@Autowired
 	IUserService userService;
 	
-	@RequestMapping(value = RequestPath.MOBILE_NO + RequestPath.EMAIL_ID, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserDTO handleInternalRequestForLoggedUserDetail(@PathVariable String mobileNo, @PathVariable String emailId) {
-		return null;
+	@RequestMapping(value = RequestPath.MOBILE + RequestPath.MOBILE_NO, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public UserDTO handleInternalRequestForLoggedUserDetailByMobile(@PathVariable String mobileNo) {
+		return userService.loadByMobileNo(mobileNo);
+	}
+	
+	@RequestMapping(value = RequestPath.EMAIL + RequestPath.EMAIL_ID, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public UserDTO handleInternalRequestForLoggedUserDetailByEmail(@PathVariable String emailId) {
+		return userService.loadByEmailId(emailId);
 	}
 }

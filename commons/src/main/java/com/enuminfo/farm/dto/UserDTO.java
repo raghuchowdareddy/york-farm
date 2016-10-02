@@ -15,24 +15,23 @@ public class UserDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int userId;
 	private String name, emailId, mobileNo;
 	private String address1, address2, address3;
 	private String locationName, pinCode;
-	private String cityName, stateName;
-	private String countryName;
+	private String cityName, stateName, countryName;
 	private List<String> roles;
 	
 	public UserDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public List<String> getRoles() {

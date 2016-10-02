@@ -57,12 +57,12 @@
 		var $userModalCtrl = this;
 		var loggedIn = $rootScope.globals.currentUser;
 		if (loggedIn == undefined) {
-			$uibModal.open({
+			/*$uibModal.open({
 				animation: $userModalCtrl.animationsEnabled,
 				templateUrl: 'resources/default/userModal.view.html',
 				controller: 'ModalInstanceController',
 				controllerAs: '$userModalCtrl'
-			});
+			});*/
 		}
 	}
 
@@ -75,6 +75,7 @@
 		$rootScope.$on('$locationChangeStart', function(event, next, current) {
 			var loggedIn = $rootScope.globals.currentUser;
 			if (loggedIn != undefined) {
+				var mobileNo = $rootScope.globals.currentUser.mobileNo;
 				//UserService.getByUsername($rootScope.globals.currentUser.username).then(function(response) {
 				//	$rootScope.access = response.data.roles.indexOf('ROLE_ADMIN') == 1;
 				//});

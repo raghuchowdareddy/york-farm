@@ -8,11 +8,16 @@
     	var service = {};
         service.getAllAdmins = getAllAdmins;
         service.getSystemName = getSystemName;
-        service.getByUsername = getByUsername;
+        service.getByMobileNo = getByMobileNo;
+        service.getByEmailId = getByEmailId;
         return service;
         
-        function getByUsername(username) {
-        	return $http.get('/api/user/loggedIn/' + username);
+        function getByMobileNo(mobileNo) {
+        	return $http.get('/api/user/loggedIn/mobile/' + mobileNo);
+        }
+        
+        function getByEmailId(emailId) {
+        	return $http.get('/api/user/loggedIn/email/' + emailId);
         }
         
 	    function getAllAdmins() {

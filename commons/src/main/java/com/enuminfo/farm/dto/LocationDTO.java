@@ -14,13 +14,9 @@ public class LocationDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int locationId;
-	private String locationName;
-	private String stateName;
-	private String cityName;
+	private int locationId, countryId;
+	private String locationName, stateName, cityName, countryName;
 	private long pinCode;
-	private int countryId;
-	private String countryName;
 	
 	public LocationDTO() {
 		// TODO Auto-generated constructor stub

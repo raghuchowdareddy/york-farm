@@ -3,11 +3,9 @@ server:
 spring:
   application:
     name: inventory-service
-spring:
-  profiles: development
-spring:
-  profiles:
-    active: development
+  datasource:
+    url: jdbc:hsqldb:hsql://localhost
+    initialize: true
 eureka:
   instance:
     prefer-ip-address: true

@@ -62,8 +62,8 @@ public class RoleService implements IRoleService {
 	
 	private RoleDTO convert2DTO(Role role) {
 		RoleDTO dtoRole = new RoleDTO();
-		dtoRole.setId(role.getId());
-		dtoRole.setName(role.getName());
+		dtoRole.setRoleId(role.getId());
+		dtoRole.setRoleName(role.getName());
 		return dtoRole;
 	}
 }

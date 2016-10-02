@@ -14,26 +14,26 @@ public class RoleDTO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private String name;
+	private int roleId;
+	private String roleName;
 	
 	public RoleDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-		return id;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
-	public String getName() {
-		return name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 }

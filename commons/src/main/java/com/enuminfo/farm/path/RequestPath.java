@@ -20,4 +20,7 @@ public interface RequestPath {
 	public static final String EMAIL_ID = "/{emailId}";
 	public static final String MOBILE = "/mobile";
 	public static final String EMAIL = "/email";
+	public static final String PRODUCT = "/product";
+	public static final String CATALOG = "/catalog";
+	public static final String CATEGORY = "/category";
 }

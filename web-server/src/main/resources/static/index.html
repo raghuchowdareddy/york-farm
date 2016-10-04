@@ -9,13 +9,14 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
 </style>
 </head>
-<body ng-clock ng-controller="UserModalController as $userModalCtrl">
+<body ng-clock>
 	<div class="header-top">
 		<div class="wrap">
 			<div class="logo">
@@ -23,8 +24,8 @@
 			</div>
 			<div class="cssmenu">
 				<ul>
-					<li><a href="#/"><i class="fa fa-cogs"></i>&nbsp;My Products</a></li>
-					<li><a href="#/"><i class="fa fa-cogs"></i>&nbsp;My Catalogs</a></li>
+					<li><a href="#/products"><i class="fa fa-cogs"></i>&nbsp;My Products</a></li>
+					<li><a href="#/cataloges"><i class="fa fa-cogs"></i>&nbsp;My Catalogs</a></li>
 					<li><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;My Orders</a></li>
 					<li><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;My Bag</a></li>
 					<!-- <li ng-controller="DefaultController"><a ng-click="showAllBaggedItems(selectedVegetables)"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">Cart</span>  ({{selectedVegetables.length}})</a></li> -->
@@ -57,18 +58,29 @@
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
 	<script type="text/javascript" src="resources/js/move-top.js"></script>
 	<script type="text/javascript" src="resources/js/easing.js"></script>
+	<script type="text/javascript" src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/app.js"></script>
 	<script type="text/javascript" src="resources/services/authentication.service.js"></script>
 	<script type="text/javascript" src="resources/services/flash.service.js"></script>
 	<script type="text/javascript" src="resources/services/user.service.js"></script>
-	<script type="text/javascript" src="resources/user/security.controller.js"></script>
-	<script type="text/javascript" src="resources/admin/settings.controller.js"></script>
+	<script type="text/javascript" src="resources/services/category.service.js"></script>
+	<script type="text/javascript" src="resources/services/product.service.js"></script>
+	<script type="text/javascript" src="resources/services/catalog.service.js"></script>
 	<script type="text/javascript" src="resources/services/vegetables.service.js"></script>
 	<script type="text/javascript" src="resources/services/friuts.service.js"></script>
 	<script type="text/javascript" src="resources/services/flowers.service.js"></script>
+	<script type="text/javascript" src="resources/user/security.controller.js"></script>
+	<script type="text/javascript" src="resources/admin/product.controller.js"></script>
+	<script type="text/javascript" src="resources/admin/catalog.controller.js"></script>
 	<script type="text/javascript" src="resources/vegetables/vegetables.controller.js"></script>
 	<script type="text/javascript" src="resources/friuts/friuts.controller.js"></script>
 	<script type="text/javascript" src="resources/flowers/flowers.controller.js"></script>
 	<script type="text/javascript" src="resources/default/default.controller.js"></script>
+	<script type="text/javascript">
+	$(function () {
+		$("#productTable").DataTable();
+	});
+	</script>
 </body>
 </html>

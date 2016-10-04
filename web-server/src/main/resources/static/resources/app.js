@@ -2,11 +2,11 @@
 	'use strict';
 	
 	angular.module('app', [ 'ngRoute', 'ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap' ])
-		.config(config)
-		.run(run)
+		.config(config);
+		//.run(run)
 		//.component('userModalComponent', { templateUrl: 'resources/default/userModal.view.html' })
-		.controller('ModalInstanceController', ModalInstanceController)
-		.controller('UserModalController', UserModalController);
+		//.controller('ModalInstanceController', ModalInstanceController)
+		//.controller('UserModalController', UserModalController);
 	
 	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
@@ -24,11 +24,11 @@
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',
 			controllerAs : 'vegetableCtrl'
-		}).when('/product', {
+		}).when('/products', {
 			controller : 'ProductController',
 			templateUrl : 'resources/admin/product.view.html',
 			controllerAs : 'productCtrl'
-		}).when('/catalog', {
+		}).when('/cataloges', {
 			controller : 'CatalogController',
 			templateUrl : 'resources/admin/catalog.view.html',
 			controllerAs : 'catalogCtrl'

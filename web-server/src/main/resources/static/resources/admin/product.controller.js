@@ -5,24 +5,16 @@
 		.component('productModalComponent', { templateUrl: 'resources/admin/product.modal.html' })
 		.controller('ProductModalInstanceController', ProductModalInstanceController);
 	
-	ProductController.$inject = [ '$uibModal', '$log', '$scope', 'ProductService', 'CategoryService' ];
-	function ProductController($uibModal, $log, $scope, ProductService, CategoryService) {
+	ProductController.$inject = [ '$uibModal', '$log', '$scope', 'ProductService' ];
+	function ProductController($uibModal, $log, $scope, ProductService) {
 		var productCtrl = this;
-		productCtrl.categories = [];
 		productCtrl.products = [];
 		initController();
 		productCtrl.add = add;
-		productCtrl.loadAllCategories = loadAllCategories;
 		
 		function initController() {
 			ProductService.getAll().then(function(response) {
 				productCtrl.products = response.data;
-			});
-		}
-		
-		function loadAllCategories() {
-			CategoryService.getAll().then(function(response) {
-				productCtrl.categories = response.data;
 			});
 		}
 		
@@ -31,16 +23,26 @@
 				animation: productCtrl.animationsEnabled,
 				templateUrl: 'resources/admin/product.modal.html',
 				controller: 'ProductModalInstanceController',
-				controllerAs: 'productCtrl'
+				controllerAs: 'productModalInstanceCtrl'
 			});
 		}
 	}
 	
-	ProductModalInstanceController.$inject = [ '$uibModalInstance' ];
-	function ProductModalInstanceController($uibModalInstance) {
-		var productCtrl = this;
-		productCtrl.save = function () {
-			
-		};
+	ProductModalInstanceController.$inject = [ '$uibModalInstance', 'ProductService', 'CategoryService' ];
+	function ProductModalInstanceController($uibModalInstance, ProductService, CategoryService) {
+		var productModalInstanceCtrl = this;
+		productModalInstanceCtrl.categories = [];
+		initController();
+		productModalInstanceCtrl.save = save;
+		
+		function initController() {
+			CategoryService.getAll().then(function(response) {
+				productModalInstanceCtrl.categories = response.data;
+			});
+		}
+		
+		function save() {
+			ProductService.save(productModalInstanceCtrl);
+		}
 	}
 })();

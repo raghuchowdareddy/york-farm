@@ -5,21 +5,22 @@
 		<div class="comments-area">
 			<form name="form" role="form" method="post">
 			<div class="modal-body">
-				<p><input type="text" placeholder="Product Name" ng-model="productCtrl.productName" /></p>
-				<p><textarea placeholder="Product Description" ng-model="productCtrl.productDescription"></textarea></p>
-				<p><select ng-model="productCtrl.categoryId">
+				<input type="hidden" ng-model="productModalInstanceCtrl.productId" />
+				<p><input type="text" placeholder="Product Name" ng-model="productModalInstanceCtrl.productName" /></p>
+				<p><textarea placeholder="Product Description" ng-model="productModalInstanceCtrl.productDescription"></textarea></p>
+				<p><select ng-model="productModalInstanceCtrl.categoryId">
 					<option value="">--- Select Category ---</option>
-					<option ng-repeat="category in productCtrl.categories" value="{{category.categoryId}}">{{category.categoryName}}</option>
+					<option ng-repeat="category in productModalInstanceCtrl.categories" value="{{category.categoryId}}">{{category.categoryName}}</option>
 				</select></p>
-				<p><input type="text" placeholder="Unit Price" ng-model="productCtrl.price" /></p>
-				<p><select ng-model="productCtrl.stock">
+				<p><input type="text" placeholder="Unit Price" ng-model="productModalInstanceCtrl.price" /></p>
+				<p><select ng-model="productModalInstanceCtrl.stock">
 					<option value="">--- Select Availability ---</option>
 					<option value="Y">Yes</option>
 					<option value="N">No</option>
 				</select></p>
 			</div>
 			<div class="modal-footer">
-			    <input type="button" value="Save" ng-click="productCtrl.save()"/>
+			    <input type="button" value="Save" ng-click="productModalInstanceCtrl.save()"/>
 			</div>
 			</form>
 		</div>

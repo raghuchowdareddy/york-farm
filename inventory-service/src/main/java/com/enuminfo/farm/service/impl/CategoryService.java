@@ -3,6 +3,8 @@
  */
 package com.enuminfo.farm.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,13 @@ public class CategoryService implements ICategoryService {
 
 	@Override
 	public List<CategoryDTO> loadAll() {
-		return null;
+		List<CategoryDTO> dtoCategories = new ArrayList<CategoryDTO>();
+		Iterable<Category> categories = categoryRepository.findAll();
+		for (Iterator<Category> iterator = categories.iterator(); iterator.hasNext();) {
+			Category category = iterator.next();
+			dtoCategories.add(convert2DTO(category));
+		}
+		return dtoCategories;
 	}
 
 	@Override

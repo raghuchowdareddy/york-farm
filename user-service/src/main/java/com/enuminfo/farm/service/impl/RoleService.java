@@ -14,6 +14,7 @@ import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.model.Role;
 import com.enuminfo.farm.repository.IRoleRepository;
 import com.enuminfo.farm.service.IRoleService;
+import com.enuminfo.farm.wrapper.RoleWrapper;
 
 /**
  * @author Kumar
@@ -35,7 +36,7 @@ public class RoleService implements IRoleService {
 		Iterable<Role> roles = roleRepository.findAll();
 		for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext();) {
 			Role role = iterator.next();
-			dtoRoles.add(convert2DTO(role));
+			dtoRoles.add(RoleWrapper.getInstance().convert2DTO(role));
 		}
 		return dtoRoles;
 	}
@@ -58,12 +59,5 @@ public class RoleService implements IRoleService {
 	@Override
 	public void delete(int id) {
 		
-	}
-	
-	private RoleDTO convert2DTO(Role role) {
-		RoleDTO dtoRole = new RoleDTO();
-		dtoRole.setRoleId(role.getId());
-		dtoRole.setRoleName(role.getName());
-		return dtoRole;
 	}
 }

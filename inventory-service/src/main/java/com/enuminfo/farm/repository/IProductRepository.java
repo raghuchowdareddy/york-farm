@@ -12,4 +12,5 @@ import com.enuminfo.farm.model.Product;
  */
 public interface IProductRepository extends PagingAndSortingRepository<Product, Integer> {
 
+	Product findByName(String name);
 }

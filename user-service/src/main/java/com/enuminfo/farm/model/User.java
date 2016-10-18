@@ -124,7 +124,7 @@ public class User implements Serializable {
 			return this;
 		}
 		
-		public Builder withNname(String name) {
+		public Builder withName(String name) {
 			this.name = name;
 			return this;
 		}

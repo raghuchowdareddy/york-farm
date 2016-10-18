@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.dto.CategoryDTO;
 import com.enuminfo.farm.dto.ProductDTO;
-import com.enuminfo.farm.model.Category;
 import com.enuminfo.farm.model.Product;
 import com.enuminfo.farm.repository.IProductRepository;
 import com.enuminfo.farm.service.ICategoryService;
 import com.enuminfo.farm.service.IProductService;
+import com.enuminfo.farm.wrapper.ProductWrapper;
 
 /**
  * @author Kumar
@@ -33,17 +33,7 @@ public class ProductService implements IProductService {
 	@Override
 	public void add(ProductDTO dtoProduct) {
 		CategoryDTO dtoCategory = categoryService.loadById(dtoProduct.getCategoryId());
-		Category category = Category.getBuilder()
-				.withId(dtoCategory.getCategoryId())
-				.withName(dtoCategory.getCategoryName())
-				.build();
-		Product product = Product.getBuilder()
-				.withName(dtoProduct.getProductName())
-				.withDescription(dtoProduct.getProductDescription())
-				.withPrice(dtoProduct.getPrice())
-				.withStock(dtoProduct.isStock())
-				.withCategory(category)
-				.build();
+		Product product = ProductWrapper.getInstance().convert2ModelWithoutId(dtoProduct, dtoCategory);
 		productRepository.save(product);
 	}
 
@@ -52,36 +42,25 @@ public class ProductService implements IProductService {
 		List<ProductDTO> dtoProducts = new ArrayList<ProductDTO>();
 		Iterable<Product> products = productRepository.findAll();
 		for (Iterator<Product> iterator = products.iterator(); iterator.hasNext();) {
-			dtoProducts.add(convert2DTO(iterator.next()));
+			dtoProducts.add(ProductWrapper.getInstance().convert2DTO(iterator.next()));
 		}
 		return dtoProducts;
 	}
 
 	@Override
 	public ProductDTO loadById(int id) {
-		return convert2DTO(productRepository.findOne(id));
+		return ProductWrapper.getInstance().convert2DTO(productRepository.findOne(id));
 	}
 
 	@Override
 	public ProductDTO loadByName(String name) {
-		return null;
+		return ProductWrapper.getInstance().convert2DTO(productRepository.findByName(name));
 	}
 
 	@Override
 	public void edit(ProductDTO dtoProduct) {
 		CategoryDTO dtoCategory = categoryService.loadById(dtoProduct.getCategoryId());
-		Category category = Category.getBuilder()
-				.withId(dtoCategory.getCategoryId())
-				.withName(dtoCategory.getCategoryName())
-				.build();
-		Product product = Product.getBuilder()
-				.withId(dtoProduct.getProductId())
-				.withName(dtoProduct.getProductName())
-				.withDescription(dtoProduct.getProductDescription())
-				.withPrice(dtoProduct.getPrice())
-				.withStock(dtoProduct.isStock())
-				.withCategory(category)
-				.build();
+		Product product = ProductWrapper.getInstance().convert2ModelWithId(dtoProduct, dtoCategory);
 		productRepository.save(product);
 	}
 
@@ -93,17 +72,5 @@ public class ProductService implements IProductService {
 	@Override
 	public List<ProductDTO> loadProductsByStock(boolean stock) {
 		return null;
-	}
-	
-	private ProductDTO convert2DTO(Product product) {
-		ProductDTO dtoProduct = new ProductDTO();
-		dtoProduct.setProductId(product.getId());
-		dtoProduct.setProductName(product.getName());
-		dtoProduct.setProductDescription(product.getDescription());
-		dtoProduct.setPrice(product.getPrice());
-		dtoProduct.setStock(product.getStock());
-		dtoProduct.setCategoryId(product.getCategory().getId());
-		dtoProduct.setCategoryName(product.getCategory().getName());
-		return dtoProduct;
 	}
 }

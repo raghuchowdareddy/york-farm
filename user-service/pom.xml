@@ -10,7 +10,6 @@
 	<name>User Service</name>
 	<description>ENUMINfo | York Farm - User Service</description>
 	<dependencies>
-		<!-- commons dependency -->
 		<dependency>
 			<groupId>com.enuminfo.farm</groupId>
 			<artifactId>commons</artifactId>
@@ -23,14 +22,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-turbine</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>

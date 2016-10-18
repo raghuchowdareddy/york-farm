@@ -14,6 +14,7 @@ import com.enuminfo.farm.dto.CategoryDTO;
 import com.enuminfo.farm.model.Category;
 import com.enuminfo.farm.repository.ICategoryRepository;
 import com.enuminfo.farm.service.ICategoryService;
+import com.enuminfo.farm.wrapper.CategoryWrapper;
 
 /**
  * @author Kumar
@@ -26,7 +27,8 @@ public class CategoryService implements ICategoryService {
 	
 	@Override
 	public void add(CategoryDTO dtoCategory) {
-		
+		Category category = CategoryWrapper.getInstance().convert2ModelWithoutId(dtoCategory);
+		categoryRepository.save(category);
 	}
 
 	@Override
@@ -35,35 +37,31 @@ public class CategoryService implements ICategoryService {
 		Iterable<Category> categories = categoryRepository.findAll();
 		for (Iterator<Category> iterator = categories.iterator(); iterator.hasNext();) {
 			Category category = iterator.next();
-			dtoCategories.add(convert2DTO(category));
+			dtoCategories.add(CategoryWrapper.getInstance().convert2DTO(category));
 		}
 		return dtoCategories;
 	}
 
 	@Override
 	public CategoryDTO loadById(int id) {
-		return convert2DTO(categoryRepository.findOne(id));
+		return CategoryWrapper.getInstance().convert2DTO(categoryRepository.findOne(id));
 	}
 
 	@Override
 	public CategoryDTO loadByName(String name) {
-		return convert2DTO(categoryRepository.findByName(name));
+		return CategoryWrapper.getInstance().convert2DTO(categoryRepository.findByName(name));
 	}
 
 	@Override
 	public void edit(CategoryDTO dtoCategory) {
-		
+		Category category = CategoryWrapper.getInstance().convert2ModelWithId(dtoCategory);
+		categoryRepository.save(category);
 	}
 
 	@Override
 	public void remove(int id) {
-		
-	}
-	
-	private CategoryDTO convert2DTO(Category category) {
-		CategoryDTO dtoCategory = new CategoryDTO();
-		dtoCategory.setCategoryId(category.getId());
-		dtoCategory.setCategoryName(category.getName());
-		return dtoCategory;
+		CategoryDTO dtoCategory = CategoryWrapper.getInstance().convert2DTO(categoryRepository.findOne(id));
+		Category category = CategoryWrapper.getInstance().convert2ModelWithId(dtoCategory);
+		categoryRepository.delete(category);
 	}
 }

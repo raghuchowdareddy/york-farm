@@ -47,11 +47,13 @@
 			controller : 'CatalogController',
 			templateUrl : 'resources/admin/catalog.view.html',
 			controllerAs : 'catalogCtrl'
-		}).when('/baggedItems',{
-			controller : 'BaggedItemsController',
-			templateUrl : 'resources/baggedItems/baggedItems.view.html',
-			controllerAs : 'baggedItemsCtrl'
-		}).otherwise({
+		})
+//		.when('/baggedItems',{
+//			controller : 'BaggedItemsController',
+//			templateUrl : 'resources/baggedItems/baggedItems.view.html',
+//			controllerAs : 'baggedItemsCtrl'
+//		})
+		.otherwise({
 			redirectTo : '/'
 		});
 	}

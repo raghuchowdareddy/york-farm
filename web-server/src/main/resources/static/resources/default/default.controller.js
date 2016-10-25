@@ -6,15 +6,17 @@ angular.module('app').controller('ModalDemoCtrl',['$uibModal', '$log','$scope', 
   $ctrl.items = ['item1', 'item2', 'item3'];
   $ctrl.baggedItems = [];
   $ctrl.animationsEnabled = true;
+  
 
   $ctrl.openBaggedCart = function (baggedItems) {
 	  $ctrl.baggedItems = baggedItems;
 	  console.log("open"+$ctrl.baggedItems);
+	  
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-      templateUrl: 'resources/default/modalContent.html',
+      templateUrl: 'resources/baggeditems/baggeditems.view.html',
       controller: 'ModalInstanceCtrl',
       controllerAs: '$ctrl',
       //size: size,
@@ -24,6 +26,12 @@ angular.module('app').controller('ModalDemoCtrl',['$uibModal', '$log','$scope', 
         },
         baggedItems : function() {
         	return $ctrl.baggedItems;
+        },
+        quantity: function(){
+            return $ctrl.quantity;    	
+        },
+        pricecompute : function(){
+        	return $ctrl.pricecompute;
         }
       }
     });
@@ -63,26 +71,46 @@ angular.module('app').controller('ModalDemoCtrl',['$uibModal', '$log','$scope', 
 // It is not the same as the $uibModal service used above.
 
 angular.module('app').controller('ModalInstanceCtrl', function ($uibModalInstance, items,baggedItems) {
+
   var $ctrl = this;
   $ctrl.items = items;
   $ctrl.baggedItems = baggedItems;
-  $ctrl.selected = {
+  $ctrl.quantity = ['0.5kg', '1.0kg', '2.0kg', '3.0kg'];
+  $ctrl.selected = {	
     item: $ctrl.items[0]
   };
-
-  $ctrl.ok = function () {
+  
+  $ctrl.ok = function (orderedItems) {
+	  console.log(angular.toJson(orderedItems));
     $uibModalInstance.close($ctrl.selected.item);
   };
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+  $ctrl.pricecompute = function(item) {
+	var quan = item.selectedQuantity.replace( /[^\d\.]*/g, '');
+  	var computedprice = item.priceperkg*quan;
+//  	console.log("price is "+computedprice)
+  	item.totalPrice=computedprice;
+  	return computedprice;
+  };
+  $ctrl.init = function(){
+	  console.log("init"+baggedItems);
+	  angular.forEach(baggedItems, function(item){
+		  console.log("in for each +"+item.selectedQuantity);
+		  $ctrl.pricecompute(item);
+		  //item.totalPrice=$ctrl.pricecompute(item);
+		  console.log(item);
+	  });
+	  
+  }
 });
 
 // Please note that the close and dismiss bindings are from $uibModalInstance.
 
 angular.module('app').component('modalComponent', {
-  templateUrl: 'resources/default/modalContent.html',
+  templateUrl: 'resources/baggeditems/baggeditems.view.html',
   bindings: {
     resolve: '<',
     close: '&',
@@ -101,6 +129,9 @@ angular.module('app').component('modalComponent', {
     $ctrl.ok = function () {
       $ctrl.close({$value: $ctrl.selected.item});
     };
+    $ctrl.pricecalculate = function(item) {
+    	console.log(item);
+    }
 
     $ctrl.cancel = function () {
       $ctrl.dismiss({$value: 'cancel'});

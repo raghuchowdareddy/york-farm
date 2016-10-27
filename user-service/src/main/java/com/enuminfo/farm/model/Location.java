@@ -35,9 +35,7 @@ public class Location implements Serializable {
 	private Integer pin;
 	private Country country;
 
-	private Location() {
-		// TODO Auto-generated constructor stub
-	}
+	private Location() {}
 	
 	private Location(Builder builder) {
 		this.id = builder.id;
@@ -75,7 +73,7 @@ public class Location implements Serializable {
 		return pin;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = ColumnType.COUNTRY_ID)
 	public Country getCountry() {
 		return country;
@@ -111,6 +109,8 @@ public class Location implements Serializable {
 		private Integer pin;
 		private Country country;
 
+		private Builder() {}
+		
 		public Builder withId(Integer id) {
 			this.id = id;
 			return this;

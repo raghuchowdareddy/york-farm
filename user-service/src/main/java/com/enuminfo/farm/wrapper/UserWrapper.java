@@ -30,7 +30,8 @@ public class UserWrapper {
 		dtoUser.setUserId(user.getId());
 		dtoUser.setName(user.getName());
 		dtoUser.setEmailId(user.getEmailAddress());
-		dtoUser.setMobileNo(user.getMobileNumber());		
+		dtoUser.setMobileNo(user.getMobileNumber());
+		dtoUser.setPassword(user.getPassword());
 		List<String> roleList = new ArrayList<String>();
 		Collection<Role> roles = user.getRoles();
 		for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext();) {

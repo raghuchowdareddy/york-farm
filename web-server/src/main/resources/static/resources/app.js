@@ -2,11 +2,8 @@
 	'use strict';
 	
 	angular.module('app', [ 'ngRoute', 'ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap' ])
-		.config(config);
-		//.run(run)
-		//.component('userModalComponent', { templateUrl: 'resources/default/userModal.view.html' })
-		//.controller('ModalInstanceController', ModalInstanceController)
-		//.controller('UserModalController', UserModalController);
+		.config(config)
+		.run(run);
 	
 	config.$inject = [ '$routeProvider', '$locationProvider' ];
 	function config($routeProvider, $locationProvider) {
@@ -24,6 +21,10 @@
 			controller : 'VegetableController',
 			templateUrl : 'resources/vegetables/vegetables.view.html',
 			controllerAs : 'vegetableCtrl'
+		}).when('/signin', {
+			controller : 'SecurityController',
+			templateUrl : 'resources/user/security.view.html',
+			controllerAs : 'securityCtrl'
 		}).when('/products', {
 			controller : 'ProductController',
 			templateUrl : 'resources/admin/product.view.html',
@@ -36,34 +37,15 @@
 			controller : 'BaggedItemsController',
 			templateUrl : 'resources/baggedItems/baggedItems.view.html',
 			controllerAs : 'baggedItemsCtrl'
+		}).when('/signout', {
+			resolve: {
+				logout: ['AuthenticationService', function (AuthenticationService) {
+					AuthenticationService.clearCredentials();
+				}]
+			}
 		}).otherwise({
 			redirectTo : '/'
 		});
-	}
-	
-	ModalInstanceController.$inject = [ '$uibModalInstance', 'AuthenticationService' ];
-	function ModalInstanceController($uibModalInstance, AuthenticationService) {
-		var $userModalCtrl = this;
-		$userModalCtrl.ok = function () {
-			if ($userModalCtrl.mobileNumber != null || $userModalCtrl.emailId != null) {
-				AuthenticationService.setDetails(null, $userModalCtrl.mobileNumber, $userModalCtrl.emailId, null);
-				$uibModalInstance.close();
-			}
-		};
-	}
-	
-	UserModalController.$inject = [ '$uibModal', '$log', '$scope', '$rootScope' ];
-	function UserModalController($uibModal, $log, $scope, $rootScope) {
-		var $userModalCtrl = this;
-		var loggedIn = $rootScope.globals.currentUser;
-		if (loggedIn == undefined) {
-			/*$uibModal.open({
-				animation: $userModalCtrl.animationsEnabled,
-				templateUrl: 'resources/default/userModal.view.html',
-				controller: 'ModalInstanceController',
-				controllerAs: '$userModalCtrl'
-			});*/
-		}
 	}
 
 	run.$inject = [ '$rootScope', '$location', '$cookieStore', '$http', 'UserService' ];
@@ -74,11 +56,11 @@
 		}
 		$rootScope.$on('$locationChangeStart', function(event, next, current) {
 			var loggedIn = $rootScope.globals.currentUser;
-			if (loggedIn != undefined) {
-				var mobileNo = $rootScope.globals.currentUser.mobileNo;
-				//UserService.getByUsername($rootScope.globals.currentUser.username).then(function(response) {
-				//	$rootScope.access = response.data.roles.indexOf('ROLE_ADMIN') == 1;
-				//});
+			if (loggedIn) {
+				UserService.getByMobileNo($rootScope.globals.currentUser.username).then(function(response) {
+					$rootScope.dtoUser = response.data;
+					$rootScope.access = response.data.roles.indexOf('ROLE_ADMIN') == 1;
+				});
 			}
 		});
 	}

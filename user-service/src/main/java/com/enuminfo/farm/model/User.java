@@ -34,13 +34,11 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String name, emailAddress, mobileNumber;
+	private String name, emailAddress, mobileNumber, password;
 	private Address address;
 	private Collection<Role> roles;
 	
-	private User() {
-		// TODO Auto-generated constructor stub
-	}
+	private User() {}
 	
 	private User(Builder builder) {
 		this.id = builder.id;
@@ -49,6 +47,7 @@ public class User implements Serializable {
 		this.mobileNumber = builder.mobileNumber;
 		this.address = builder.address;
 		this.roles = builder.roles;
+		this.password = builder.password;
 	}
 
 	@Id
@@ -73,18 +72,23 @@ public class User implements Serializable {
 		return mobileNumber;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn (name = ColumnType.ADDRESS_ID)
 	public Address getAddress() {
 		return address;
 	}
 
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable (name = TableType.T_USER_ROLE, joinColumns = {@JoinColumn(name = ColumnType.ROLE_ID)}, inverseJoinColumns = {@JoinColumn(name = ColumnType.USER_ID)})
 	public Collection<Role> getRoles() {
 		return roles;
 	}
 	
+	@Column (name = ColumnType.PASSWORD)
+	public String getPassword() {
+		return password;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -109,15 +113,17 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public static class Builder {
 		private Integer id;
-		private String name, emailAddress, mobileNumber;
+		private String name, emailAddress, mobileNumber, password;
 		private Address address;
 		private Collection<Role> roles;
 		
-		public Builder() {
-			// TODO Auto-generated constructor stub
-		}
+		private Builder() {}
 		
 		public Builder withId(Integer id) {
 			this.id = id;
@@ -146,6 +152,11 @@ public class User implements Serializable {
 		
 		public Builder withRoles(Collection<Role> roles) {
 			this.roles = roles;
+			return this;
+		}
+		
+		public Builder withPassword(String password) {
+			this.password = password;
 			return this;
 		}
 		

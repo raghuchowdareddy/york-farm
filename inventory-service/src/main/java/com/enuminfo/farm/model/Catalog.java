@@ -62,7 +62,7 @@ public class Catalog implements Serializable {
 		return name;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = TableType.T_CATALOG_PRODUCT, joinColumns = {
 			@JoinColumn(name = ColumnType.CATALOG_ID) }, inverseJoinColumns = {
 					@JoinColumn(name = ColumnType.PRODUCT_ID) })

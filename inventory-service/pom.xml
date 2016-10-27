@@ -6,22 +6,18 @@
 		<artifactId>york-farm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>inventory-service</artifactId>
+	<artifactId>york-inventory-service</artifactId>
 	<name>Inventory Service</name>
 	<description>ENUMINfo | York Farm - Inventory Service</description>
 	<dependencies>
 		<dependency>
 			<groupId>com.enuminfo.farm</groupId>
-			<artifactId>commons</artifactId>
+			<artifactId>york-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
@@ -35,14 +31,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

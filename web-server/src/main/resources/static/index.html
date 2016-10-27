@@ -24,10 +24,12 @@
 			</div>
 			<div class="cssmenu">
 				<ul>
-					<li><a href="#/products"><i class="fa fa-cogs"></i>&nbsp;My Products</a></li>
-					<li><a href="#/cataloges"><i class="fa fa-cogs"></i>&nbsp;My Catalogs</a></li>
-					<li><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;My Orders</a></li>
-					<li><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;My Bag</a></li>
+					<li ng-if="globals.currentUser != undefined && access == true"><a href="#/products"><i class="fa fa-cogs"></i>&nbsp;Products</a></li>
+					<li ng-if="globals.currentUser != undefined && access == true"><a href="#/cataloges"><i class="fa fa-cogs"></i>&nbsp;Catalogs</a></li>
+					<li ng-if="globals.currentUser != undefined"><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;Orders</a></li>
+					<li ng-if="globals.currentUser == undefined"><a href="#/signin"><i class="fa fa-sign-in"></i>&nbsp;<span class="signin-icon">Sign In</span></a></li>
+					<li><a href="#/"><i class="fa fa-shopping-cart"></i>&nbsp;Checkout</a></li>
+					<li ng-if="globals.currentUser != undefined"><a href="#/signout"><i class="fa fa-sign-out"></i>&nbsp;<span class="signup-icon">Sign Out</span></a></li>
 					<!-- <li ng-controller="DefaultController"><a ng-click="showAllBaggedItems(selectedVegetables)"><i class="fa fa-shopping-cart"></i>&nbsp;<span class="cart-icon">Cart</span>  ({{selectedVegetables.length}})</a></li> -->
 				</ul>
 			</div>
@@ -37,12 +39,11 @@
 	<div class="header-bottom">
 		<div class="wrap">
 			<ul class="megamenu skyblue">
-				<!-- <li><a class="color1" href="#/">Home</a></li> -->
+				<li><a class="color1" href="#/">Home</a></li>
 				<li><a class="color2" href="#/flowers">Flowers</a></li>
 				<li><a class="color3" href="#/friuts">Fruits</a></li>
 				<li><a class="color4" href="#/vegetables">Vegetables</a></li>
-				<li ng-if="globals.currentUser != undefined && access == true"><a class="color7" href="#/product">Products</span></a></li>
-				<li ng-if="globals.currentUser != undefined && access == true"><a class="color8" href="#/catalog">Catalogs</span></a></li>
+				<li ng-if="globals.currentUser != undefined"><a class="color5" href="#/">Welcome, {{dtoUser.name}} !</a></li>
 			</ul>
 			<div class="clear"></div>
 		</div>
@@ -56,8 +57,23 @@
 	<script type="text/javascript" src="resources/components/angular-cookies/angular-cookies.min.js"></script>
 	<script type="text/javascript" src="resources/components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="resources/js/megamenu.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".megamenu").megamenu();
+		});
+	</script>
 	<script type="text/javascript" src="resources/js/move-top.js"></script>
 	<script type="text/javascript" src="resources/js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop : $(this.hash).offset().top
+				}, 1200);
+			});
+		});
+	</script>
 	<script type="text/javascript" src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/app.js"></script>

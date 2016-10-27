@@ -6,7 +6,7 @@
 		<artifactId>york-farm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>eureka-server</artifactId>
+	<artifactId>york-discovery-server</artifactId>
 	<name>Discovery Server</name>
 	<description>ENUMINfo | York Farm - Discovery Server</description>
 	<dependencies>

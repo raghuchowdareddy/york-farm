@@ -37,9 +37,7 @@ public class Address implements Serializable {
 	private Location location;
 	private Collection<User> users;
 
-	private Address() {
-		// TODO Auto-generated constructor stub
-	}
+	private Address() {}
 	
 	private Address(Builder builder) {
 		this.id = builder.id;
@@ -72,7 +70,7 @@ public class Address implements Serializable {
 		return landmark;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = ColumnType.LOCATION_ID)
 	public Location getLocation() {
 		return location;
@@ -113,6 +111,8 @@ public class Address implements Serializable {
 		private Location location;
 		private Collection<User> users;
 
+		private Builder() {}
+		
 		public Builder withId(Integer id) {
 			this.id = id;
 			return this;

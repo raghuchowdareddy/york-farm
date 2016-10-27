@@ -6,13 +6,13 @@
 		<artifactId>york-farm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>user-service</artifactId>
+	<artifactId>york-user-service</artifactId>
 	<name>User Service</name>
 	<description>ENUMINfo | York Farm - User Service</description>
 	<dependencies>
 		<dependency>
 			<groupId>com.enuminfo.farm</groupId>
-			<artifactId>commons</artifactId>
+			<artifactId>york-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -35,14 +35,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

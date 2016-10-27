@@ -15,9 +15,8 @@ public class ProductDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int productId, categoryId;
-	private String productName, productDescription, categoryName;
+	private String productName, productDescription, categoryName, stock;
 	private double price;
-	private boolean stock;
 	
 	public ProductDTO() {
 		// TODO Auto-generated constructor stub
@@ -71,11 +70,11 @@ public class ProductDTO implements Serializable {
 		this.price = price;
 	}
 
-	public boolean isStock() {
+	public String getStock() {
 		return stock;
 	}
 
-	public void setStock(boolean stock) {
+	public void setStock(String stock) {
 		this.stock = stock;
 	}
 }

@@ -48,12 +48,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserDTO loadByMobileNo(String mobileNo) {
-		return UserWrapper.getInstance().convert2DTO(userRepository.findByMobileNumber(mobileNo));
-	}
-
-	@Override
-	public UserDTO loadByEmailId(String emailId) {
-		return UserWrapper.getInstance().convert2DTO(userRepository.findByEmailAddress(emailId));
+	public UserDTO loadByUsername(String username) {
+		return UserWrapper.getInstance().convert2DTO(userRepository.findByUsername(username));
 	}
 }

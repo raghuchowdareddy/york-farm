@@ -1,8 +1,8 @@
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: ${PORT:${SERVER_PORT:46357}}
 spring:
   application:
-    name: user
+    name: user-service
   datasource:
     url: jdbc:hsqldb:hsql://localhost
     initialize: true

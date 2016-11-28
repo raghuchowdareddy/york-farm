@@ -3,24 +3,24 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.enuminfo.farm</groupId>
 	<version>0.0.1-SNAPSHOT</version>
-	<artifactId>york-commons</artifactId>
+	<artifactId>YF-Commons</artifactId>
 	<packaging>jar</packaging>
 	<name>Commons</name>
 	<description>ENUMINfo | York Farm - Commons</description>
 	<dependencies>
-	
+
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-	        	<groupId>org.apache.maven.plugins</groupId>
-	        	<artifactId>maven-compiler-plugin</artifactId>
-	        	<version>3.5.1</version>
-	        	<configuration>
-	          		<source>1.8</source>
-	          		<target>1.8</target>
-	        	</configuration>
-	      	</plugin>
-	    </plugins>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

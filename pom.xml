@@ -9,7 +9,7 @@
 	<name>York Farm</name>
 	<description>ENUMInfo | York Farm Framework</description>
 	<groupId>com.enuminfo.farm</groupId>
-	<artifactId>york-farm</artifactId>
+	<artifactId>York-Farm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
@@ -18,12 +18,10 @@
 	</properties>
 	<modules>
 		<module>commons</module>
-		<module>eureka-server</module>
-		<module>proxy-server</module>
-		<module>web-server</module>
-		<module>catalog-service</module>
-		<module>inventory-service</module>
+		<module>registry-server</module>
+		<module>front-server</module>
 		<module>user-service</module>
+		<module>model</module>
 	</modules>
 	<dependencies>
 		<dependency>

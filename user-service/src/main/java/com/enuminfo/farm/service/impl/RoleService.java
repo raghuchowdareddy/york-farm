@@ -23,7 +23,7 @@ import com.enuminfo.farm.wrapper.RoleWrapper;
 public class RoleService implements IRoleService {
 
 	@Autowired
-	IRoleRepository roleRepository;
+	IRoleRepository repository;
 	
 	@Override
 	public void add(RoleDTO dtoRole) {
@@ -33,7 +33,7 @@ public class RoleService implements IRoleService {
 	@Override
 	public List<RoleDTO> loadAll() {
 		List<RoleDTO> dtoRoles = new ArrayList<RoleDTO>();
-		Iterable<Role> roles = roleRepository.findAll();
+		Iterable<Role> roles = repository.findAll();
 		for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext();) {
 			Role role = iterator.next();
 			dtoRoles.add(RoleWrapper.getInstance().convert2DTO(role));
@@ -43,12 +43,12 @@ public class RoleService implements IRoleService {
 
 	@Override
 	public RoleDTO loadById(int id) {
-		return null;
+		return RoleWrapper.getInstance().convert2DTO(repository.findOne(id));
 	}
 
 	@Override
 	public RoleDTO loadByName(String name) {
-		return null;
+		return RoleWrapper.getInstance().convert2DTO(repository.findByName(name));
 	}
 
 	@Override

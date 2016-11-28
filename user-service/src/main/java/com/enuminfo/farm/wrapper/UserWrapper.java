@@ -8,9 +8,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
 import com.enuminfo.farm.model.Role;
 import com.enuminfo.farm.model.User;
+import com.enuminfo.farm.util.StringUtil;
 
 /**
  * @author Kumar
@@ -28,9 +30,7 @@ public class UserWrapper {
 	public UserDTO convert2DTO(User user) {
 		UserDTO dtoUser = new UserDTO();
 		dtoUser.setUserId(user.getId());
-		dtoUser.setName(user.getName());
-		dtoUser.setEmailId(user.getEmailAddress());
-		dtoUser.setMobileNo(user.getMobileNumber());
+		dtoUser.setUsername(user.getUsername());
 		dtoUser.setPassword(user.getPassword());
 		List<String> roleList = new ArrayList<String>();
 		Collection<Role> roles = user.getRoles();
@@ -45,18 +45,20 @@ public class UserWrapper {
 	public User convert2ModelWithId(UserDTO dtoUser) {
 		User user = User.getBuilder()
 				.withId(dtoUser.getUserId())
-				.withName(dtoUser.getName())
-				.withEmailAddress(dtoUser.getEmailId())
-				.withMobileNumber(dtoUser.getMobileNo())
+				.withUsername(dtoUser.getMobileNo())
 				.build();
 		return user;
 	}
 	
-	public User convert2ModelWithoutId(UserDTO dtoUser) {
+	public User convert2ModelWithoutId(UserDTO dtoUser, List<RoleDTO> dtoRoles) {
+		Collection<Role> roles = new ArrayList<Role>();
+		for (Iterator<RoleDTO> iterator = dtoRoles.iterator(); iterator.hasNext();) {
+			roles.add(RoleWrapper.getInstance().convert2ModelWithId(iterator.next()));
+		}
 		User user = User.getBuilder()
-				.withName(dtoUser.getName())
-				.withEmailAddress(dtoUser.getEmailId())
-				.withMobileNumber(dtoUser.getMobileNo())
+				.withUsername(dtoUser.getMobileNo())
+				.withPassword(StringUtil.generatePassword())
+				.withRoles(roles)
 				.build();
 		return user;
 	}

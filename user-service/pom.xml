@@ -3,18 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.enuminfo.farm</groupId>
-		<artifactId>york-farm</artifactId>
+		<artifactId>York-Farm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>york-user-service</artifactId>
+	<artifactId>YF-User-Service</artifactId>
 	<name>User Service</name>
 	<description>ENUMINfo | York Farm - User Service</description>
 	<dependencies>
-		<dependency>
-			<groupId>com.enuminfo.farm</groupId>
-			<artifactId>york-commons</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
@@ -22,6 +17,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.enuminfo.farm</groupId>
+			<artifactId>YF-Commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>

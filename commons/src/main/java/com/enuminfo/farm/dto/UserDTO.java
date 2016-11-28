@@ -16,9 +16,9 @@ public class UserDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int userId;
-	private String name, emailId, mobileNo, password;
+	private String name, emailId, mobileNo, password, username;
 	private String address1, address2, address3;
-	private String locationName, pinCode;
+	private String locationName, pinCode, isdCode;
 	private String cityName, stateName, countryName;
 	private List<String> roles;
 	
@@ -136,5 +136,21 @@ public class UserDTO implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getIsdCode() {
+		return isdCode;
+	}
+
+	public void setIsdCode(String isdCode) {
+		this.isdCode = isdCode;
 	}
 }

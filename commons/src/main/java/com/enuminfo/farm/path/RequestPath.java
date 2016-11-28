@@ -23,4 +23,5 @@ public interface RequestPath {
 	public static final String PRODUCT = "/product";
 	public static final String CATALOG = "/catalog";
 	public static final String CATEGORY = "/category";
+	public static final String CUSTOMER = "/customer";
 }

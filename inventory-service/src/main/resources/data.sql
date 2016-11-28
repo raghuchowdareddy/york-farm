@@ -1,7 +1,0 @@
-/**
- * Data For T_CATEGORY Table
- */
-
-INSERT INTO T_CATEGORY (ID, NAME) VALUES (1, 'Fruits');
-INSERT INTO T_CATEGORY (ID, NAME) VALUES (2, 'Flowers');
-INSERT INTO T_CATEGORY (ID, NAME) VALUES (3, 'Vegetables');

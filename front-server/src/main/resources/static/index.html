@@ -1,0 +1,98 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>GREEN FARM</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/prettyPhoto.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/price-range.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/animate.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/main.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/responsive.css" rel="stylesheet" type="text/css" media="all" />
+<style type="text/css">[ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; }</style>
+</head>
+<body ng-clock>
+	<header id="header">
+		<div class="header_top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i>&nbsp;</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i>&nbsp;</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-middle">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="#/"><img src="resources/images/logo.png" width="139" height="49"/></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li ng-if="globals.currentUser != undefined"><a href="#"><i class="fa fa-user"></i>&nbsp;Welcome {{dtoUser.name}}!</a></li>
+								<li ng-if="globals.currentUser != undefined"><a href="#/checkout"><i class="fa fa-crosshairs"></i>&nbsp;Checkout</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Cart</a></li>
+								<li ng-if="globals.currentUser == undefined"><a href="#/login"><i class="fa fa-lock"></i>&nbsp;Login</a></li>
+								<li ng-if="globals.currentUser != undefined"><a href="#/logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<ng-view></ng-view>
+	<footer id="footer">
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2016 GREEN FARM Inc. All rights reserved.</p>
+					<p class="pull-right">Designed By <span><a target="_blank" href="http://www.enuminfo.com">ENUMInfo</a></span></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script type="text/javascript" src="resources/components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="resources/components/angular-animate/angular-animate.min.js"></script>
+	<script type="text/javascript" src="resources/components/angular-sanitize/angular-sanitize.min.js"></script>
+	<script type="text/javascript" src="resources/components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="resources/components/angular-cookies/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.js"></script>
+	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.scrollUp.min.js"></script>
+	<script type="text/javascript" src="resources/js/price-range.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="resources/js/main.js"></script>
+	<script type="text/javascript" src="resources/app.js"></script>
+	<script type="text/javascript" src="resources/services/authentication.service.js"></script>
+	<script type="text/javascript" src="resources/services/flash.service.js"></script>
+	<script type="text/javascript" src="resources/services/user.service.js"></script>
+	<script type="text/javascript" src="resources/services/product.service.js"></script>
+	<script type="text/javascript" src="resources/user/security.controller.js"></script>
+	<script type="text/javascript" src="resources/default/default.controller.js"></script>
+</body>
+</html>

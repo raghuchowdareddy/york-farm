@@ -15,8 +15,7 @@ public interface IUserService {
 	void add(UserDTO dtoUser);
 	List<UserDTO> loadAll();
 	UserDTO loadById(int id);
-	UserDTO loadByMobileNo(String mobileNo);
-	UserDTO loadByEmailId(String emailId);
+	UserDTO loadByUsername(String username);
 	void edit(UserDTO dtoUser);
 	void delete(int id);
 }

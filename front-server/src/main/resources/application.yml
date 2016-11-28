@@ -1,0 +1,9 @@
+server:
+  port: 8787
+spring:
+  application:
+    name: front-gui
+zuul:
+  routes:
+    user-service: 
+      path: /api/user/**

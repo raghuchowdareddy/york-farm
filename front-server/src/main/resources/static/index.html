@@ -55,7 +55,7 @@
 							<ul class="nav navbar-nav">
 								<li ng-if="globals.currentUser != undefined"><a href="#"><i class="fa fa-user"></i>&nbsp;Welcome {{dtoUser.name}}!</a></li>
 								<li ng-if="globals.currentUser != undefined"><a href="#/checkout"><i class="fa fa-crosshairs"></i>&nbsp;Checkout</a></li>
-								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Cart</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Cart&nbsp;({{selectedProductItems.length}})</a></li>
 								<li ng-if="globals.currentUser == undefined"><a href="#/login"><i class="fa fa-lock"></i>&nbsp;Login</a></li>
 								<li ng-if="globals.currentUser != undefined"><a href="#/logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
 							</ul>
@@ -94,5 +94,7 @@
 	<script type="text/javascript" src="resources/services/product.service.js"></script>
 	<script type="text/javascript" src="resources/user/security.controller.js"></script>
 	<script type="text/javascript" src="resources/default/default.controller.js"></script>
+	<script type="text/javascript" src="resources/user/cart.controller.js"></script>
+	<script type="text/javascript" src="resources/user/checkout.controller.js"></script>
 </body>
 </html>

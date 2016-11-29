@@ -4,9 +4,9 @@
 			<div class="category-tab">
 				<div class="col-sm-12">
 					<ul class="nav nav-tabs">
+						<li><a href="#vegetable" data-toggle="tab">Vegetables</a></li>
 						<li><a href="#flower" data-toggle="tab">Flowers</a></li>
 						<li><a href="#fruit" data-toggle="tab">Fruits</a></li>
-						<li><a href="#vegetable" data-toggle="tab">Vegetables</a></li>
 					</ul>
 				</div>
 				<div class="tab-content">
@@ -20,7 +20,7 @@
 										<img src="../../resources/images/product/{{vegetable.imageName}}" width="315" height="235"/>
 										<h2>{{vegetable.price}}</h2>
 										<p>{{vegetable.name}}</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a href ng-click="defaultCtrl.add2Cart(vegetable)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
 							</div>
@@ -38,7 +38,7 @@
 										<img src="../../resources/images/product/{{flower.imageName}}" width="315" height="235"/>
 										<h2>{{flower.price}}</h2>
 										<p>{{flower.name}}</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a href ng-click="defaultCtrl.add2Cart(flower)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
 							</div>
@@ -56,7 +56,7 @@
 										<img src="../../resources/images/product/{{fruit.imageName}}" width="315" height="235"/>
 										<h2>{{fruit.price}}</h2>
 										<p>{{fruit.name}}</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a href ng-click="defaultCtrl.add2Cart(fruit)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
 							</div>

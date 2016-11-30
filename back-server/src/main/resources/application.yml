@@ -1,0 +1,9 @@
+server:
+  port: 8989
+spring:
+  application:
+    name: back-gui
+zuul:
+  routes:
+    user-service: 
+      path: /api/user/**

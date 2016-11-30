@@ -6,41 +6,21 @@
     
     function UserService($http) {
     	var service = {};
-        service.getAllAdmins = getAllAdmins;
-        service.getSystemName = getSystemName;
-        service.getByMobileNo = getByMobileNo;
-        service.getByEmailId = getByEmailId;
         service.getByUsername = getByUsername;
         service.getDetailByUsername = getDetailByUsername;
-        service.saveCustomer = saveCustomer;
+        service.saveUser = saveUser;
         return service;
         
-        function getByMobileNo(mobileNo) {
-        	return $http.get('/api/user/loggedIn/mobile/' + mobileNo);
-        }
-        
-        function getByEmailId(emailId) {
-        	return $http.get('/api/user/loggedIn/email/' + emailId);
-        }
-        
         function getByUsername(username) {
-        	return $http.get('/api/user/loggedIn/' + username);
+        	return $http.get('/api/userservice/user/loggedIn/' + username);
         }
-        
-	    function getAllAdmins() {
-	    	return $http.get('/api/user/system/privilage');
-	    }
-	    
-	    function getSystemName() {
-	    	return $http.get('/api/user/system/admins');
-	    }
 	    
 	    function getDetailByUsername(username) {
-	    	return $http.get('/api/user/customer/' + username)
+	    	return $http.get('/api/userservice/user/' + username)
 	    }
 	    
-	    function saveCustomer(user) {
-	    	return $http.post('/api/user/customer', user);
+	    function saveUser(user) {
+	    	return $http.post('/api/userservice/user', user);
 	    }
     }
 })();

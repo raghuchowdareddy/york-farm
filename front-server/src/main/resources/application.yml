@@ -6,4 +6,4 @@ spring:
 zuul:
   routes:
     user-service: 
-      path: /api/user/**
+      path: /api/userservice/**

@@ -21,7 +21,7 @@
 		}
 		
 		function register() {
-			UserService.saveCustomer(securityCtrl);
+			UserService.saveUser(securityCtrl);
 		}
 	}
 })();

@@ -22,6 +22,7 @@
 		<module>front-server</module>
 		<module>user-service</module>
 		<module>model</module>
+		<module>back-server</module>
 	</modules>
 	<dependencies>
 		<dependency>

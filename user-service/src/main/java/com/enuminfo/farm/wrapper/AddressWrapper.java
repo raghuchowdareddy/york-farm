@@ -5,7 +5,7 @@ package com.enuminfo.farm.wrapper;
 
 import com.enuminfo.farm.dto.UserDTO;
 import com.enuminfo.farm.model.Address;
-import com.enuminfo.farm.model.Customer;
+import com.enuminfo.farm.model.UserDetail;
 
 /**
  * @author Kumar
@@ -20,7 +20,7 @@ public class AddressWrapper {
 		return SingletonWrapper.ADDRESS_WRAPPER_INSTANCE;
 	}
 	
-	public UserDTO convert2DTO(Customer customer) {
+	public UserDTO convert2DTO(UserDetail customer) {
 		UserDTO dtoUserAddress = new UserDTO();
 		
 		return dtoUserAddress;

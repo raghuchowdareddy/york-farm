@@ -11,7 +11,7 @@ public interface TableType {
 	public static final String T_USER = "T_USER";
 	public static final String T_ROLE = "T_ROLE";
 	public static final String T_USER_ROLE = "T_USER_ROLE";
-	public static final String T_CUSTOMER = "T_CUSTOMER";
+	public static final String T_USER_DETAIL = "T_USER_DETAIL";
 	public static final String T_ADDRESS = "T_ADDRESS";
 	public static final String T_COUNTRY = "T_COUNTRY";
 	public static final String T_LOCATION = "T_LOCATION";

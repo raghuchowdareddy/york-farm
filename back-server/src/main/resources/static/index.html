@@ -11,8 +11,33 @@
 	<link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css" />
 	<style type="text/css">[ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; }</style>
 </head>
-<body ng-cloak>
-	<div ng-view class="container"></div>
+<body ng-cloak class="hold-transition skin-blue layout-top-nav">
+	<div class="wrapper">
+		<header class="main-header">
+			<nav class="navbar navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a href="#/"><img src="resources/dist/img/logo.png" width="139" height="49"/></a>
+              			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                			<i class="fa fa-bars"></i>
+              			</button>
+            		</div>
+            		<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            		
+            		</div>
+				</div>
+			</nav>
+		</header>
+		<div class="content-wrapper">
+			<div ng-view class="container"></div>
+		</div>
+		<footer class="main-footer">
+			<div class="container">
+				<div class="pull-right hidden-xs"><b>Version</b>&nbsp;0.0.1-SNAPSHOT</div>
+          		<strong>Copyright&nbsp;&copy;&nbsp;2016-17&nbsp;<a href="http://enuminfo.com">ENUMInfo</a>.</strong>&nbsp;All&nbsp;rights&nbsp;reserved.
+			</div>
+		</footer>
+	</div>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-cookies.js"></script>
@@ -27,5 +52,6 @@
 	<script type="text/javascript" src="resources/app.js"></script>
 	<script type="text/javascript" src="resources/user/security.controller.js"></script>
 	<script type="text/javascript" src="resources/user/register.controller.js"></script>
+	<script type="text/javascript" src="resources/default/default.controller.js"></script>
 </body>
 </html>

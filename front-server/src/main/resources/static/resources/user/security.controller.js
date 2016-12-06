@@ -21,7 +21,16 @@
 		}
 		
 		function register() {
-			UserService.saveUser(securityCtrl);
+			UserService.saveUser(securityCtrl).then(function (response) {
+				Service.saveUser(registerCtrl.user).then(function (response) {
+	            	if (response) {
+	            		FlashService.success('Registration successful', true);
+	            		$location.path('/login');
+	            	} else {
+	            		FlashService.error(response.message);
+	            		registerCtrl.dataLoading = false;
+	            	}
+			});
 		}
 	}
 })();

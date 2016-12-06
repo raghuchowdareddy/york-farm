@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enuminfo.farm.dto.UserDTO;
 import com.enuminfo.farm.path.RequestPath;
+import com.enuminfo.farm.service.IUserDetailService;
 import com.enuminfo.farm.service.IUserService;
 
 /**
@@ -24,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	IUserService service;
+	
+	@Autowired
+	IUserDetailService detailService;
 	
 	@RequestMapping(value = RequestPath.LOGGED_IN + RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public UserDTO handleInteralRequestForLoggedUserDetailByUsername(@PathVariable String username) {
@@ -37,6 +41,6 @@ public class UserController {
 	
 	@RequestMapping(value = RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public UserDTO handleInternalRequestForDetailByUsername(@PathVariable String username) {
-		return service.loadByUsername(username);
+		return detailService.loadByUsername(username);
 	}
 }

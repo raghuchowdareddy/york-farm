@@ -21,7 +21,7 @@
                     FlashService.Error(response.message);
                     securityCtrl.dataLoading = false;
                 }
-        	}
+        	})
         };
     }
 })();

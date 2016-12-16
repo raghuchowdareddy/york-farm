@@ -9,7 +9,9 @@
 		defaultCtrl.flowers = [];
 		defaultCtrl.fruits = [];
 		defaultCtrl.vegetables = [];
-		$rootScope.selectedProductItems = [];
+		if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length==0){
+			$rootScope.selectedProductItems = [];
+		}
 		initController();
 		defaultCtrl.add2Cart = add2Cart;
 		

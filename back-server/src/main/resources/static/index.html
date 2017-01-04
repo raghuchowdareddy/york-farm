@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 	<link rel="stylesheet" href="resources/dist/css/AdminLTE.min.css" />
 	<link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css" />
+	<link rel="stylesheet" href="resources/plugins/datatables/dataTables.bootstrap.css" />
 	<style type="text/css">[ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; }</style>
 </head>
 <body ng-cloak class="hold-transition skin-blue layout-top-nav">
@@ -24,16 +25,17 @@
             		</div>
             		<div class="collapse navbar-collapse pull-left" id="navbar-collapse" ng-if="globals.currentUser != undefined">
             			<ul class="nav navbar-nav">
-            				<li><a href="#">Categories</a></li>
-            				<li><a href="#">Products</a></li>
-            				<li><a href="#">Catalogs</a></li>
-            				<li><a href="#">Orders</a></li>
+            				<li><a href="#/category">Categories</a></li>
+            				<li><a href="#/product">Products</a></li>
+            				<li><a href="#/catalog">Catalogs</a></li>
+            				<li><a href="#/deliveryloc">Delivery Locations</a></li>
+            				<li><a href="#/order">Orders</a></li>
             			</ul>
             		</div>
             		<div class="navbar-custom-menu" ng-if="globals.currentUser != undefined">
             			<ul class="nav navbar-nav">
             				<li class="dropdown messages-menu">
-            					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            					<a href class="dropdown-toggle" data-toggle="dropdown">
             						<i class="fa fa-envelope-o"></i><span class="label label-success">4</span>
             					</a>
             					<ul class="dropdown-menu">
@@ -43,7 +45,7 @@
             					</ul>
 							</li>
             				<li class="dropdown notifications-menu">
-            					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            					<a href class="dropdown-toggle" data-toggle="dropdown">
             						<i class="fa fa-bell-o"></i><span class="label label-warning">10</span>
             					</a>
                     			<ul class="dropdown-menu">
@@ -53,7 +55,7 @@
                     			</ul>
             				</li>
             				<li class="dropdown tasks-menu">
-            					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            					<a href class="dropdown-toggle" data-toggle="dropdown">
             						<i class="fa fa-flag-o"></i><span class="label label-danger">9</span>
             					</a>
                     			<ul class="dropdown-menu">
@@ -63,14 +65,14 @@
                     			</ul>
             				</li>
             				<li class="dropdown user user-menu">
-            					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            					<a href class="dropdown-toggle" data-toggle="dropdown">
             						<img src="resources/dist/img/user2-160x160.jpg" class="user-image"/>
 			                      	<span class="hidden-xs">Alexander Pierce</span>
                     			</a>
                     			<ul class="dropdown-menu">
                     				<li class="user-header">
                         				<img src="resources/dist/img/user2-160x160.jpg" class="img-circle"/>
-                        				<p>Alexander Pierce - Web Developer<small>Member since Nov. 2012</small></p>
+                        				<p>{{currentUser.username}}<small>Member since Nov. 2012</small></p>
                       				</li>
                       				<li class="user-body"></li>
                       				<li class="user-footer">
@@ -99,20 +101,34 @@
 		</footer>
 	</div>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<script type="text/javascript" src="resources/components/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="resources/components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="resources/js/ui-bootstrap-tpls-2.1.4.min.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
 	<script type="text/javascript" src="https://code.angularjs.org/1.5.0/angular-cookies.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="resources/plugins/fastclick/fastclick.min.js"></script>
 	<script type="text/javascript" src="resources/dist/js/app.min.js"></script>
 	<script type="text/javascript" src="resources/dist/js/demo.js"></script>
 	<script type="text/javascript" src="resources/plugins/iCheck/icheck.min.js"></script>
+    <script type="text/javascript">
+	$(function () {
+		$("#categoryTable").DataTable();
+	});
+	</script>
 	<script type="text/javascript" src="resources/app.js"></script>
 	<script type="text/javascript" src="resources/services/authentication.service.js"></script>
 	<script type="text/javascript" src="resources/services/flash.service.js"></script>
 	<script type="text/javascript" src="resources/services/user.service.js"></script>
+	<script type="text/javascript" src="resources/services/inventory.service.js"></script>
+	<script type="text/javascript" src="resources/inventory/category.controller.js"></script>
+	<script type="text/javascript" src="resources/inventory/product.controller.js"></script>
+	<script type="text/javascript" src="resources/user/deliveryloc.controller.js"></script>
 	<script type="text/javascript" src="resources/user/security.controller.js"></script>
 	<script type="text/javascript" src="resources/user/register.controller.js"></script>
 	<script type="text/javascript" src="resources/default/default.controller.js"></script>

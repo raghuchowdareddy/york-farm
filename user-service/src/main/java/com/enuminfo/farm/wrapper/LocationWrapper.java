@@ -3,7 +3,7 @@
  */
 package com.enuminfo.farm.wrapper;
 
-import com.enuminfo.farm.dto.UserDTO;
+import com.enuminfo.farm.dto.LocationDTO;
 import com.enuminfo.farm.model.Location;
 
 /**
@@ -19,14 +19,20 @@ public class LocationWrapper {
 		return SingletonWrapper.LOCATION_WRAPPER_INSTANCE;
 	}
 	
-	public Location convert2ModelWithoutId(UserDTO dtoUser) {
+	public Location convert2ModelWithoutId(LocationDTO dtoLocation) {
 		Location location = Location.getBuilder()
-				.withName(dtoUser.getLocationName())
-				.withPin(Integer.parseInt(dtoUser.getPinCode()))
-				.withCity(dtoUser.getCityName())
-				.withState(dtoUser.getStateName())
-				.withCountry(CountryWrapper.getInstance().convert2ModelWithoutId(dtoUser))
+				.withName(dtoLocation.getLocationName())
+				.withPin(dtoLocation.getPinCode())
+				.withCity(dtoLocation.getCityName())
+				.withState(dtoLocation.getStateName())
+				.withCountry(CountryWrapper.getInstance().convert2ModelWithoutId(dtoLocation))
 				.build();
 		return location;
+	}
+	
+	public LocationDTO convert2DTO(Location location) {
+		LocationDTO dtoLocation = new LocationDTO();
+		
+		return dtoLocation;
 	}
 }

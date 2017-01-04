@@ -9,7 +9,7 @@
 		defaultCtrl.flowers = [];
 		defaultCtrl.fruits = [];
 		defaultCtrl.vegetables = [];
-		if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length==0){
+		if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length == 0){
 			$rootScope.selectedProductItems = [];
 		}
 		initController();

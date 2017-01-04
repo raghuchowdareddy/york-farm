@@ -32,7 +32,7 @@ public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name, state, city;
-	private Integer pin;
+	private Long pin;
 	private Country country;
 
 	private Location() {}
@@ -69,7 +69,7 @@ public class Location implements Serializable {
 	}
 
 	@Column(name = ColumnType.ZIP_CODE)
-	public Integer getPin() {
+	public Long getPin() {
 		return pin;
 	}
 
@@ -95,7 +95,7 @@ public class Location implements Serializable {
 		this.city = city;
 	}
 
-	public void setPin(Integer pin) {
+	public void setPin(Long pin) {
 		this.pin = pin;
 	}
 
@@ -106,7 +106,7 @@ public class Location implements Serializable {
 	public static class Builder {
 		private Integer id;
 		private String name, state, city;
-		private Integer pin;
+		private Long pin;
 		private Country country;
 
 		private Builder() {}
@@ -131,7 +131,7 @@ public class Location implements Serializable {
 			return this;
 		}
 
-		public Builder withPin(Integer pin) {
+		public Builder withPin(Long pin) {
 			this.pin = pin;
 			return this;
 		}

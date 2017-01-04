@@ -29,17 +29,17 @@ public class UserController {
 	@Autowired
 	IUserDetailService detailService;
 	
-	@RequestMapping(value = RequestPath.LOGGED_IN + RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping (value = RequestPath.LOGGED_IN + RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public UserDTO handleInteralRequestForLoggedUserDetailByUsername(@PathVariable String username) {
 		return service.loadByUsername(username);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping (method = RequestMethod.POST)
 	public void handleInternalRequestForSaveCustomer(@RequestBody UserDTO dtoUser) {
 		service.add(dtoUser);
 	}
 	
-	@RequestMapping(value = RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping (value = RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public UserDTO handleInternalRequestForDetailByUsername(@PathVariable String username) {
 		return detailService.loadByUsername(username);
 	}

@@ -31,7 +31,6 @@ public class AddressWrapper {
 				.withHouseNo(dtoUser.getAddress1())
 				.withStreet(dtoUser.getAddress2())
 				.withStreet(dtoUser.getAddress3())
-				.withLocation(LocationWrapper.getInstance().convert2ModelWithoutId(dtoUser))
 				.build();
 		return address;
 	}

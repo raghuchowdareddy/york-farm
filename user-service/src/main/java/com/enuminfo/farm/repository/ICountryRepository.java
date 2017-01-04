@@ -12,4 +12,5 @@ import com.enuminfo.farm.model.Country;
  */
 public interface ICountryRepository extends PagingAndSortingRepository<Country, Integer> {
 
+	Country findByName(String name);
 }

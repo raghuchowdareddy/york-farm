@@ -23,4 +23,14 @@ public interface RequestPath {
 	public static final String PRODUCT = "/product";
 	public static final String CATALOG = "/catalog";
 	public static final String CATEGORY = "/category";
+	public static final String REGION = "/region";
+	public static final String COUNTRIES = "/countries";
+	public static final String STATES = "/states";
+	public static final String COUNTRY = "/{country}";
+	public static final String CITIES = "/cities";
+	public static final String STATE = "/{state}";
+	public static final String LOCATIONS = "/locations";
+	public static final String CITY = "/{city}";
+	public static final String LOCATION = "/location";
+	public static final String ID = "/{id}";
 }

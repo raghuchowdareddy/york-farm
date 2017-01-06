@@ -31,6 +31,7 @@
 	            		registerCtrl.dataLoading = false;
 	            	}
 			});
-		}
+		});
 	}
+ }
 })();

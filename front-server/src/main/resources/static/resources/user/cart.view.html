@@ -5,8 +5,8 @@
 				<thead><tr class="cart_menu">
 					<td class="image">Item</td>
 					<td class="description"></td>
-					<td class="price">Price</td>
-					<td class="quantity">Quantity</td>
+					<td class="price">Price/Kg</td>
+					<td class="quantity">Quantity (in Kg)</td>
 					<td class="total">Total</td>
 					<td>&nbsp;</td>
 				</tr></thead>
@@ -16,11 +16,11 @@
 						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
 						<td class="cart_price"><p>{{selectedProductItem.price}}</p></td>
 						<td class="cart_quantity"><div class="cart_quantity_button">
-							<a class="cart_quantity_up" href=""> + </a>
-							<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-							<a class="cart_quantity_down" href=""> - </a>
+							<a href ng-click="cartCtrl.add(selectedProductItem)" class="cart_quantity_up" > + </a>
+							<input class="cart_quantity_input" type="text" name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
+							<a class="cart_quantity_down" href ng-click="cartCtrl.substract(selectedProductItem)"> - </a>
 						</div></td>
-						<td class="cart_total"><p class="cart_total_price">10.00</p></td>
+						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice}}</p></td>
 						<td class="cart_delete">
 							<a class="cart_quantity_delete" href="#"><i class="fa fa-times"></i></a>
 						</td>

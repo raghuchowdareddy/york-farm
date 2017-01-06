@@ -14,15 +14,15 @@
 					<tr ng-repeat="selectedProductItem in selectedProductItems">
 						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.imageName}}" width="110" height="110"/></a></td>
 						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
-						<td class="cart_price"><p>{{selectedProductItem.price}}</p></td>
+						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
 						<td class="cart_quantity"><div class="cart_quantity_button">
 							<a href ng-click="cartCtrl.add(selectedProductItem)" class="cart_quantity_up" > + </a>
 							<input class="cart_quantity_input" type="text" name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
 							<a class="cart_quantity_down" href ng-click="cartCtrl.substract(selectedProductItem)"> - </a>
 						</div></td>
-						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice}}</p></td>
+						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
 						<td class="cart_delete">
-							<a class="cart_quantity_delete" href="#"><i class="fa fa-times"></i></a>
+							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem,$index)"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>
 				</tbody>
@@ -72,11 +72,11 @@
 			<div class="col-sm-6">
 				<div class="total_area">
 					<ul>
-						<li>Cart Sub Total:&nbsp;<span>30.00</span></li>
-						<li>Eco Tax:&nbsp;<span>5.00</span></li>
-						<li>Shipping Cost:&nbsp;<span>0.00</span></li>
-						<li>Total:&nbsp;<span>35.00</span></li>
-					</ul>
+						<li>Cart Sub Total:&nbsp;<span>{{subTotal | currency:"₹"}}</span></li>
+						<li>Eco Tax:&nbsp;<span>{{tax | currency:"₹"}}</span></li>
+						<li>Shipping Cost:&nbsp;<span>{{shippingCost | currency:"₹"}}</span></li>
+						<li>Total:&nbsp;<span>{{subTotal+tax+shippingCost | currency:"₹"}}</span></li>
+					</ul> 
 					<a class="btn btn-default update" href="#">Save As Draft</a>
 					<a class="btn btn-default check_out" href="#/checkout">Check Out</a>
 				</div>

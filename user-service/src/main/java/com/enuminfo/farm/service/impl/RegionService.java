@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.dto.LocationDTO;
 import com.enuminfo.farm.model.Country;
@@ -21,6 +22,7 @@ import com.enuminfo.farm.wrapper.LocationWrapper;
 /**
  * @author Kumar
  */
+@Service
 public class RegionService implements IRegionService {
 
 	@Autowired 

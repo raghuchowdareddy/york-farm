@@ -40,4 +40,19 @@ public interface ColumnType {
 	public static final String CATEGORY = "category";
 	public static final String PRODUCT = "product";
 	public static final String ADDRESS = "address";
+	
+	//columns for T_USER_SELECTED_ITEM, entity = UserSelectedItem
+	public static final String USER_MOBILE_NO = "USER_MOBILE_NO";
+	public static final String ITEM_NAME = "ITEM_NAME";
+	public static final String COST_PER_KG = "COST_PER_KG";
+	public static final String QUANTITY = "QUANTITY";
+	
+	public static final String CREATED_DATE = "CREATED_DATE";
+	public static final String UPDATED_DATE = "UPDATED_DATE";
+	public static final String DELIVERED_DATE = "DELIVERED_DATE";
+	public static final String DRAFETED = "DRAFETED";
+	public static final String ORDERED = "ORDERED";
+	public static final String DELIVERED = "DELIVERED";
+	public static final String ORDER_CANCELED = "ORDER_CANCELED";
+	public static final String USER_SELECTED_ITEM_ID = "USER_SELECTED_ITEM_ID";
 }

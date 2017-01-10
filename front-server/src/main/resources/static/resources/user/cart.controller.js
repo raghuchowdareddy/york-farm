@@ -2,19 +2,22 @@
 	'use strict';
 	
 	angular.module('app').controller('CartController', CartController);
-	CartController.$inject = [ '$rootScope','$scope', '$location' ,'$window'];
+	CartController.$inject = [ '$rootScope','$scope', '$location' ,'$window','CartService','FlashService'];
 
-	function CartController($rootScope, $scope,$location,$window) {
+	function CartController($rootScope, $scope,$location,$window,CartService,FlashService) {
 		init();
 		$scope.shippingCost=5.00;
 		$scope.tax=5.00;
+	
 		var cartCtrl = this;
 		cartCtrl.add = add;
 		cartCtrl.substract = substract;
 		cartCtrl.deleteItem = deleteItem;
+		cartCtrl.saveDraft = saveDraft;
+		
 		
 		function init(){
-		//do something
+			
 		}
 		function add(item){
 			var currentQuantity = item.quantity;
@@ -40,6 +43,31 @@
 				
 			}
 			console.log($rootScope.selectedProductItems);
+		}
+		function saveDraft(){
+			$scope.user =[];
+			var log = [];
+			$scope.userSelectedItems = [];
+//			$scope.cart={'user':$scope.user,'userSelectedItem':$rootScope.selectedProductItems,
+//					'shippingCost':$scope.shippingCost,"tax":$scope.tax,'subTotal':$rootScope.subTotal};
+			angular.forEach($rootScope.selectedProductItems, function(item,key){
+				$scope.userSelectedItems.push({'userMobileNo':1234567890,'itemName':item.name,
+					'costPerKg':item.price,'quantity':item.quantity,'isDrafted':1})
+				console.log($scope.userSelectedItems);
+			},log);
+			
+			CartService.saveDraft($scope.userSelectedItems).then(function(response){
+				if (response) {
+					console.log("cart response");
+            		FlashService.success('Registration successful', true);
+            		$location.path('/#');
+            	} else {
+            		console.log("cart response false");
+            		FlashService.error(response.message);
+            		registerCtrl.dataLoading = false;
+            	}
+			})
+			
 		}
 	}
 	

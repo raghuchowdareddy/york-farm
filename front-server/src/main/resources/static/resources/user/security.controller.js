@@ -34,4 +34,12 @@
 		});
 	}
  }
+	
+	angular.module('app').controller('RegisterController', RegisterController);
+	SecurityController.$inject = [ 'UserService', 'AuthenticationService', 'FlashService', '$rootScope', '$location' ];
+
+	function RegisterController(UserService, AuthenticationService, FlashService, $rootScope, $location) {
+		
+	}
+	
 })();

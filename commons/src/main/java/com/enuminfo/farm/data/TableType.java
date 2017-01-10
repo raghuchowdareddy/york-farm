@@ -19,4 +19,5 @@ public interface TableType {
 	public static final String T_PRODUCT = "T_PRODUCT";
 	public static final String T_CATALOG = "T_CATALOG";
 	public static final String T_CATALOG_PRODUCT = "T_CATALOG_PRODUCT";
+	public static final String T_USER_SELECTED_ITEM = "T_USER_SELECTED_ITEM";
 }

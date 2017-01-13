@@ -2,9 +2,9 @@
 	'use strict';
 	
 	angular.module('app').controller('CartController', CartController);
-	CartController.$inject = [ '$rootScope','$scope', '$location' ,'$window','CartService','FlashService'];
+	CartController.$inject = [ '$rootScope','$scope','$cookieStore','$location' ,'$window','CartService','FlashService'];
 
-	function CartController($rootScope, $scope,$location,$window,CartService,FlashService) {
+	function CartController($rootScope, $scope,$cookieStore,$location,$window,CartService,FlashService) {
 		init();
 		$scope.shippingCost=5.00;
 		$scope.tax=5.00;
@@ -45,6 +45,13 @@
 			console.log($rootScope.selectedProductItems);
 		}
 		function saveDraft(){
+			if(angular.isUndefined($cookieStore.get('globals'))){
+				$rootScope.currentLocation = $location.path();
+				console.log($rootScope.currentLocation);
+				swal("Request...", "Please login or register before draft or save your items ", "error");
+				$location.path('/login');
+				return;
+			}
 			$scope.user =[];
 			var log = [];
 			$scope.userSelectedItems = [];
@@ -57,6 +64,7 @@
 			},log);
 			
 			CartService.saveDraft($scope.userSelectedItems).then(function(response){
+				
 				if (response) {
 					console.log("cart response");
             		FlashService.success('Registration successful', true);

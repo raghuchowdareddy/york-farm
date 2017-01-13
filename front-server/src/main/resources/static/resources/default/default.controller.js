@@ -2,9 +2,9 @@
 	'use strict';
 	
 	angular.module('app').controller('DefaultController', DefaultController);
-	DefaultController.$inject = [ '$rootScope', 'ProductService' ];
+	DefaultController.$inject = [ '$rootScope', '$cookieStore','ProductService' ];
 	
-	function DefaultController($rootScope, ProductService) {
+	function DefaultController($rootScope, $cookieStore,ProductService) {
 		var defaultCtrl = this;
 		defaultCtrl.flowers = [];
 		defaultCtrl.fruits = [];
@@ -20,6 +20,12 @@
 			defaultCtrl.flowers = ProductService.getFlowers();
 			defaultCtrl.fruits = ProductService.getFruits();
 			defaultCtrl.vegetables = ProductService.getVegetables();
+			if(!angular.isUndefined($cookieStore.get('globals'))){
+				var obj = $cookieStore.get('globals');
+				ProductService.getDraftedProductsByUser(obj.currentUser.username).then(function(response){
+					$rootScope.selectedProductItems = response;	
+				})
+			}
 		}
 		
 		function add2Cart(selectedItem) {

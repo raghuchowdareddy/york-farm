@@ -15,6 +15,11 @@ public class UserSelectedItemService implements IUserSelectedItem {
 	  selectedItemRepository.save(userSelectedItem);
 
 	}
+	@Override
+	public UserSelectedItem[] getDraftedItems(Integer userNumber) {
+	  return selectedItemRepository.findByUserMobileNoAndDraftedTrue(userNumber,true);
+	}
+	
 	@Autowired IUserSelectedItemRepository selectedItemRepository;
 	
 }

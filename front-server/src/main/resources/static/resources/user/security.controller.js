@@ -13,7 +13,12 @@
 			AuthenticationService.login(securityCtrl.username, securityCtrl.password, function(response) {
 				if (response.success) {
 					AuthenticationService.setCredentials(securityCtrl.username, securityCtrl.password);
-					$location.path('/');
+					if((!angular.isUndefined($rootScope.currentLocation)) && $rootScope.currentLocation != ''){
+						$location.path($rootScope.currentLocation);
+						$rootScope.currentLocation=null;
+					}else{
+						$location.path('/');
+					}
 				} else {
 					FlashService.error(response.message);
 				}

@@ -12,6 +12,7 @@
         service.getFlowers = getFlowers;
         service.getFruits = getFruits;
         service.getVegetables = getVegetables;
+        service.getDraftedProductsByUser = getDraftedProductsByUser;
         return service;
         
         function getAll() {
@@ -24,6 +25,11 @@
         
         function getByCategory(categoryName) {
         	return $http.get('/api/inventroy/product/' + categoryName);
+        }
+        function getDraftedProductsByUser(userMobileNo){
+        	return $http.get('/getDraftedItems/'+userMobileNo,{headers:{
+                'Content-Type': 'application/json'
+        	   }});
         }
         
         function getFlowers() {

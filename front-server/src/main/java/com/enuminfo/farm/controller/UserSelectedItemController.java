@@ -20,7 +20,6 @@ public class UserSelectedItemController {
 	@RequestMapping(value="/draftSelectedItems",method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void draftSelectedItem(@RequestBody UserSelectedItem[] userSelectedItem){
 		for (UserSelectedItem userSelectedItem2 : userSelectedItem) {
-			System.out.println("UserSelectedItemController.draftSelectedItem():: "+userSelectedItem2.toString());
 			selectedItem.add(userSelectedItem2);
 		}
 		
@@ -33,3 +32,4 @@ public class UserSelectedItemController {
 	}
 	@Autowired IUserSelectedItem selectedItem;
 }
+

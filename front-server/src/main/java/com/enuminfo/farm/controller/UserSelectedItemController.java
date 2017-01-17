@@ -1,5 +1,7 @@
 package com.enuminfo.farm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +26,9 @@ public class UserSelectedItemController {
 		
 	}
 	@RequestMapping(value="/getDraftedItems/{userNumber}",method = RequestMethod.GET,
-			consumes=MediaType.TEXT_HTML_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public UserSelectedItem[] getDraftedItems(@PathVariable String userNumber){
-		  return selectedItem.getDraftedItems(Integer.valueOf(userNumber));
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<UserSelectedItem> getDraftedItems(@PathVariable String userNumber){
+		  return selectedItem.getDraftedItems(Long.valueOf(userNumber));
 			
 	}
 	@Autowired IUserSelectedItem selectedItem;

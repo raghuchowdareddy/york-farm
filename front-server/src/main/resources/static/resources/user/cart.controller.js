@@ -58,8 +58,8 @@
 //			$scope.cart={'user':$scope.user,'userSelectedItem':$rootScope.selectedProductItems,
 //					'shippingCost':$scope.shippingCost,"tax":$scope.tax,'subTotal':$rootScope.subTotal};
 			angular.forEach($rootScope.selectedProductItems, function(item,key){
-				$scope.userSelectedItems.push({'userMobileNo':1234567890,'itemName':item.name,
-					'costPerKg':item.price,'quantity':item.quantity,'isDrafted':1})
+				$scope.userSelectedItems.push({'userMobileNo':$rootScope.globals.currentUser.username,'itemName':item.name,
+					'price':item.price,'quantity':item.quantity,'imageName':item.imageName,status:"drafted"})
 				console.log($scope.userSelectedItems);
 			},log);
 			

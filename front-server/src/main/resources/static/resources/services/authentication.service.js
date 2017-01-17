@@ -43,6 +43,7 @@
 		}
 
 		function clearCredentials() {
+			$rootScope.selectedProductItems = [];
 			$rootScope.globals = {};
 			$cookieStore.remove('globals');
 			$rootScope.access = null;

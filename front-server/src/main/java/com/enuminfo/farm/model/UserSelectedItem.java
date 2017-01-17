@@ -11,76 +11,82 @@ import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
 import com.enuminfo.farm.data.TableType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity(name="userSelectedItem")
+@Entity(name = "userSelectedItem")
 @Table(name = TableType.T_USER_SELECTED_ITEM)
 
 public class UserSelectedItem {
-	
-	private long userMobileNo;
+
+	private Long userMobileNo;
 	private String itemName;
-	private int costPerKg;
+	private int price;
 	private String desscription;
+	private String imageName;
 	private int quantity;
 	private LocalDateTime createdDate;
 	private LocalDateTime updatedDate;
 	private LocalDateTime deliveredDate;
-	@JsonProperty
-	private Boolean isDrafted = new Boolean(false);
-	@JsonProperty
-	private Boolean isOrdered = new Boolean(false);
-	@JsonProperty
-	private Boolean isDelivered = new Boolean(false);
-	@JsonProperty
-	private Boolean isOrderCanceled = new Boolean(false);;
-	
+	private String status;
+
 	private int userSelectedItemId;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name=ColumnType.USER_SELECTED_ITEM_ID)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = ColumnType.USER_SELECTED_ITEM_ID)
 	public int getUserSelectedItemId() {
 		return userSelectedItemId;
 	}
-	
+
 	public void setUserSelectedItemId(int userSelectedItemId) {
 		this.userSelectedItemId = userSelectedItemId;
 	}
-	
-	@Column(name=ColumnType.USER_MOBILE_NO)
-	public long getUserMobileNo() {
+
+	@Column(name = ColumnType.USER_MOBILE_NO)
+	public Long getUserMobileNo() {
 		return userMobileNo;
 	}
-	public void setUserMobileNo(long userMobileNo) {
+
+	public void setUserMobileNo(Long userMobileNo) {
 		this.userMobileNo = userMobileNo;
 	}
-	
-	@Column(name=ColumnType.ITEM_NAME)
+
+	@Column(name = ColumnType.ITEM_NAME)
 	public String getItemName() {
 		return itemName;
 	}
+
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	
-	@Column(name=ColumnType.COST_PER_KG)
-	public int getCostPerKg() {
-		return costPerKg;
+
+	@Column(name = ColumnType.PRICE)
+	public int getPrice() {
+		return price;
 	}
-	public void setCostPerKg(int costPerKg) {
-		this.costPerKg = costPerKg;
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	
-	@Column(name=ColumnType.DESCRIPTION)
+
+	@Column(name = ColumnType.DESCRIPTION)
 	public String getDesscription() {
 		return desscription;
 	}
+
 	public void setDesscription(String desscription) {
 		this.desscription = desscription;
 	}
-	
-	@Column(name=ColumnType.QUANTITY)
+
+	@Column(name = ColumnType.IMAGE_NAME)
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	@Column(name = ColumnType.QUANTITY)
 	public int getQuantity() {
 		return quantity;
 	}
@@ -89,74 +95,51 @@ public class UserSelectedItem {
 		this.quantity = quantity;
 	}
 
-	@Column(name=ColumnType.CREATED_DATE)
+	@Column(name = ColumnType.CREATED_DATE)
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
+
 	public void setCreatedDate(LocalDateTime createdDate) {
-		if(createdDate == null){
-			this.createdDate =  LocalDateTime.now();
-		}else{
+		if (createdDate == null) {
+			this.createdDate = LocalDateTime.now();
+		} else {
 			this.createdDate = createdDate;
 		}
 	}
-	
-	@Column(name=ColumnType.UPDATED_DATE)
+
+	@Column(name = ColumnType.UPDATED_DATE)
 	public LocalDateTime getUpdatedDate() {
 		return updatedDate;
 	}
+
 	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
-	@Column(name=ColumnType.DELIVERED_DATE)
+
+	@Column(name = ColumnType.DELIVERED_DATE)
 	public LocalDateTime getDeliveredDate() {
 		return deliveredDate;
 	}
+
 	public void setDeliveredDate(LocalDateTime deliveredDate) {
 		this.deliveredDate = deliveredDate;
 	}
-	
-	@Column(name=ColumnType.DRAFETED)
-	public Boolean isDrafted() {
-		return isDrafted;
-	}
-	public void setDrafted(Boolean isDrafted) {
-		this.isDrafted = isDrafted;
-	}
-	
-	@Column(name=ColumnType.ORDERED)
-	public Boolean isOrdered() {
-		return isOrdered;
-	}
-	public void setOrdered(Boolean isOrdered) {
-		this.isOrdered = isOrdered;
-	}
-	
-	@Column(name=ColumnType.DELIVERED)
-	public Boolean isDelivered() {
-		return isDelivered;
-	}
-	public void setDelivered(Boolean isDelivered) {
-		this.isDelivered = isDelivered;
-	}
-	
-	@Column(name=ColumnType.ORDER_CANCELED)
-	public Boolean isOrderCanceled() {
-		return isOrderCanceled;
-	}
-	public void setOrderCanceled(Boolean isOrderCanceled) {
-		this.isOrderCanceled = isOrderCanceled;
+
+	@Column(name = ColumnType.STATUS)
+	public String getStatus() {
+		return status;
 	}
 
-	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
-		return "UserSelectedItem [userMobileNo=" + userMobileNo + ", itemName=" + itemName + ", costPerKg=" + costPerKg
+		return "UserSelectedItem [userMobileNo=" + userMobileNo + ", itemName=" + itemName + ", costPerKg=" + price
 				+ ", desscription=" + desscription + ", quantity=" + quantity + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + ", deliveredDate=" + deliveredDate + ", isDrafted=" + isDrafted
-				+ ", isOrdered=" + isOrdered + ", isDelivered=" + isDelivered + ", isOrderCanceled=" + isOrderCanceled
+				+ ", updatedDate=" + updatedDate + ", deliveredDate=" + deliveredDate + ", status=" + status
 				+ ", userSelectedItemId=" + userSelectedItemId + "]";
 	}
 
@@ -164,17 +147,15 @@ public class UserSelectedItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + costPerKg;
+		result = prime * result + price;
 		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + ((deliveredDate == null) ? 0 : deliveredDate.hashCode());
 		result = prime * result + ((desscription == null) ? 0 : desscription.hashCode());
-		result = prime * result + (isDelivered ? 1231 : 1237);
-		result = prime * result + (isDrafted ? 1231 : 1237);
-		result = prime * result + (isOrderCanceled ? 1231 : 1237);
-		result = prime * result + (isOrdered ? 1231 : 1237);
 		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
+		result = prime * result + quantity;
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
-		result = prime * result + (int) (userMobileNo ^ (userMobileNo >>> 32));
+		result = prime * result + ((userMobileNo == null) ? 0 : userMobileNo.hashCode());
 		result = prime * result + userSelectedItemId;
 		return result;
 	}
@@ -188,7 +169,7 @@ public class UserSelectedItem {
 		if (getClass() != obj.getClass())
 			return false;
 		UserSelectedItem other = (UserSelectedItem) obj;
-		if (costPerKg != other.costPerKg)
+		if (price != other.price)
 			return false;
 		if (createdDate == null) {
 			if (other.createdDate != null)
@@ -205,29 +186,31 @@ public class UserSelectedItem {
 				return false;
 		} else if (!desscription.equals(other.desscription))
 			return false;
-		if (isDelivered != other.isDelivered)
-			return false;
-		if (isDrafted != other.isDrafted)
-			return false;
-		if (isOrderCanceled != other.isOrderCanceled)
-			return false;
-		if (isOrdered != other.isOrdered)
-			return false;
 		if (itemName == null) {
 			if (other.itemName != null)
 				return false;
 		} else if (!itemName.equals(other.itemName))
+			return false;
+		if (quantity != other.quantity)
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		if (updatedDate == null) {
 			if (other.updatedDate != null)
 				return false;
 		} else if (!updatedDate.equals(other.updatedDate))
 			return false;
-		if (userMobileNo != other.userMobileNo)
+		if (userMobileNo == null) {
+			if (other.userMobileNo != null)
+				return false;
+		} else if (!userMobileNo.equals(other.userMobileNo))
 			return false;
 		if (userSelectedItemId != other.userSelectedItemId)
 			return false;
 		return true;
 	}
-	
+
 }

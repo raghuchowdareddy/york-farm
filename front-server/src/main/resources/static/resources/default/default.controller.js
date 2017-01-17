@@ -23,7 +23,8 @@
 			if(!angular.isUndefined($cookieStore.get('globals'))){
 				var obj = $cookieStore.get('globals');
 				ProductService.getDraftedProductsByUser(obj.currentUser.username).then(function(response){
-					$rootScope.selectedProductItems = response;	
+					$rootScope.selectedProductItems = response.data;
+					console.log(angular.toJson($rootScope.selectedProductItem));
 				})
 			}
 		}

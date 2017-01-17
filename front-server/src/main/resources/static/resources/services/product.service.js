@@ -27,9 +27,7 @@
         	return $http.get('/api/inventroy/product/' + categoryName);
         }
         function getDraftedProductsByUser(userMobileNo){
-        	return $http.get('/getDraftedItems/'+userMobileNo,{headers:{
-                'Content-Type': 'application/json'
-        	   }});
+        	return $http.get('/getDraftedItems/'+userMobileNo);
         }
         
         function getFlowers() {

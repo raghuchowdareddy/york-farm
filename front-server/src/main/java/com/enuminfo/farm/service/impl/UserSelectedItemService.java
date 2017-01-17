@@ -1,5 +1,7 @@
 package com.enuminfo.farm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,8 @@ public class UserSelectedItemService implements IUserSelectedItem {
 
 	}
 	@Override
-	public UserSelectedItem[] getDraftedItems(Integer userNumber) {
-	  return selectedItemRepository.findByUserMobileNoAndDraftedTrue(userNumber,true);
+	public List<UserSelectedItem>  getDraftedItems(Long userNumber) {
+	  return selectedItemRepository.findByUserMobileNoAndStatus(userNumber,"drafted");
 	}
 	
 	@Autowired IUserSelectedItemRepository selectedItemRepository;

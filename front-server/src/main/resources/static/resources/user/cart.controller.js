@@ -2,9 +2,9 @@
 	'use strict';
 	
 	angular.module('app').controller('CartController', CartController);
-	CartController.$inject = [ '$rootScope','$scope','$cookieStore','$location' ,'$window','CartService','FlashService'];
+	CartController.$inject = [ '$rootScope','$scope','$cookieStore','$location' ,'$window','CartService','FlashService','ProductService'];
 
-	function CartController($rootScope, $scope,$cookieStore,$location,$window,CartService,FlashService) {
+	function CartController($rootScope, $scope,$cookieStore,$location,$window,CartService,FlashService,ProductService) {
 		init();
 		$scope.shippingCost=5.00;
 		$scope.tax=5.00;
@@ -17,7 +17,25 @@
 		
 		
 		function init(){
-			
+			$rootScope.subTotal = 0;
+			if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length==0){
+				if(!angular.isUndefined($cookieStore.get('globals'))){
+					var obj = $cookieStore.get('globals');
+					ProductService.getDraftedProductsByUser(obj.currentUser.username).then(function(response){
+						$rootScope.selectedProductItems = response.data;
+						angular.forEach($rootScope.selectedProductItems, function(item,key){
+							item.totalPrice = item.price*item.quantity;
+							$rootScope.subTotal = $rootScope.subTotal+item.totalPrice;
+						});
+					})
+				}
+			}
+			else{
+				angular.forEach($rootScope.selectedProductItems, function(item,key){
+					item.totalPrice = item.price*item.quantity;
+					$rootScope.subTotal = $rootScope.subTotal+item.totalPrice;
+				});
+			}
 		}
 		function add(item){
 			var currentQuantity = item.quantity;
@@ -36,12 +54,12 @@
 			$rootScope.subTotal = $rootScope.subTotal-item.price;
 		}
 		function deleteItem(item,index){
-			var deleteItem = $window.confirm('Are you sure you want to delete '+item.name+"!!");
-			if(deleteItem){
+			//var deleteItem = $window.confirm('Are you sure you want to delete '+item.name+"!!");
+			//if(deleteItem){
 				$rootScope.subTotal = $rootScope.subTotal-item.totalPrice;
 				$rootScope.selectedProductItems.splice(index,1);
 				
-			}
+			//}
 			console.log($rootScope.selectedProductItems);
 		}
 		function saveDraft(){
@@ -58,7 +76,7 @@
 //			$scope.cart={'user':$scope.user,'userSelectedItem':$rootScope.selectedProductItems,
 //					'shippingCost':$scope.shippingCost,"tax":$scope.tax,'subTotal':$rootScope.subTotal};
 			angular.forEach($rootScope.selectedProductItems, function(item,key){
-				$scope.userSelectedItems.push({'userMobileNo':$rootScope.globals.currentUser.username,'itemName':item.name,
+				$scope.userSelectedItems.push({'userSelectedItemId':item.userSelectedItemId,'userMobileNo':$rootScope.globals.currentUser.username,'itemName':item.name,
 					'price':item.price,'quantity':item.quantity,'imageName':item.imageName,status:"drafted"})
 				console.log($scope.userSelectedItems);
 			},log);

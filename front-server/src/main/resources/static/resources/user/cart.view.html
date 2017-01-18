@@ -10,8 +10,8 @@
 					<td class="total">Total</td>
 					<td>&nbsp;</td>
 				</tr></thead>
-				<tbody>
-					<tr ng-repeat="selectedProductItem in selectedProductItems">
+				<tbody ng-if="selectedProductItems.length!=0">
+				  <tr ng-repeat="selectedProductItem in selectedProductItems">
 						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.imageName}}" width="110" height="110"/></a></td>
 						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
 						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
@@ -24,7 +24,13 @@
 						<td class="cart_delete">
 							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem,$index)"><i class="fa fa-times"></i></a>
 						</td>
+						
 					</tr>
+				</tbody>
+				<tbody ng-if="selectedProductItems.length==0">
+				 <tr><td>
+				 <div class="col-sm-8" > No items in your cart!!</div>
+				 </td></tr>
 				</tbody>
 			</table>
 		</div>

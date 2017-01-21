@@ -1,6 +1,8 @@
 package com.enuminfo.farm.model;
 
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +13,12 @@ import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
 import com.enuminfo.farm.data.TableType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "userSelectedItem")
-@Table(name = TableType.T_USER_SELECTED_ITEM)
+@Entity(name = "userSelectItem")
+@Table(name = TableType.T_USER_SELECT_ITEM)
 
-public class UserSelectedItem {
+public class UserSelectItem {
 
 	private Long userMobileNo;
 	private String itemName;
@@ -23,22 +26,25 @@ public class UserSelectedItem {
 	private String desscription;
 	private String imageName;
 	private int quantity;
-	private LocalDateTime createdDate;
-	private LocalDateTime updatedDate;
-	private LocalDateTime deliveredDate;
+	private String createDate;
+	private String updateDate;
+	private String deliveryDate;
 	private String status;
-
-	private int userSelectedItemId;
+	private int userSelectItemId;
+	
+	@JsonIgnore
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = ColumnType.USER_SELECTED_ITEM_ID)
-	public int getUserSelectedItemId() {
-		return userSelectedItemId;
+	@Column(name = ColumnType.USER_SELECTE_ITEM_ID)
+	public int getUserSelectItemId() {
+		return userSelectItemId;
 	}
 
-	public void setUserSelectedItemId(int userSelectedItemId) {
-		this.userSelectedItemId = userSelectedItemId;
+	public void setUserSelectItemId(int userSelectItemId) {
+		this.userSelectItemId = userSelectItemId;
 	}
 
 	@Column(name = ColumnType.USER_MOBILE_NO)
@@ -95,35 +101,38 @@ public class UserSelectedItem {
 		this.quantity = quantity;
 	}
 
-	@Column(name = ColumnType.CREATED_DATE)
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
+	@Column(name = ColumnType.CREATE_DATE)
+	public String getCreateDate() {
+		if (this.createDate == null) {
+			this.createDate = sdf.format(new Timestamp(System.currentTimeMillis()));
+		}
+		return createDate;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
-		if (createdDate == null) {
-			this.createdDate = LocalDateTime.now();
+	public void setCreateDate(String createDate) {
+		if (createDate == null) {
+			this.createDate = sdf.format(new Timestamp(System.currentTimeMillis()));
 		} else {
-			this.createdDate = createdDate;
+			this.createDate = createDate;
 		}
 	}
 
-	@Column(name = ColumnType.UPDATED_DATE)
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
+	@Column(name = ColumnType.UPDATE_DATE)
+	public String getUpdateDate() {
+		return updateDate;
 	}
 
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 
-	@Column(name = ColumnType.DELIVERED_DATE)
-	public LocalDateTime getDeliveredDate() {
-		return deliveredDate;
+	@Column(name = ColumnType.DELIVERY_DATE)
+	public String getDeliveryDate() {
+		return deliveryDate;
 	}
 
-	public void setDeliveredDate(LocalDateTime deliveredDate) {
-		this.deliveredDate = deliveredDate;
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 	@Column(name = ColumnType.STATUS)
@@ -138,9 +147,9 @@ public class UserSelectedItem {
 	@Override
 	public String toString() {
 		return "UserSelectedItem [userMobileNo=" + userMobileNo + ", itemName=" + itemName + ", costPerKg=" + price
-				+ ", desscription=" + desscription + ", quantity=" + quantity + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + ", deliveredDate=" + deliveredDate + ", status=" + status
-				+ ", userSelectedItemId=" + userSelectedItemId + "]";
+				+ ", desscription=" + desscription + ", quantity=" + quantity + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + ", deliveryDate=" + deliveryDate + ", status=" + status
+				+ ", userSelectItemId=" + userSelectItemId + "]";
 	}
 
 	@Override
@@ -148,15 +157,15 @@ public class UserSelectedItem {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + price;
-		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
-		result = prime * result + ((deliveredDate == null) ? 0 : deliveredDate.hashCode());
+		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime * result + ((desscription == null) ? 0 : desscription.hashCode());
 		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
 		result = prime * result + quantity;
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
+		result = prime * result + ((updateDate == null) ? 0 : updateDate.hashCode());
 		result = prime * result + ((userMobileNo == null) ? 0 : userMobileNo.hashCode());
-		result = prime * result + userSelectedItemId;
+		result = prime * result + userSelectItemId;
 		return result;
 	}
 
@@ -168,18 +177,18 @@ public class UserSelectedItem {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserSelectedItem other = (UserSelectedItem) obj;
+		UserSelectItem other = (UserSelectItem) obj;
 		if (price != other.price)
 			return false;
-		if (createdDate == null) {
-			if (other.createdDate != null)
+		if (createDate == null) {
+			if (other.createDate != null)
 				return false;
-		} else if (!createdDate.equals(other.createdDate))
+		} else if (!createDate.equals(other.createDate))
 			return false;
-		if (deliveredDate == null) {
-			if (other.deliveredDate != null)
+		if (deliveryDate == null) {
+			if (other.deliveryDate != null)
 				return false;
-		} else if (!deliveredDate.equals(other.deliveredDate))
+		} else if (!deliveryDate.equals(other.deliveryDate))
 			return false;
 		if (desscription == null) {
 			if (other.desscription != null)
@@ -198,17 +207,17 @@ public class UserSelectedItem {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
-		if (updatedDate == null) {
-			if (other.updatedDate != null)
+		if (updateDate == null) {
+			if (other.updateDate != null)
 				return false;
-		} else if (!updatedDate.equals(other.updatedDate))
+		} else if (!updateDate.equals(other.updateDate))
 			return false;
 		if (userMobileNo == null) {
 			if (other.userMobileNo != null)
 				return false;
 		} else if (!userMobileNo.equals(other.userMobileNo))
 			return false;
-		if (userSelectedItemId != other.userSelectedItemId)
+		if (userSelectItemId != other.userSelectItemId)
 			return false;
 		return true;
 	}

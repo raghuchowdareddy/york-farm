@@ -2,10 +2,11 @@ package com.enuminfo.farm.service;
 
 import java.util.List;
 
-import com.enuminfo.farm.model.UserSelectedItem;
+import com.enuminfo.farm.model.UserSelectItem;
 
 public interface IUserSelectedItem {
-  void add(UserSelectedItem userSelectedItem);
-  List<UserSelectedItem> getDraftedItems(Long userNumber);
+  void add(UserSelectItem userSelectedItem);
+  List<UserSelectItem> getDraftedItems(Long userNumber);
+  void deleteSelectedItem(UserSelectItem userSelectedItem);
   
 }

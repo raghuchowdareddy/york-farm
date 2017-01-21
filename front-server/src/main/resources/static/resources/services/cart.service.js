@@ -8,6 +8,7 @@
     	var service = {};
         service.saveDraft = saveDraft;
         service.saveOrder = saveOrder;
+        service.deleteDraft = deleteDraft;
         
         return service;
         
@@ -15,6 +16,9 @@
         	console.log(draftItems);
         	return $http.post('/draftSelectedItems',draftItems);
         	//return $http.get('/api/inventory/product');
+        }
+        function deleteDraft(deleteItem){
+        	return $http.post('/deleteItem',deleteItem);
         }
         	
         function saveOrder(orderItem) {

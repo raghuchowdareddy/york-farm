@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.enuminfo.farm.model.UserSelectedItem;
+import com.enuminfo.farm.model.UserSelectItem;
 
-public interface IUserSelectedItemRepository extends PagingAndSortingRepository<UserSelectedItem, Integer>{
+public interface IUserSelectedItemRepository extends PagingAndSortingRepository<UserSelectItem, Integer>{
 	//@NamedQuery(query="select * from UserSelectedItem usi where usi.userMobileNo=:userNumber and usi.isDrafted=:drafted")
-	List<UserSelectedItem> findByUserMobileNoAndStatus(Long userNumber, String string);
+	List<UserSelectItem> findByUserMobileNoAndStatus(Long userNumber, String string);
   
 }

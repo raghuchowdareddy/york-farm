@@ -56,10 +56,15 @@
 		function deleteItem(item,index){
 			//var deleteItem = $window.confirm('Are you sure you want to delete '+item.name+"!!");
 			//if(deleteItem){
-				$rootScope.subTotal = $rootScope.subTotal-item.totalPrice;
-				$rootScope.selectedProductItems.splice(index,1);
-				
-			//}
+			CartService.deleteDraft(item).then(function(response){
+					if (response) {
+						$rootScope.subTotal = $rootScope.subTotal-item.totalPrice;
+						$rootScope.selectedProductItems.splice(index,1);
+						FlashService.success('Registration successful', true);
+	            	} else {
+	            		console.log("cart response false");
+	            	}
+				})
 			console.log($rootScope.selectedProductItems);
 		}
 		function saveDraft(){
@@ -72,26 +77,24 @@
 			}
 			$scope.user =[];
 			var log = [];
-			$scope.userSelectedItems = [];
-//			$scope.cart={'user':$scope.user,'userSelectedItem':$rootScope.selectedProductItems,
-//					'shippingCost':$scope.shippingCost,"tax":$scope.tax,'subTotal':$rootScope.subTotal};
+			$scope.userSelectItems = [];
 			angular.forEach($rootScope.selectedProductItems, function(item,key){
-				$scope.userSelectedItems.push({'userSelectedItemId':item.userSelectedItemId,'userMobileNo':$rootScope.globals.currentUser.username,'itemName':item.name,
+				$scope.userSelectItems.push({'userSelectItemId':item.userSelectItemId,'userMobileNo':$rootScope.globals.currentUser.username,'itemName':item.name,
 					'price':item.price,'quantity':item.quantity,'imageName':item.imageName,status:"drafted"})
-				console.log($scope.userSelectedItems);
 			},log);
 			
-			CartService.saveDraft($scope.userSelectedItems).then(function(response){
-				
+			CartService.saveDraft($scope.userSelectItems).then(function(response){
 				if (response) {
-					console.log("cart response");
-            		FlashService.success('Registration successful', true);
+					FlashService.success('Registration successful', true);
             		$location.path('/#');
             	} else {
-            		console.log("cart response false");
             		FlashService.error(response.message);
             		registerCtrl.dataLoading = false;
             	}
+				//reload drafted products from db
+				ProductService.getDraftedProductsByUser($cookieStore.get('globals').currentUser.username).then(function(response){
+						$rootScope.selectedProductItems = response.data;
+				})
 			})
 			
 		}

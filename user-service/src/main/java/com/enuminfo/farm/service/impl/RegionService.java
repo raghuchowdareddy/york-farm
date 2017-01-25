@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.dto.LocationDTO;
 import com.enuminfo.farm.model.Country;
+import com.enuminfo.farm.model.DeliveryLocation;
 import com.enuminfo.farm.model.Location;
 import com.enuminfo.farm.repository.ICountryRepository;
+import com.enuminfo.farm.repository.IDeliveryLocationRepository;
 import com.enuminfo.farm.repository.ILocationRepository;
 import com.enuminfo.farm.service.IRegionService;
 import com.enuminfo.farm.wrapper.CountryWrapper;
+import com.enuminfo.farm.wrapper.DeliveryLocationWrapper;
 import com.enuminfo.farm.wrapper.LocationWrapper;
 
 /**
@@ -25,11 +28,9 @@ import com.enuminfo.farm.wrapper.LocationWrapper;
 @Service
 public class RegionService implements IRegionService {
 
-	@Autowired 
-	ICountryRepository countryRepository;
-	
-	@Autowired
-	ILocationRepository locationRepository;
+	@Autowired ICountryRepository countryRepository;	
+	@Autowired ILocationRepository locationRepository;
+	@Autowired IDeliveryLocationRepository deliveryLocationRepository;
 	
 	@Override
 	public void addCountry(LocationDTO dtoLocation) {
@@ -87,5 +88,15 @@ public class RegionService implements IRegionService {
 	@Override
 	public LocationDTO loadLocation(int locationId) {
 		return LocationWrapper.getInstance().convert2DTO(locationRepository.findOne(locationId));
+	}
+
+	@Override
+	public List<LocationDTO> loadAllDeliveryLocations() {
+		List<LocationDTO> dtoDeliveryLocations = new ArrayList<LocationDTO>();
+		Iterable<DeliveryLocation> deliveryLocations = deliveryLocationRepository.findAll();
+		for (Iterator<DeliveryLocation> iterator = deliveryLocations.iterator(); iterator.hasNext();) {
+			dtoDeliveryLocations.add(DeliveryLocationWrapper.getInstance().convert2DTO(iterator.next()));
+		}
+		return dtoDeliveryLocations;
 	}
 }

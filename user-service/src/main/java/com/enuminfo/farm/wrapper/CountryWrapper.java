@@ -27,6 +27,15 @@ public class CountryWrapper {
 		return country;
 	}
 	
+	public Country convert2ModelWithId(LocationDTO dtoLocation) {
+		Country country = Country.getBuilder()
+				.withId(dtoLocation.getCountryId())
+				.withName(dtoLocation.getCountryName())
+				.withIsd(dtoLocation.getIsdCode())
+				.build();
+		return country;
+	}
+	
 	public LocationDTO convert2DTO(Country country) {
 		LocationDTO dtoLocation = new LocationDTO();
 		dtoLocation.setCountryId(country.getId());

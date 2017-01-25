@@ -14,4 +14,5 @@ class SingletonWrapper {
 	static final AddressWrapper ADDRESS_WRAPPER_INSTANCE = new AddressWrapper();
 	static final CountryWrapper COUNTRY_WRAPPER_INSTANCE = new CountryWrapper();
 	static final LocationWrapper LOCATION_WRAPPER_INSTANCE = new LocationWrapper();
+	static final DeliveryLocationWrapper DELIVERY_LOCATION_WRAPPER = new DeliveryLocationWrapper();
 }

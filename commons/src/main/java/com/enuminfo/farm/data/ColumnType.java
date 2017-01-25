@@ -34,6 +34,7 @@ public interface ColumnType {
 	public static final String MOBILE_NUMBER = "MOBILE_NUMBER";
 	public static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
 	public static final String ADDRESS_ID = "ADDRESS_ID";
+	public static final String QUANTITY = "QUANTITY";
 	
 	public static final String COUNTRY = "country";	
 	public static final String LOCATION = "location";
@@ -41,16 +42,13 @@ public interface ColumnType {
 	public static final String PRODUCT = "product";
 	public static final String ADDRESS = "address";
 	
-	//columns for T_USER_SELECTED_ITEM, entity = UserSelectedItem
 	public static final String USER_MOBILE_NO = "USER_MOBILE_NO";
 	public static final String ITEM_NAME = "ITEM_NAME";
-	public static final String QUANTITY = "QUANTITY";
 	
 	public static final String CREATE_DATE = "CREATE_DATE";
 	public static final String UPDATE_DATE = "UPDATE_DATE";
 	public static final String DELIVERY_DATE = "DELIVERY_DATE";
 	public static final String STATUS = "STATUS";
-	public static final String USER_SELECTE_ITEM_ID = "USER_SELECTE_ITEM_ID";
-	public static final String IMAGE_NAME = "IMAGE_NAME";
-	
+	public static final String USER_SELECTED_ITEM_ID = "USER_SELECTED_ITEM_ID";
+	public static final String IMAGE_NAME = "IMAGE_NAME";	
 }

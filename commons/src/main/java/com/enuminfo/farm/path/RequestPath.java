@@ -33,4 +33,6 @@ public interface RequestPath {
 	public static final String CITY = "/{city}";
 	public static final String LOCATION = "/location";
 	public static final String ID = "/{id}";
+	public static final String NAME = "/{name}";
+	public static final String DELIVERY_LOCATIONS = "/deliverylocations";
 }

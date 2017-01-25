@@ -38,7 +38,7 @@ public class UserSelectItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = ColumnType.USER_SELECTE_ITEM_ID)
+	@Column(name = ColumnType.USER_SELECTED_ITEM_ID)
 	public int getUserSelectItemId() {
 		return userSelectItemId;
 	}

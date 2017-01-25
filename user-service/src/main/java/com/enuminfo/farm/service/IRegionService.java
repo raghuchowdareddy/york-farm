@@ -19,4 +19,5 @@ public interface IRegionService {
 	List<LocationDTO> loadAllCities(String stateName);
 	List<LocationDTO> loadAllLocations(String cityName);
 	LocationDTO loadLocation(int locationId);
+	List<LocationDTO> loadAllDeliveryLocations();
 }

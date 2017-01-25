@@ -32,8 +32,6 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name, description;
-	private Double price;
-	private Boolean stock;
 	private Category category;
 
 	private Product() {
@@ -44,8 +42,6 @@ public class Product implements Serializable {
 		this.id = builder.id;
 		this.name = builder.name;
 		this.description = builder.description;
-		this.price = builder.price;
-		this.stock = builder.stock;
 		this.category = builder.category;
 	}
 
@@ -66,16 +62,6 @@ public class Product implements Serializable {
 		return description;
 	}
 
-	@Column(name = ColumnType.PRICE)
-	public Double getPrice() {
-		return price;
-	}
-
-	@Column(name = ColumnType.IS_STOCK)
-	public Boolean getStock() {
-		return stock;
-	}
-
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = ColumnType.CATEGORY_ID)
 	public Category getCategory() {
@@ -94,14 +80,6 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public void setStock(Boolean stock) {
-		this.stock = stock;
-	}
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
@@ -109,8 +87,6 @@ public class Product implements Serializable {
 	public static class Builder {
 		private Integer id;
 		private String name, description;
-		private Double price;
-		private Boolean stock;
 		private Category category;
 
 		public Builder withId(Integer id) {
@@ -125,16 +101,6 @@ public class Product implements Serializable {
 
 		public Builder withDescription(String description) {
 			this.description = description;
-			return this;
-		}
-
-		public Builder withPrice(Double price) {
-			this.price = price;
-			return this;
-		}
-
-		public Builder withStock(Boolean stock) {
-			this.stock = stock;
 			return this;
 		}
 

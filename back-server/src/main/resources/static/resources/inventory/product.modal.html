@@ -28,18 +28,6 @@
 	            				required="required" ng-model="productModalInstanceCtrl.productDescription"></textarea>
 	            		</div>
 	            	</div>
-	            	<div class="col-md-6">
-			            <div class="form-group" ng-class="{'has-error': form.price.$dirty && form.price.$error.required}">
-			            	<input type="text" placeholder="Unit Price" class="form-control" required="required"  ng-model="productModalInstanceCtrl.price" />
-			            </div>
-			            <div class="form-group" ng-class="{'has-error': form.stock.$dirty && form.stock.$error.required}">
-			            	<select class="form-control" required="required" ng-model="productModalInstanceCtrl.stock">
-								<option value="">--- Select Availability ---</option>
-								<option value="Y">Yes</option>
-								<option value="N">No</option>
-							</select>
-			            </div>
-		 			</div>
 		 		</div>
 		 	</form>
 		 </div>

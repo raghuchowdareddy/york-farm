@@ -15,4 +15,6 @@ class SingletonWrapper {
 	static final CountryWrapper COUNTRY_WRAPPER_INSTANCE = new CountryWrapper();
 	static final LocationWrapper LOCATION_WRAPPER_INSTANCE = new LocationWrapper();
 	static final DeliveryLocationWrapper DELIVERY_LOCATION_WRAPPER = new DeliveryLocationWrapper();
+	static final UserOrderWrapper USER_ORDER_WRAPPER = new UserOrderWrapper();
+	static final UserOrderedItemWrapper USER_ORDERED_ITEM_WRAPPER = new UserOrderedItemWrapper();
 }

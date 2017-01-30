@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
@@ -23,22 +25,22 @@ import com.enuminfo.farm.data.TableType;
  * @author Kumar
  */
 @Entity
-@Table (name = TableType.T_ORDERED_DELIVERY_LOCATION)
-public class UserOrderedItemDeliveryLocation implements Serializable {
+@Table (name = TableType.T_USER_ORDER_DELIVERY_LOCATION)
+public class UserOrderDeliveryLocation implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private UserOrderedItem userOrderedItem;
+	private UserOrder userOrder;
 	private DeliveryLocation deliveryLocation;
 	
-	private UserOrderedItemDeliveryLocation() {}
+	private UserOrderDeliveryLocation() {}
 	
-	private UserOrderedItemDeliveryLocation(Builder builder) {
+	private UserOrderDeliveryLocation(Builder builder) {
 		this.id = builder.id;
-		this.userOrderedItem = builder.userOrderedItem;
+		this.userOrder = builder.userOrder;
 		this.deliveryLocation = builder.deliveryLocation;
 	}
 
@@ -55,16 +57,16 @@ public class UserOrderedItemDeliveryLocation implements Serializable {
 
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn (name = ColumnType.USER_ORDER_ID)
-	public UserOrderedItem getUserOrderedItem() {
-		return userOrderedItem;
+	public UserOrder getUserOrder() {
+		return userOrder;
 	}
 
-	public void setUserOrderedItem(UserOrderedItem userOrderedItem) {
-		this.userOrderedItem = userOrderedItem;
+	public void setUserOrder(UserOrder userOrder) {
+		this.userOrder = userOrder;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn (name = ColumnType.DELIVERY_LOCATION_ID)
+	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@PrimaryKeyJoinColumn
 	public DeliveryLocation getDeliveryLocation() {
 		return deliveryLocation;
 	}
@@ -76,7 +78,7 @@ public class UserOrderedItemDeliveryLocation implements Serializable {
 	public static class Builder {
 		
 		private Integer id;
-		private UserOrderedItem userOrderedItem;
+		private UserOrder userOrder;
 		private DeliveryLocation deliveryLocation;
 		
 		private Builder() {}
@@ -86,8 +88,8 @@ public class UserOrderedItemDeliveryLocation implements Serializable {
 			return this;
 		}
 
-		public Builder withUserOrderedItem(UserOrderedItem userOrderedItem) {
-			this.userOrderedItem = userOrderedItem;
+		public Builder withUserOrder(UserOrder userOrder) {
+			this.userOrder = userOrder;
 			return this;
 		}
 
@@ -96,8 +98,8 @@ public class UserOrderedItemDeliveryLocation implements Serializable {
 			return this;
 		}
 		
-		public UserOrderedItemDeliveryLocation build() {
-			return new UserOrderedItemDeliveryLocation(this);
+		public UserOrderDeliveryLocation build() {
+			return new UserOrderDeliveryLocation(this);
 		}
 	}
 	

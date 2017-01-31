@@ -8,6 +8,7 @@
 	</parent>
 	<artifactId>YF-Model</artifactId>
 	<name>Model</name>
+	<version>0.0.1-SNAPSHOT</version>
 	<description>ENUMINfo | York Farm - Model</description>
 	<dependencies>
 		<dependency>

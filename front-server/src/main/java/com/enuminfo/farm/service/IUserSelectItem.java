@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.enuminfo.farm.model.UserSelectItem;
 
-public interface IUserSelectedItem {
+public interface IUserSelectItem {
   void add(UserSelectItem userSelectedItem);
   List<UserSelectItem> getDraftedItems(Long userNumber);
   void deleteSelectedItem(UserSelectItem userSelectedItem);

@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.model.UserSelectItem;
-import com.enuminfo.farm.repository.IUserSelectedItemRepository;
-import com.enuminfo.farm.service.IUserSelectedItem;
+import com.enuminfo.farm.repository.IUserSelectItemRepository;
+import com.enuminfo.farm.service.IUserSelectItem;
 
 @Service
-public class UserSelectItemService implements IUserSelectedItem {
+public class UserSelectItemService implements IUserSelectItem {
 	
 	@Override
 	public void add(UserSelectItem userSelectedItem) {
@@ -30,6 +30,6 @@ public class UserSelectItemService implements IUserSelectedItem {
 		}
 	}
 	
-	@Autowired IUserSelectedItemRepository selectedItemRepository;
+	@Autowired IUserSelectItemRepository selectedItemRepository;
 	
 }

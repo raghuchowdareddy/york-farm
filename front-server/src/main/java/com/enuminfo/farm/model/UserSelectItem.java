@@ -1,25 +1,33 @@
 package com.enuminfo.farm.model;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
 import com.enuminfo.farm.data.TableType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "userSelectItem")
+@Entity(name="userSelectItem")
 @Table(name = TableType.T_USER_SELECT_ITEM)
 
-public class UserSelectItem {
-
+public class UserSelectItem implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	private int userSelectItemId;
 	private Long userMobileNo;
 	private String itemName;
 	private int price;
@@ -30,7 +38,8 @@ public class UserSelectItem {
 	private String updateDate;
 	private String deliveryDate;
 	private String status;
-	private int userSelectItemId;
+	private UserOrder userOrder;
+	
 	
 	@JsonIgnore
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
@@ -38,7 +47,7 @@ public class UserSelectItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = ColumnType.USER_SELECTED_ITEM_ID)
+	@Column(name = ColumnType.USER_SELECTE_ITEM_ID)
 	public int getUserSelectItemId() {
 		return userSelectItemId;
 	}
@@ -142,6 +151,16 @@ public class UserSelectItem {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+    @JsonBackReference
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY,optional=true)
+    @JoinColumn(name="USER_ORDER_ID")
+	public UserOrder getUserOrder() {
+		return userOrder;
+	}
+
+	public void setUserOrder(UserOrder userOrder) {
+		this.userOrder = userOrder;
 	}
 
 	@Override

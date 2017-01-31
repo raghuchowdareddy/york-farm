@@ -35,7 +35,7 @@ public class ProductWrapper {
 				.withId(dtoProduct.getProductId())
 				.withName(dtoProduct.getProductName())
 				.withDescription(dtoProduct.getProductDescription())
-				.withCategory(SingletonWrapper.CATEGORY_WRAPPER_INSTANCE.convert2ModelWithId(dtoCategory))
+				.withCategory(CategoryWrapper.getInstance().convert2ModelWithId(dtoCategory))
 				.build();
 		return product;
 	}
@@ -45,6 +45,16 @@ public class ProductWrapper {
 				.withName(dtoProduct.getProductName())
 				.withDescription(dtoProduct.getProductDescription())
 				.withCategory(SingletonWrapper.CATEGORY_WRAPPER_INSTANCE.convert2ModelWithId(dtoCategory))
+				.build();
+		return product;
+	}
+	
+	public Product convert2ModelWithId(int productId, String productName, String description, int categoryId, String categoryName) {
+		Product product = Product.getBuilder()
+				.withId(productId)
+				.withName(productName)
+				.withDescription(description)
+				.withCategory(CategoryWrapper.getInstance().convert2ModelWithId(categoryId, categoryName))
 				.build();
 		return product;
 	}

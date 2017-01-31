@@ -17,16 +17,12 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Category</th>
-                        <th>Price</th>
-                        <th>Available</th>
 					</tr></thead>
 					<tbody><tr ng-repeat="product in productCtrl.products">
 						<td>{{product.productId}}</td>
 						<td>{{product.productName}}</td>
 						<td>{{product.productDescription}}</td>
 						<td>{{product.category.categoryName}}</td>
-						<td>{{product.price}}</td>
-						<td>{{product.stock}}</td>
 					</tr></tbody>
 				</table>
 			</div>

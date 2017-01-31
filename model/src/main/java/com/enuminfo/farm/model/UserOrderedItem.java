@@ -31,19 +31,17 @@ public class UserOrderedItem implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private User user;
+	private UserOrder order;
 	private Product product;
 	private Integer quantity;
-	private String status;
 	
 	private UserOrderedItem() {}
 	
 	private UserOrderedItem(Builder builder) {
 		this.id = builder.id;
-		this.user = builder.user;
+		this.order = builder.order;
 		this.product = builder.product;
 		this.quantity = builder.quantity;
-		this.status = builder.status;
 	}
 	
 	@Id
@@ -57,14 +55,14 @@ public class UserOrderedItem implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn (name = ColumnType.USER_ID)
-	public User getUser() {
-		return user;
+	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn (name = ColumnType.USER_ORDER_ID)
+	public UserOrder getOrder() {
+		return order;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setOrder(UserOrder order) {
+		this.order = order;
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -86,22 +84,12 @@ public class UserOrderedItem implements Serializable {
 		this.quantity = quantity;
 	}
 
-	@Column (name = ColumnType.STATUS)
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public static class Builder {
 		
 		private Integer id;
-		private User user;
+		private UserOrder order;
 		private Product product;
 		private Integer quantity;
-		private String status;
 		
 		public Builder() {
 			// TODO Auto-generated constructor stub
@@ -112,8 +100,8 @@ public class UserOrderedItem implements Serializable {
 			return this;
 		}
 
-		public Builder withUser(User user) {
-			this.user = user;
+		public Builder withOrder(UserOrder order) {
+			this.order = order;
 			return this;
 		}
 
@@ -124,11 +112,6 @@ public class UserOrderedItem implements Serializable {
 
 		public Builder withQuantity(Integer quantity) {
 			this.quantity = quantity;
-			return this;
-		}
-
-		public Builder withStatus(String status) {
-			this.status = status;
 			return this;
 		}
 		

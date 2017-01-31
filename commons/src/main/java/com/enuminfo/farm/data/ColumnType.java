@@ -41,6 +41,10 @@ public interface ColumnType {
 	public static final String CATEGORY = "category";
 	public static final String PRODUCT = "product";
 	public static final String ADDRESS = "address";
+	public static final String USER_ORDERED_ITEMS = "order"; 
+	
+	public static final String USER_ORDER_ID = "USER_ORDER_ID";
+	public static final String DELIVERY_LOCATION_ID = "DELIVERY_LOCATION_ID";
 	
 	public static final String USER_MOBILE_NO = "USER_MOBILE_NO";
 	public static final String ITEM_NAME = "ITEM_NAME";

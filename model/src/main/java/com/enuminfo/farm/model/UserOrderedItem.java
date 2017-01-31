@@ -100,7 +100,7 @@ public class UserOrderedItem implements Serializable {
 			return this;
 		}
 
-		public Builder withUser(UserOrder order) {
+		public Builder withOrder(UserOrder order) {
 			this.order = order;
 			return this;
 		}

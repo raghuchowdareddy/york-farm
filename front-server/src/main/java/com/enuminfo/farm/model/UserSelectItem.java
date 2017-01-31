@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -152,7 +153,8 @@ public class UserSelectItem implements Serializable{
 		this.status = status;
 	}
     @JsonBackReference
-	@ManyToOne(targetEntity=UserOrder.class,cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.LAZY,optional=true)
+    @JoinColumn(name="USER_ORDER_ID")
 	public UserOrder getUserOrder() {
 		return userOrder;
 	}

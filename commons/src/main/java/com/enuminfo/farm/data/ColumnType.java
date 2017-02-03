@@ -62,6 +62,5 @@ public interface ColumnType {
 	public static final String STREET = "STREET";
 	public static final String LANDMARK = "LANDMARK";
 	public static final String POSTALCODE = "POSTALCODE";
-	public static final String USER_ORDER_ID = "USER_ORDER_ID";
 
 }

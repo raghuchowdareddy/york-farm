@@ -1,6 +1,6 @@
 <section id="cart_items">
 	<div class="container">
-		<div class="checkout-options">
+		<!-- <div class="checkout-options">
 			<h3>&nbsp;</h3>
 			<ul class="nav">
 				<li><label><input type="checkbox">&nbsp;Register Account</label></li>
@@ -10,10 +10,10 @@
 		</div>
 		<div class="register-req">
 			<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-		</div>
+		</div> -->
 		<div class="shopper-informations">
 			<div class="row">
-				<div class="col-sm-3">
+				<!-- <div class="col-sm-3">
 					<div class="shopper-info">
 						<p>Shopper Information</p>
 						<form>
@@ -23,10 +23,10 @@
 						<a class="btn btn-primary" href="">Get Quotes</a>
 						<a class="btn btn-primary" href="">Continue</a>
 					</div>
-				</div>
+				</div> -->
 				<div class="col-sm-5 clearfix">
 					<div class="bill-to">
-						<p>Bill To</p>
+						<p>Deliver To</p>
 						<div class="form-one">
 							<form>
 								<input type="text" ng-model="userContactInfo.emailId" placeholder="Email ID*">
@@ -48,26 +48,15 @@
 								</select>
 								<input type="text" ng-model="userContactInfo.postalCode" placeholder="Zip / Postal Code *">
 								<input type="text" ng-model="userContactInfo.contactNumber"  placeholder="Mobile Phone">
+								<textarea  name="message"  placeholder="Notes about your order, Special Notes for Delivery"></textarea>
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
-					<div class="order-message">
-						<p>Shipping Order</p>
-						<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="10"></textarea>
-						<label><input type="checkbox"> Shipping to bill address</label>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="review-payment"><h2>Review &amp; Payment</h2></div>
-		<div class="table-responsive cart_info">
+			<div class="table-responsive cart_info total_area" >
 			<table class="table table-condensed">
 				<thead><tr class="cart_menu">
 					<td class="image">Item</td>
-					<td class="description"></td>
-					<td class="price">Price/Kg</td>
 					<td class="quantity">Quantity (in Kg)</td>
 					<td class="total">Total</td>
 					<td>&nbsp;</td>
@@ -75,14 +64,11 @@
 				<tbody ng-if="selectedProductItems.length!=0">
 				  <tr ng-repeat="selectedProductItem in selectedProductItems">
 						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.imageName}}" width="110" height="110"/></a></td>
-						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
-						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
 						<td class="cart_quantity"><p> {{selectedProductItem.quantity}}</p></td>
 						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
 						<td class="cart_delete">
 							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem,$index)"><i class="fa fa-times"></i></a>
 						</td>
-						
 					</tr>
 				</tbody>
 				<tbody ng-if="selectedProductItems.length==0">
@@ -91,16 +77,52 @@
 				 </td></tr>
 				</tbody>
 			</table>
-		</div><div class="col-sm-12">
-				<div class="total_area">
+		</div>
+		<div class="col-sm-1 total_area">
 					<a class="btn btn-default check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
-					<a class="btn btn-default check_out" href ng-click="checkoutCtrl.fetchOrders()">Your Orders</a>
-				</div>
 			</div>
+				<!-- <div class="col-sm-5">
+					<div class="order-message">
+						<p>Shipping Order</p>
+						<textarea  name="message"  placeholder="Notes about your order, Special Notes for Delivery"></textarea>
+						<label><input type="checkbox"> Shipping to bill address</label>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<!-- <div class="review-payment"><h2>Review &amp; Payment</h2></div> -->
+		<div>My Orders</div>
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead><tr class="cart_menu">
+					<td class="image">Order #</td>
+					<td class="items">Total Items</td>
+					<td class="quantity">Total Quantity (in Kg)</td>
+					<td class="price">Total Price</td>
+					<td>&nbsp;</td>
+				</tr></thead>
+				<tbody ng-if="selectedProductItems.length!=0">
+				  <tr ng-repeat="selectedProductItem in selectedProductItems">
+						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
+						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
+						<td class="cart_quantity"><p> {{selectedProductItem.quantity}}</p></td>
+						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
+					</tr>
+				</tbody>
+				<tbody ng-if="selectedProductItems.length==0">
+				 <tr><td>
+				 <div class="col-sm-8" > No items in your cart!!</div>
+				 </td></tr>
+				</tbody>
+			</table>
+			<div class="col-sm-1 total_area">
+					<a class="btn btn-default check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
+			</div>
+		</div>
 		<div class="payment-options">
-			<span><label><input type="checkbox">&nbsp;Direct Bank Transfer</label></span>
-			<span><label><input type="checkbox">&nbsp;Cash Payment</label></span>
-			<span><label><input type="checkbox">&nbsp;Paypal</label></span>
+			<span><label><input disabled type="checkbox">&nbsp;Direct Bank Transfer</label></span>
+			<span><label><input disabled type="checkbox">&nbsp;Cash Payment</label></span>
+			<span><label><input disabled type="checkbox">&nbsp;Paypal</label></span>
 		</div>
 	</div>
 </section>

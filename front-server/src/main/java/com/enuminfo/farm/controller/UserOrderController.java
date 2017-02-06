@@ -23,9 +23,9 @@ public class UserOrderController {
 		userOrderSerive.add(userOrder);
 		
 	}
-	@RequestMapping(value="/fetchOrders",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<UserOrder> fetchOrders(){
-		Iterable<UserOrder> orders = userOrderSerive.findAll();
+	@RequestMapping(value="/fetchOrdersByUserName/{userName}",method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<UserOrder> fetchOrdersByUserName(@PathVariable String userName){
+		Iterable<UserOrder> orders = userOrderSerive.findByUserName(userName);
 		List<UserOrder> list = new ArrayList<UserOrder>();
 		orders.forEach(order->{list.add(order);});
 		return list;

@@ -6,4 +6,5 @@ public interface IUserOrder {
   void add(UserOrder userOrder);
   Iterable<UserOrder> findAll();
   UserOrder findById(Integer id);
+  Iterable<UserOrder> findByUserName(String userName);
   }

@@ -14,13 +14,12 @@
         function saveOrder(order) {
         	console.log(order);
         	return $http.post('/orderItems',order);
-        	//return $http.get('/api/inventory/product');
         }
         function deleteOrder(order){
         	return $http.post('/deleteItems',deleteItem);
         }
-        function fetchOrders(){
-        	return $http.get('/fetchOrders');
+        function fetchOrders(username){
+        	return $http.get('/fetchOrdersByUserName/'+username);
         }
        
     }

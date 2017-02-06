@@ -2664,7 +2664,7 @@ th {
 .table {
 	width: 100%;
 	max-width: 100%;
-	margin-bottom: 20px
+	margin-bottom: 10px
 }
 
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,

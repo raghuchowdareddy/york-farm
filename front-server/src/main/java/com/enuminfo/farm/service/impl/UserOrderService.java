@@ -34,6 +34,10 @@ public class UserOrderService implements IUserOrder {
 		return userOrderRepository.findAll();
 	}
 	@Override
+	public Iterable<UserOrder> findByUserName(String userName) {
+		return userOrderRepository.findByUserName(userName);
+	}
+	@Override
 	public UserOrder findById(Integer id) {
 		return userOrderRepository.findByUserOrderId(id);
 	}

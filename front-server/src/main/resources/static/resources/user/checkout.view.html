@@ -53,24 +53,27 @@
 						</div>
 					</div>
 				</div>
-			<div class="table-responsive cart_info total_area" >
-			<table class="table table-condensed">
+				<div>My Cart</div>
+			<div>	
+			<div class="scroll table-responsive cart_info" >
+			<table class="table table-responsive">
 				<thead><tr class="cart_menu">
 					<td class="image">Item</td>
-					<td class="quantity">Quantity (in Kg)</td>
+					<td class="quantity">KGs</td>
 					<td class="total">Total</td>
 					<td>&nbsp;</td>
 				</tr></thead>
 				<tbody ng-if="selectedProductItems.length!=0">
 				  <tr ng-repeat="selectedProductItem in selectedProductItems">
 						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.imageName}}" width="110" height="110"/></a></td>
-						<td class="cart_quantity"><p> {{selectedProductItem.quantity}}</p></td>
+						<td class="cart_quantity"><p class="center"> {{selectedProductItem.quantity}}</p></td>
 						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
 						<td class="cart_delete">
 							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem,$index)"><i class="fa fa-times"></i></a>
 						</td>
 					</tr>
 				</tbody>
+			
 				<tbody ng-if="selectedProductItems.length==0">
 				 <tr><td>
 				 <div class="col-sm-8" > No items in your cart!!</div>
@@ -78,9 +81,13 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-sm-1 total_area">
-					<a class="btn btn-default check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
-			</div>
+		<div  class="col-sm-12">
+			<a class="btn btn-default pull-right check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
+		</div>
+		</div>
+		<div ng-if="selectedProductItems.length!=0">
+		<p>Please add products in cart</p>
+		</div>
 				<!-- <div class="col-sm-5">
 					<div class="order-message">
 						<p>Shipping Order</p>
@@ -97,32 +104,35 @@
 				<thead><tr class="cart_menu">
 					<td class="image">Order #</td>
 					<td class="items">Total Items</td>
-					<td class="quantity">Total Quantity (in Kg)</td>
+					<td class="quantity">Total KGs</td>
 					<td class="price">Total Price</td>
 					<td>&nbsp;</td>
 				</tr></thead>
-				<tbody ng-if="selectedProductItems.length!=0">
-				  <tr ng-repeat="selectedProductItem in selectedProductItems">
-						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
-						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
-						<td class="cart_quantity"><p> {{selectedProductItem.quantity}}</p></td>
-						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
+				<tbody>
+				  <tr ng-repeat="userOrder in userOrders">
+						<td><p><a href="">{{userOrder.userOrderId}}</a></p></td>
+						<td><p>{{userOrder.items.length}}</p></td>
+						<td><p>{{userOrder.quantity}}</p></td>
+						<td><p>{{userOrder.price}}</p></td>
+						<td class="cart_delete">
+							<a class="cart_quantity_delete" href ng-click="checkoutCtrl.cancelOrder(userOrder,$index)"><i class="fa fa-times"></i></a>
+						</td>
 					</tr>
 				</tbody>
-				<tbody ng-if="selectedProductItems.length==0">
+				<tbody ng-if="userOrders.length==0">
 				 <tr><td>
 				 <div class="col-sm-8" > No items in your cart!!</div>
 				 </td></tr>
 				</tbody>
 			</table>
-			<div class="col-sm-1 total_area">
-					<a class="btn btn-default check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
-			</div>
 		</div>
-		<div class="payment-options">
+		<div  class="col-sm-1">
+			<a class="btn btn-default pull-left check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
+		</div>
+		<!-- <div class="payment-options">
 			<span><label><input disabled type="checkbox">&nbsp;Direct Bank Transfer</label></span>
 			<span><label><input disabled type="checkbox">&nbsp;Cash Payment</label></span>
 			<span><label><input disabled type="checkbox">&nbsp;Paypal</label></span>
-		</div>
+		</div> -->
 	</div>
 </section>

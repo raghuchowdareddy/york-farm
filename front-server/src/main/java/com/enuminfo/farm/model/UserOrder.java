@@ -1,6 +1,8 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,14 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
 import com.enuminfo.farm.data.TableType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name=TableType.T_USER_ORDER)
@@ -27,6 +28,13 @@ public class UserOrder implements Serializable{
 	private Integer userOrderId;
 	private List<UserSelectItem> items;
 	private UserContactInfo userContactInfo;
+	private Double price;
+	private Integer quantity;
+	private String status;
+	private String orderDate;
+	private String userName;
+	@JsonIgnore
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -37,7 +45,7 @@ public class UserOrder implements Serializable{
 	public void setUserOrderId(Integer userOrderId) {
 		this.userOrderId = userOrderId;
 	}
-	@OneToMany(mappedBy= "userOrder",cascade=CascadeType.ALL,orphanRemoval=true,fetch=FetchType.EAGER,targetEntity=UserSelectItem.class)
+	@OneToMany(mappedBy= "userOrder",cascade=CascadeType.ALL,orphanRemoval=true,fetch=FetchType.EAGER)
 	public List<UserSelectItem> getItems() {
 		return items;
 	}
@@ -51,6 +59,44 @@ public class UserOrder implements Serializable{
 	}
 	public void setUserContactInfo(UserContactInfo userContactInfo) {
 		this.userContactInfo = userContactInfo;
+	}
+	@Column(name=ColumnType.STATUS)
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	@Column(name=ColumnType.ORDER_PRICE)
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	@Column(name=ColumnType.ORDER_QUANTITY)
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	@Column(name=ColumnType.ORDER_DATE)
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		if(orderDate==null){
+			this.orderDate = sdf.format(new Timestamp(System.currentTimeMillis()));
+		}
+		this.orderDate = orderDate;
+	}
+	@Column(name=ColumnType.USERNAME)
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	@Override
 	public int hashCode() {

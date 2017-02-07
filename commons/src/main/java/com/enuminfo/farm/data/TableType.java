@@ -20,7 +20,6 @@ public interface TableType {
 	public static final String T_CATALOG = "T_CATALOG";
 	public static final String T_CATALOG_PRODUCT = "T_CATALOG_PRODUCT";
 
-  public static final String T_DELIVERY_LOCATION = "T_DELIVERY_LOCATION";
 	public static final String T_USER_ORDERED_ITEM = "T_USER_ORDERED_ITEM";
 	public static final String T_USER_CONTACT_INFO = "T_USER_CONTACT_INFO";
 	public static final String T_USER_ORDER = "T_USER_ORDER";

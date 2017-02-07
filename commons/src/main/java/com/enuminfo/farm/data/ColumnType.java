@@ -64,4 +64,5 @@ public interface ColumnType {
 	public static final String POSTALCODE = "POSTALCODE";
 	public static final String ORDER_DATE = "ORDER_DATE";
 	public static final String ORDER_PRICE = "ORDER_PRICE";
-	public static final String ORDER_QUANTITY = "ORDER_QUANTITY";}
+	public static final String ORDER_QUANTITY = "ORDER_QUANTITY";
+}

@@ -26,5 +26,6 @@ public interface TableType {
 	public static final String T_USER_ORDER = "T_USER_ORDER";
 	public static final String T_USER_ORDER_DELIVERY_LOCATION = "T_USER_ORDER_DELIVERY_LOCATION";
 	public static final String T_USER_SELECT_ITEM = "T_USER_SELECT_ITEM";
+	public static final String T_LOCATION_LANDMARK = "T_LOCATION_LANDMARK";
 
 }

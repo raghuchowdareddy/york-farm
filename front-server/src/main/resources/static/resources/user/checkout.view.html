@@ -1,133 +1,133 @@
 <section id="cart_items">
 	<div class="container">
-		<!-- <div class="checkout-options">
-			<h3>&nbsp;</h3>
-			<ul class="nav">
-				<li><label><input type="checkbox">&nbsp;Register Account</label></li>
-				<li><label><input type="checkbox">&nbsp;Guest Checkout</label></li>
-				<li><a href="#"><i class="fa fa-times"></i>&nbsp;Cancel</a></li>
-			</ul>
-		</div>
-		<div class="register-req">
-			<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-		</div> -->
 		<div class="shopper-informations">
 			<div class="row">
-				<!-- <div class="col-sm-3">
-					<div class="shopper-info">
-						<p>Shopper Information</p>
-						<form>
-							<input type="text" placeholder="Display Name">
-							<input type="text" placeholder="Username">
-						</form>
-						<a class="btn btn-primary" href="">Get Quotes</a>
-						<a class="btn btn-primary" href="">Continue</a>
+				<div class="col-sm-7">
+				<p>My Cart</p>
+					<div class="scroll table-responsive cart_info">
+						<table class="table table-responsive">
+							<thead>
+								<tr class="cart_menu">
+									<td class="image">Item</td>
+									<td class="quantity">KGs</td>
+									<td class="total">Total</td>
+								</tr>
+							</thead>
+							<tbody ng-if="selectedProductItems.length!=0">
+								<tr ng-repeat="selectedProductItem in selectedProductItems">
+									<td class="cart_product"><a href="#"><img
+											src="../../resources/images/product/{{selectedProductItem.imageName}}"
+											width="110" height="110" /></a></td>
+									<td class="cart_quantity"><p class="center">
+											{{selectedProductItem.quantity}}</p></td>
+									<td class="cart_total"><p class="cart_total_price"
+											ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice
+											| currency:"₹"}}</p></td>
+								</tr>
+								<tr class="info">
+									<td class="clearfix">Items-
+										{{selectedProductItems.length}}</td>
+									<td class="clearfix col-sm-3">Kgs- {{totalQuantity}}</td>
+									<td class="clearfix col-sm-5">₹ {{subTotal}}</td>
+								</tr>
+							</tbody>
+							<tbody ng-if="selectedProductItems.length==0">
+							<tr><td><p>No items to display!!</p></td></tr>
+							</tbody>
+						</table>
 					</div>
-				</div> -->
+					<div class="col-sm-12">
+						<a class="btn btn-default pull-right check_out" href
+							ng-click="checkoutCtrl.saveOrder()"> <span>Place Order</span>
+						</a>
+					</div>
+				</div>
 				<div class="col-sm-5 clearfix">
+					<p>Deliver To</p>
 					<div class="bill-to">
-						<p>Deliver To</p>
 						<div class="form-one">
 							<form>
-								<input type="text" ng-model="userContactInfo.emailId" placeholder="Email ID*">
-								<input type="text" ng-model="userContactInfo.name" placeholder="Name *">
-								<input type="text" ng-model="userContactInfo.flatNumber" placeholder="House/Flat Number *">
-								<input type="text" ng-model="userContactInfo.street" placeholder="Street Name">
-								<input type="text" ng-model="userContactInfo.landMark" placeholder="Landmark">
+								<input type="text" ng-model="userContactInfo.emailId"
+									placeholder="Email ID*"> <input type="text"
+									ng-model="userContactInfo.name" placeholder="Name *"> <input
+									type="text" ng-model="userContactInfo.flatNumber"
+									placeholder="House/Flat Number *"> <input type="text"
+									ng-model="userContactInfo.street" placeholder="Street Name">
 							</form>
 						</div>
 						<div class="form-two">
 							<form>
-								<select>
-									<option>--- City ---</option>
-									<option>Bangalore</option>
-								</select>
-								<select>
-									<option>--- Location ---</option>
-									<option>Whitefield</option>
-								</select>
-								<input type="text" ng-model="userContactInfo.postalCode" placeholder="Zip / Postal Code *">
-								<input type="text" ng-model="userContactInfo.contactNumber"  placeholder="Mobile Phone">
-								<textarea  name="message"  placeholder="Notes about your order, Special Notes for Delivery"></textarea>
+								<select
+									ng-options="city.cityName as city.cityName for city in cities"
+									ng-model="userContactInfo.city" placeholder="City"></select> 
+								<select 
+									ng-options="location.locationId as location.locationName for location in locations"
+									ng-model="userContactInfo.locationId" ng-change="checkoutCtrl.loadLandMarks()"
+									placeholder="Location Name"></select> 
+								<select
+									ng-options="landMark.name as landMark.name for landMark in landMarks"
+									ng-model="userContactInfo.landMark" placeholder="Land Mark"></select> 
+								
+								<input
+									type="text" ng-model="userContactInfo.postalCode"
+									placeholder="Zip / Postal Code *"> 
+								<input type="text"
+									ng-model="userContactInfo.contactNumber"
+									placeholder="Mobile Phone">
+								<textarea name="message"
+									placeholder="Your comments"></textarea>
 							</form>
 						</div>
 					</div>
 				</div>
-				<div>My Cart</div>
-			<div>	
-			<div class="scroll table-responsive cart_info" >
-			<table class="table table-responsive">
-				<thead><tr class="cart_menu">
-					<td class="image">Item</td>
-					<td class="quantity">KGs</td>
-					<td class="total">Total</td>
-					<td>&nbsp;</td>
-				</tr></thead>
-				<tbody ng-if="selectedProductItems.length!=0">
-				  <tr ng-repeat="selectedProductItem in selectedProductItems">
-						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.imageName}}" width="110" height="110"/></a></td>
-						<td class="cart_quantity"><p class="center"> {{selectedProductItem.quantity}}</p></td>
-						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
-						<td class="cart_delete">
-							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem,$index)"><i class="fa fa-times"></i></a>
-						</td>
-					</tr>
-				</tbody>
-			
-				<tbody ng-if="selectedProductItems.length==0">
-				 <tr><td>
-				 <div class="col-sm-8" > No items in your cart!!</div>
-				 </td></tr>
-				</tbody>
-			</table>
-		</div>
-		<div  class="col-sm-12">
-			<a class="btn btn-default pull-right check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
-		</div>
-		</div>
-		<div ng-if="selectedProductItems.length!=0">
-		<p>Please add products in cart</p>
-		</div>
-				<!-- <div class="col-sm-5">
-					<div class="order-message">
-						<p>Shipping Order</p>
-						<textarea  name="message"  placeholder="Notes about your order, Special Notes for Delivery"></textarea>
-						<label><input type="checkbox"> Shipping to bill address</label>
-					</div>
-				</div> -->
 			</div>
 		</div>
 		<!-- <div class="review-payment"><h2>Review &amp; Payment</h2></div> -->
 		<div>My Orders</div>
-		<div class="table-responsive cart_info">
-			<table class="table table-condensed">
-				<thead><tr class="cart_menu">
-					<td class="image">Order #</td>
-					<td class="items">Total Items</td>
-					<td class="quantity">Total KGs</td>
-					<td class="price">Total Price</td>
-					<td>&nbsp;</td>
-				</tr></thead>
+		<div class="table-responsive cart_info scroll">
+			<table class="table table-condensed table-striped">
+				<thead>
+					<tr class="cart_menu">
+						<td class="number">Order #</td>
+						<td class="date">Order Date</td>
+						<td class="items">Total Items</td>
+						<td class="quantity">Total KGs</td>
+						<td class="price">Total Price</td>
+						<td class="status">Status</td>
+						<td>&nbsp;</td>
+					</tr>
+				</thead>
+
 				<tbody>
-				  <tr ng-repeat="userOrder in userOrders">
-						<td><p><a href="">{{userOrder.userOrderId}}</a></p></td>
-						<td><p>{{userOrder.items.length}}</p></td>
-						<td><p>{{userOrder.quantity}}</p></td>
-						<td><p>{{userOrder.price}}</p></td>
-						<td class="cart_delete">
-							<a class="cart_quantity_delete" href ng-click="checkoutCtrl.cancelOrder(userOrder,$index)"><i class="fa fa-times"></i></a>
+
+					<tr ng-repeat="userOrder in userOrders">
+						<td><a href
+							ng-click="checkoutCtrl.openItemsWindow(userOrder)">{{userOrder.userOrderId}}</a></td>
+						<td><a href
+							ng-click="checkoutCtrl.openItemsWindow(userOrder)">{{userOrder.orderDate}}</a></td>
+						<td><a href
+							ng-click="checkoutCtrl.openItemsWindow(userOrder)">{{userOrder.items.length}}</a></td>
+						<td><a href
+							ng-click="checkoutCtrl.openItemsWindow(userOrder)">{{userOrder.quantity}}</a></td>
+						<td><a href
+							ng-click="checkoutCtrl.openItemsWindow(userOrder)">{{userOrder.price}}</a></td>
+						<td><a href
+							ng-click="checkoutCtrl.openItemsWindow(userOrder)">{{userOrder.status}}</a></td>
+						<td class="cart_delete"><a class="cart_quantity_delete" href
+							ng-click="checkoutCtrl.cancelOrder(userOrder,$index)"><i
+								class="fa fa-times"></i></a></td>
+					</tr>
+
+				</tbody>
+
+				<tbody ng-if="userOrders.length==0">
+					<tr>
+						<td>
+							<div class="col-sm-8">No items in your cart!!</div>
 						</td>
 					</tr>
 				</tbody>
-				<tbody ng-if="userOrders.length==0">
-				 <tr><td>
-				 <div class="col-sm-8" > No items in your cart!!</div>
-				 </td></tr>
-				</tbody>
 			</table>
-		</div>
-		<div  class="col-sm-1">
-			<a class="btn btn-default pull-left check_out" href ng-click="checkoutCtrl.saveOrder()">Place Order</a>
 		</div>
 		<!-- <div class="payment-options">
 			<span><label><input disabled type="checkbox">&nbsp;Direct Bank Transfer</label></span>
@@ -135,4 +135,54 @@
 			<span><label><input disabled type="checkbox">&nbsp;Paypal</label></span>
 		</div> -->
 	</div>
+	<!-- Items model window for selected order -->
+	<!-- Modal HTML -->
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header header-padding">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<p class="modal-title">Items</p>
+				</div>
+				<div class="modal-body body-padding">
+				<div class="row-fluid">
+				<div class="span-12">
+				<span class = "label label-default label-background"> Contact-</span><span>{{deliveryAddress.contactNumber}}</span>
+				<span class = "label label-default label-background"> Name-</span><span>{{deliveryAddress.name}}</span>
+				<span class = "label label-default label-background"> Location-</span><span>{{deliveryAddress.locationName}}</span>
+				<span class = "label label-default label-background"> Land Mark-</span><span>{{deliveryAddress.landMark}}</span>
+				</div>
+				</div>
+						<div class="table-responsive cart_info">
+							<table class="table table-condensed">
+								<thead>
+									<tr class="cart_menu">
+										<td class="image">Item</td>
+										<td class="price">Price/Kg</td>
+										<td class="quantity">Quantity</td>
+										<td class="total">Total</td>
+									
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="orderItem in orderItems">
+										<td class="cart_product"><a href="#"><img
+												src="../../resources/images/product/{{orderItem.imageName}}"
+												width="90" height="90" /></a></td>
+										<td class="cart_price"><p>{{orderItem.price |
+												currency:"₹"}}</p></td>
+										<td class="cart_quantity"><p>{{orderItem.quantity}} Kg</p></td>
+
+										<td class="cart_total"><p class="cart_total_price"
+												ng-init="orderItem.totalPrice=(orderItem.price*orderItem.quantity)">{{orderItem.totalPrice
+												| currency:"₹"}}</p></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
 </section>

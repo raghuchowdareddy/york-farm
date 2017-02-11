@@ -7,6 +7,6 @@ import com.enuminfo.farm.model.UserOrder;
 public interface IUserOrderRepository extends PagingAndSortingRepository<UserOrder, Integer>{
 
 	UserOrder findByUserOrderId(Integer id);
-	Iterable<UserOrder> findByUserName(String userName);
+	Iterable<UserOrder> findByUserNameOrderByOrderDateDesc(String userName);
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enuminfo.farm.dto.LocationDTO;
+import com.enuminfo.farm.dto.LocationLandmarkDTO;
 import com.enuminfo.farm.path.RequestPath;
 import com.enuminfo.farm.service.IRegionService;
 
@@ -53,5 +54,11 @@ public class RegionController {
 	@RequestMapping (value = RequestPath.DELIVERY_LOCATIONS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<LocationDTO> handleInteralRequestForAllDeliveryLocations() {
 		return service.loadAllDeliveryLocations();
+	}
+	
+	@RequestMapping (value = RequestPath.LOCATION_LANDMARKS+ RequestPath.ID, method = RequestMethod.GET)
+	public List<LocationLandmarkDTO> handleInteralRequestForAllLocationLandmarks(@PathVariable String id) {
+		System.out.println("RegionController.handleInteralRequestForAllLocationLandmarks()");
+		return service.loadAllLocationLandmarks(id);
 	}
 }

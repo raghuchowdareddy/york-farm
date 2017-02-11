@@ -35,4 +35,6 @@ public interface RequestPath {
 	public static final String ID = "/{id}";
 	public static final String NAME = "/{name}";
 	public static final String DELIVERY_LOCATIONS = "/deliverylocations";
+	public static final String LOCATION_LANDMARKS = "/locationlandmarks";
+	
 }

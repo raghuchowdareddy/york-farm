@@ -37,6 +37,7 @@ public class Location implements Serializable {
 	private Long pin;
 	private Country country;
 	private Collection<DeliveryLocation> deliveryLocations;
+	private Collection<LandMark> landmark;
 
 	private Location() {}
 	
@@ -90,6 +91,14 @@ public class Location implements Serializable {
 
 	public void setDeliveryLocations(Collection<DeliveryLocation> deliveryLocations) {
 		this.deliveryLocations = deliveryLocations;
+	}
+	@OneToMany(cascade = CascadeType.ALL, mappedBy =  ColumnType.LOCATION)
+	public Collection<LandMark> getLandmark() {
+		return landmark;
+	}
+
+	public void setLandmark(Collection<LandMark> landMark) {
+		this.landmark = landMark;
 	}
 
 	public void setId(Integer id) {

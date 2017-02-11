@@ -2,13 +2,14 @@
 	'use strict';
 	
 	angular.module('app').controller('CheckoutController', CheckoutController);
-	CheckoutController.$inject = [ '$rootScope', '$location' ,'$scope','CheckoutService'];
+	CheckoutController.$inject = [ '$rootScope', '$location' ,'$scope','CheckoutService','CartService'];
 
-	function CheckoutController($rootScope, $location,$scope,CheckoutService) {
+	function CheckoutController($rootScope, $location,$scope,CheckoutService,CartService) {
 		init();
 		var checkoutCtrl = this;
 		$scope.userContactInfo={};
 		$scope.userOrder={};
+		$scope.orderItems=[];
 		if(angular.isUndefined($rootScope.globals.currentUser)){
 			$scope.userContactInfo.contactNumber ="";
 		}else{
@@ -18,6 +19,10 @@
 		checkoutCtrl.fetchOrders = fetchOrders;
 		checkoutCtrl.cancelOrder = cancelOrder;
 		checkoutCtrl.calculateTotalPriceAndQuantity = calculateTotalPriceAndQuantity;
+		checkoutCtrl.loadCities = loadCities;
+		checkoutCtrl.loadLocations = loadLocations;
+		checkoutCtrl.openItemsWindow = openItemsWindow;
+		checkoutCtrl.loadLandMarks = loadLandMarks;
 		
 		function init(){
 			var user;
@@ -26,18 +31,53 @@
 			}else{
 				user = $rootScope.globals.currentUser.username;
 			}
+			CartService.initCart();//load cart details if any 
+			if(angular.isUndefined($rootScope.selectedProductItems)){
+				$rootScope.selectedProductItems=[];
+			}
+			loadCities();
+			loadLocations();
 			fetchOrders(user);
 		}
+		function loadCities(){
+			CheckoutService.loadAllCities().then(function(res){
+				$scope.cities = res.data;
+			});
+		}
+		function loadLocations(){
+			CheckoutService.loadLocations().then(function(res){
+				$scope.locations = res.data;
+			})
+		}
+		function loadLandMarks(){
+			//$scope.userContactInfo.locationName = $scope.selectedLocation.locationName;
+			CheckoutService.loadLandMarks($scope.userContactInfo.locationId).then(function(res){
+				$scope.landMarks = res.data;
+			})
+		}
+		function openItemsWindow(order){
+			$scope.deliveryAddress = order.userContactInfo;
+			$scope.orderItems = order.items;
+			CheckoutService.loadLocation(order.userContactInfo.locationId).then(function(res){
+				$scope.deliveryAddress.locationName = res.data.locationName;
+				$(document).ready(function(){
+					
+			        $("#myModal").modal('show');
+			    });
+			})
+			}
 		function saveOrder(){
 			$scope.userOrder.items=[];
+			if($rootScope.selectedProductItems.length==0){
+				return;
+			}
 			angular.forEach($rootScope.selectedProductItems, function(item,key){
 				item.status = 'ordered';
-				//$scope.userOrder.items.push(item);
 			});
-			
 			$scope.userOrder.userContactInfo=$scope.userContactInfo;
 			$scope.userOrder.items=$rootScope.selectedProductItems;
-			$scope.userOrder.status='ordered';
+			$scope.userOrder.status='In Progress';
+			
 			if(!angular.isUndefined($rootScope.globals.currentUser.username)){
 				$scope.userOrder.userName=$rootScope.globals.currentUser.username;
 			}
@@ -50,6 +90,13 @@
 		function fetchOrders(username){
 				CheckoutService.fetchOrders(username).then(function(response){
 					$scope.userOrders = response.data;
+					if($scope.userOrders.length > 0){
+						$scope.userContactInfo = $scope.userOrders[0].userContactInfo;
+						loadLandMarks();
+					}else{
+						//load user contact info
+					}
+					
 				});
 		}
 		function calculateTotalPriceAndQuantity(items){
@@ -64,7 +111,9 @@
 		}
 		
 	 function cancelOrder(order,index){
-		 
+		 CheckoutService.cancelOrder(order).then(function(res){
+			 $scope.userOrders.splice(index,1);
+		 })
 	 }
 	}
 })();

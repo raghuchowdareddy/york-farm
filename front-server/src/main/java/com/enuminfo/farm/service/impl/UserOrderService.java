@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enuminfo.farm.model.UserContactInfo;
 import com.enuminfo.farm.model.UserOrder;
 import com.enuminfo.farm.model.UserSelectItem;
+import com.enuminfo.farm.repository.IUserContactInfoRepository;
 import com.enuminfo.farm.repository.IUserOrderRepository;
 import com.enuminfo.farm.repository.IUserSelectItemRepository;
 import com.enuminfo.farm.service.IUserOrder;
@@ -21,7 +23,16 @@ public class UserOrderService implements IUserOrder {
 	 	  order = userOrderRepository.save(new UserOrder());
 	 	  userOrder.setUserOrderId(order.getUserOrderId());
 		}
+		//re-check delivery contact information if it is same or changed
+		UserContactInfo _this = userOrder.getUserContactInfo();;
+		if(null != _this.getUserContactInfo()){
+			UserContactInfo _that = contactInfoRepository.findOne(_this.getUserContactInfo());
+			if(!_that.equals(_this)){
+				_this.setUserContactInfo(null);
+			}
+		}
 		userOrderRepository.save(userOrder);
+		
 		List<UserSelectItem> items = userOrder.getItems();
 		items.parallelStream().forEach(item->{
 			item.setUserOrder(userOrder);
@@ -35,13 +46,18 @@ public class UserOrderService implements IUserOrder {
 	}
 	@Override
 	public Iterable<UserOrder> findByUserName(String userName) {
-		return userOrderRepository.findByUserName(userName);
+		return userOrderRepository.findByUserNameOrderByOrderDateDesc(userName);
 	}
 	@Override
 	public UserOrder findById(Integer id) {
 		return userOrderRepository.findByUserOrderId(id);
 	}
+	@Override
+	public void delete(Integer id) {
+		userOrderRepository.delete(id);
+	}
 	@Autowired IUserOrderRepository userOrderRepository;
 	@Autowired IUserSelectItemRepository itemRepository;
+	@Autowired IUserContactInfoRepository contactInfoRepository;
 	
 }

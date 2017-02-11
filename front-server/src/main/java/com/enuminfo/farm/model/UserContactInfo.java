@@ -24,13 +24,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserContactInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	private Long userContactInfo;
+	private Integer userContactInfo;
 	
 	private Long contactNumber;
 	private String emailId;
 	private String name;
 	private String flatNumber;
 	private String street;
+	private String city;
+	private Integer  locationId;
 	private String landMark;
 	private Integer postalCode;
 	private String updateDate;
@@ -42,11 +44,11 @@ public class UserContactInfo implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name= ColumnType.USER_CONTACT_INFO_ID)
-	public Long getUserContactInfo() {
+	public Integer getUserContactInfo() {
 		return userContactInfo;
 	}
 
-	public void setUserContactInfo(Long userContactInfo) {
+	public void setUserContactInfo(Integer userContactInfo) {
 		this.userContactInfo = userContactInfo;
 	}
 	
@@ -90,6 +92,24 @@ public class UserContactInfo implements Serializable{
 	public void setStreet(String street) {
 		this.street = street;
 	}
+	
+	@Column(name = ColumnType.CITY_NAME)
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+	@Column(name = ColumnType.LOCATION_ID)
+	public Integer getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(Integer locationId) {
+		this.locationId = locationId;
+	}
+
 	@Column(name = ColumnType.LANDMARK)
 	public String getLandMark() {
 		return landMark;
@@ -159,11 +179,7 @@ public class UserContactInfo implements Serializable{
 				return false;
 		} else if (!contactNumber.equals(other.contactNumber))
 			return false;
-		if (emailId == null) {
-			if (other.emailId != null)
-				return false;
-		} else if (!emailId.equals(other.emailId))
-			return false;
+		
 		if (flatNumber == null) {
 			if (other.flatNumber != null)
 				return false;
@@ -179,20 +195,11 @@ public class UserContactInfo implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (postalCode == null) {
-			if (other.postalCode != null)
-				return false;
-		} else if (!postalCode.equals(other.postalCode))
-			return false;
+		
 		if (street == null) {
 			if (other.street != null)
 				return false;
 		} else if (!street.equals(other.street))
-			return false;
-		if (updateDate == null) {
-			if (other.updateDate != null)
-				return false;
-		} else if (!updateDate.equals(other.updateDate))
 			return false;
 		if (userContactInfo == null) {
 			if (other.userContactInfo != null)

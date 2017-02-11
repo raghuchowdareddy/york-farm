@@ -32,6 +32,7 @@ public class UserOrder implements Serializable{
 	private Integer quantity;
 	private String status;
 	private String orderDate;
+	@JsonIgnore private String deliveryDate;
 	private String userName;
 	@JsonIgnore
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
@@ -83,13 +84,22 @@ public class UserOrder implements Serializable{
 	}
 	@Column(name=ColumnType.ORDER_DATE)
 	public String getOrderDate() {
+		if(orderDate==null || "".equals(orderDate)){
+			this.orderDate = sdf.format(new Timestamp(System.currentTimeMillis()));
+		}
 		return orderDate;
 	}
 	public void setOrderDate(String orderDate) {
-		if(orderDate==null){
+		if(orderDate==null || "".equals(orderDate)){
 			this.orderDate = sdf.format(new Timestamp(System.currentTimeMillis()));
 		}
 		this.orderDate = orderDate;
+	}
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 	@Column(name=ColumnType.USERNAME)
 	public String getUserName() {

@@ -2431,5 +2431,14 @@ h2.title {
 	color: #FE980F;
 }
 .scroll {
-    height:290px;overflow:scroll
+    height:150px;overflow:scroll
+}
+.body-padding{
+	padding:2px;
+}
+.header-padding{
+	padding:5px;
+}
+.label-background lable{
+	background:#FE980F;
 }

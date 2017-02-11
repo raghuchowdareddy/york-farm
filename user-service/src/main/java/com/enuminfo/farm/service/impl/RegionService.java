@@ -11,15 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.dto.LocationDTO;
+import com.enuminfo.farm.dto.LocationLandmarkDTO;
 import com.enuminfo.farm.model.Country;
 import com.enuminfo.farm.model.DeliveryLocation;
+import com.enuminfo.farm.model.LandMark;
 import com.enuminfo.farm.model.Location;
 import com.enuminfo.farm.repository.ICountryRepository;
 import com.enuminfo.farm.repository.IDeliveryLocationRepository;
+import com.enuminfo.farm.repository.ILocationLandmarkRepository;
 import com.enuminfo.farm.repository.ILocationRepository;
 import com.enuminfo.farm.service.IRegionService;
 import com.enuminfo.farm.wrapper.CountryWrapper;
 import com.enuminfo.farm.wrapper.DeliveryLocationWrapper;
+import com.enuminfo.farm.wrapper.LandMarkWrapper;
 import com.enuminfo.farm.wrapper.LocationWrapper;
 
 /**
@@ -31,6 +35,7 @@ public class RegionService implements IRegionService {
 	@Autowired ICountryRepository countryRepository;	
 	@Autowired ILocationRepository locationRepository;
 	@Autowired IDeliveryLocationRepository deliveryLocationRepository;
+	@Autowired ILocationLandmarkRepository locaitonLandmarkRepository;
 	
 	@Override
 	public void addCountry(LocationDTO dtoLocation) {
@@ -98,5 +103,17 @@ public class RegionService implements IRegionService {
 			dtoDeliveryLocations.add(DeliveryLocationWrapper.getInstance().convert2DTO(iterator.next()));
 		}
 		return dtoDeliveryLocations;
+	}
+	
+	@Override
+	public  List<LocationLandmarkDTO> loadAllLocationLandmarks(String  locationId) {
+		LocationDTO location = new LocationDTO();
+		location.setLocationId(Integer.parseInt(locationId));
+		List<LocationLandmarkDTO> dtoLocationLandMarks = new ArrayList<LocationLandmarkDTO>();
+		Iterable<LandMark> landMarks = locaitonLandmarkRepository.findByLocation(LocationWrapper.getInstance().convert2ModelWithId(location));
+		for (Iterator<LandMark> iterator = landMarks.iterator(); iterator.hasNext();) {
+			dtoLocationLandMarks.add(LandMarkWrapper.getInstance().convert2DTO(iterator.next()));
+		}
+		return dtoLocationLandMarks;
 	}
 }

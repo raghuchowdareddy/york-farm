@@ -18,30 +18,15 @@
 		
 		function init(){
 			$rootScope.subTotal = 0;
-			if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length==0){
-				if(!angular.isUndefined($cookieStore.get('globals'))){
-					var obj = $cookieStore.get('globals');
-					ProductService.getDraftedProductsByUser(obj.currentUser.username).then(function(response){
-						$rootScope.selectedProductItems = response.data;
-						angular.forEach($rootScope.selectedProductItems, function(item,key){
-							item.totalPrice = item.price*item.quantity;
-							$rootScope.subTotal = $rootScope.subTotal+item.totalPrice;
-						});
-					})
-				}
-			}
-			else{
-				angular.forEach($rootScope.selectedProductItems, function(item,key){
-					item.totalPrice = item.price*item.quantity;
-					$rootScope.subTotal = $rootScope.subTotal+item.totalPrice;
-				});
-			}
+			$rootScope.totalQuantity = 0;
+			CartService.initCart();
 		}
 		function add(item){
 			var currentQuantity = item.quantity;
 			item.quantity = currentQuantity + 1;
 			item.totalPrice = item.price*item.quantity;
 			$rootScope.subTotal = $rootScope.subTotal+item.price;
+			$rootScope.totalQuantity = $rootScope.totalQuantity+ 1;
 		}
 		function substract(item){
 			var currentQuantity = item.quantity;
@@ -52,6 +37,7 @@
 			item.quantity = currentQuantity - 1;
 			item.totalPrice = item.price*item.quantity;
 			$rootScope.subTotal = $rootScope.subTotal-item.price;
+			$rootScope.totalQuantity = $rootScope.totalQuantity-1;
 		}
 		function deleteItem(item,index){
 			//var deleteItem = $window.confirm('Are you sure you want to delete '+item.name+"!!");
@@ -60,6 +46,7 @@
 					if (response) {
 						$rootScope.subTotal = $rootScope.subTotal-item.totalPrice;
 						$rootScope.selectedProductItems.splice(index,1);
+						$rootScope.totalQuantity = $rootScope.totalQuantity-item.quantity;
 						FlashService.success('Registration successful', true);
 	            	} else {
 	            		console.log("cart response false");

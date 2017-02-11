@@ -35,6 +35,10 @@ public class UserOrderController {
 	public UserOrder fetchOrderById(@PathVariable String id){
 		return userOrderSerive.findById(Integer.parseInt(id));
 	}
+	@RequestMapping(value="/cancelOrder/{id}",method = RequestMethod.POST)
+	public void deleteOrder(@PathVariable String id){
+		 userOrderSerive.delete(Integer.parseInt(id));
+	}
 
 	@Autowired IUserOrder userOrderSerive;
 }

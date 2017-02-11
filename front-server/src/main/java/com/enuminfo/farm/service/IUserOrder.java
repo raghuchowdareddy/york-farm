@@ -7,4 +7,5 @@ public interface IUserOrder {
   Iterable<UserOrder> findAll();
   UserOrder findById(Integer id);
   Iterable<UserOrder> findByUserName(String userName);
+  void delete(Integer id);
   }

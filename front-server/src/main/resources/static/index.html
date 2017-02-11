@@ -21,17 +21,11 @@
 		<div class="header_top">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i>&nbsp;</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i>&nbsp;</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-12">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-phone"></i>&nbsp;</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i>&nbsp;</a></li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
@@ -55,8 +49,8 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li ng-if="globals.currentUser != undefined"><a href="#"><i class="fa fa-user"></i>&nbsp;Welcome {{dtoUser.name}}!</a></li>
-								<li ng-if="globals.currentUser != undefined"><a href="#/checkout"><i class="fa fa-crosshairs"></i>&nbsp;Checkout</a></li>
-								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;Cart&nbsp;({{selectedProductItems.length}})</a></li>
+								<li ng-if="globals.currentUser != undefined"><a href="#/checkout"><i class="fa fa-crosshairs"></i>&nbsp;My Order</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;My Cart&nbsp;({{selectedProductItems.length}})</a></li>
 								<li ng-if="globals.currentUser == undefined"><a href="#/login"><i class="fa fa-lock"></i>&nbsp;Login</a></li>
 								<li ng-if="globals.currentUser != undefined"><a href="#/logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
 							</ul>

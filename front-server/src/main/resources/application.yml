@@ -17,6 +17,6 @@ zuul:
       path: /api/userservice/**
     inventory-service:
       path: /api/inventoryservice/**
-      path: /api/userservice/**
+
 #docker api key
 ##b39f9079-1b9d-415e-b3cf-a8f3d5652fb1

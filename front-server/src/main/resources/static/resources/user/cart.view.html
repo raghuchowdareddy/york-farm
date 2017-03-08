@@ -17,7 +17,7 @@
 						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
 						<td class="cart_quantity"><div class="cart_quantity_button">
 							<a href ng-click="cartCtrl.add(selectedProductItem)" class="cart_quantity_up" > + </a>
-							<input class="cart_quantity_input" type="text" name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
+							<input class="cart_quantity_input" type="text" readonly name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
 							<a class="cart_quantity_down" href ng-click="cartCtrl.substract(selectedProductItem)"> - </a>
 						</div></td>
 						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>

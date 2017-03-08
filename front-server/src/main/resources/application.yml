@@ -3,9 +3,20 @@ server:
 spring:
   application:
     name: front-gui
+
+  datasource:
+    url: jdbc:hsqldb:hsql://localhost
+##    initialize: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+#     spring.datasource.continue-on-error=true ##This can be useful once an application has matured and been deployed a few times, 
 zuul:
   routes:
     user-service: 
       path: /api/userservice/**
     inventory-service:
       path: /api/inventoryservice/**
+      path: /api/userservice/**
+#docker api key
+##b39f9079-1b9d-415e-b3cf-a8f3d5652fb1

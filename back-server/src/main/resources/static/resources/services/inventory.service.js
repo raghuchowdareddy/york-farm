@@ -10,6 +10,8 @@
     	service.saveCategory = saveCategory;
     	service.getAllProducts = getAllProducts;
     	service.saveProduct = saveProduct;
+    	service.getAllCataloges = getAllCataloges;
+    	service.saveCatalog = saveCatalog;
         return service;
         
         function getAllCategories() {
@@ -24,8 +26,20 @@
         	return $http.get('/api/inventoryservice/product');
         }
         
+        function getAllProductsByCategory(categoryName) {
+        	return $http.get('/api/inventoryservice/product/category/' + categoryName);
+        }
+        
         function saveProduct(product) {
         	return $http.post('/api/inventoryservice/product', product);
+        }
+        
+        function getAllCataloges() {
+        	return $http.get('/api/inventoryservice/catalog');
+        }
+        
+        function saveCatalog(catalog) {
+        	return $http.post('/api/inventoryservice/catalog', catalog);
         }
     }
 })();

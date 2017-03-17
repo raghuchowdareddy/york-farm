@@ -19,11 +19,22 @@ public class DeliveryLocationWrapper {
 		return SingletonWrapper.DELIVERY_LOCATION_WRAPPER;
 	}
 	
-	public DeliveryLocation convert2ModelWithoutId(LocationDTO dtoLocation) {
+	public DeliveryLocation convert2ModelWithoutId(LocationDTO dtoDeliveryLocation, LocationDTO dtoLocation) {
 		DeliveryLocation deliveryLocation = DeliveryLocation.getBuilder()
-				.withStreet(dtoLocation.getValue1())
-				.withLandmark1(dtoLocation.getValue2())
-				.withLandmark2(dtoLocation.getValue3())
+				.withStreet(dtoDeliveryLocation.getValue1())
+				.withLandmark1(dtoDeliveryLocation.getValue2())
+				.withLandmark2(dtoDeliveryLocation.getValue3())
+				.withLocation(LocationWrapper.getInstance().convert2ModelWithId(dtoLocation))
+				.build();
+		return deliveryLocation;
+	}
+	
+	public DeliveryLocation convert2ModelWithId(LocationDTO dtoDeliveryLocation, LocationDTO dtoLocation) {
+		DeliveryLocation deliveryLocation = DeliveryLocation.getBuilder()
+				.withId(dtoDeliveryLocation.getLocationId())
+				.withStreet(dtoDeliveryLocation.getValue1())
+				.withLandmark1(dtoDeliveryLocation.getValue2())
+				.withLandmark2(dtoDeliveryLocation.getValue3())
 				.withLocation(LocationWrapper.getInstance().convert2ModelWithId(dtoLocation))
 				.build();
 		return deliveryLocation;

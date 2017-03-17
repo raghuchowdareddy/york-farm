@@ -9,6 +9,10 @@
         service.getByUsername = getByUsername;
         service.getDetailByUsername = getDetailByUsername;
         service.saveUser = saveUser;
+        service.getDraftedProductsByUsername = getDraftedProductsByUsername;
+        service.saveDraftedProducts = saveDraftedProducts;
+        service.getOrderedProductsByUsername = getOrderedProductsByUsername;
+        service.saveOrderedProducts = saveOrderedProducts;
         return service;
         
         function getByUsername(username) {
@@ -22,5 +26,21 @@
 	    function saveUser(user) {
 	    	return $http.post('/api/userservice/user', user);
 	    }
+        
+        function getDraftedProductsByUsername(username) {
+        	return $http.get('/api/userservice/user/drafted/items/' + username);
+        }
+        
+        function saveDraftedProducts(order) {
+        	return $http.post('/api/userservice/user/drafted/items', order);
+        }
+        
+        function getOrderedProductsByUsername(username) {
+        	return $http.get('/api/userservice/user/ordered/items/' + username);
+        }
+        
+        function saveOrderedProducts(order) {
+        	return $http.post('/api/userservice/user/ordered/items', order);
+        }
     }
 })();

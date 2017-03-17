@@ -22,8 +22,7 @@ import com.enuminfo.farm.wrapper.RoleWrapper;
 @Service
 public class RoleService implements IRoleService {
 
-	@Autowired
-	IRoleRepository repository;
+	@Autowired IRoleRepository repository;
 	
 	@Override
 	public void add(RoleDTO dtoRole) {

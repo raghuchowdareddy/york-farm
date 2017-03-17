@@ -28,13 +28,14 @@
 		}
     }
     
-    CategoryModalInstanceController.$inject = [ '$uibModalInstance', 'InventoryService' ];
-	function CategoryModalInstanceController($uibModalInstance, InventoryService) {
+    CategoryModalInstanceController.$inject = [ '$uibModalInstance', '$scope', 'InventoryService' ];
+	function CategoryModalInstanceController($uibModalInstance, $scope, InventoryService) {
 		var categoryCtrlModalInstanceCtrl = this;
 		categoryCtrlModalInstanceCtrl.save = save;
 		
 		function save() {
-			InventoryService.saveCategory(categoryCtrlModalInstanceCtrl);
+			InventoryService.saveCategory(this.categorySubmitted);		
+			$uibModalInstance.close();
 		}
 	}
 })();

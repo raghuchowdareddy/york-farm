@@ -16,4 +16,5 @@ public interface ILocationRepository extends PagingAndSortingRepository<Location
 	Iterable<Location> findByCountry(Country country);
 	Iterable<Location> findByState(String state);
 	Iterable<Location> findByCity(String city);
+	Location findByName(String name);
 }

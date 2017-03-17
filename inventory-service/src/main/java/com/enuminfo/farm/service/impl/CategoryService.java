@@ -22,8 +22,7 @@ import com.enuminfo.farm.wrapper.CategoryWrapper;
 @Service
 public class CategoryService implements ICategoryService {
 
-	@Autowired
-	ICategoryRepository categoryRepository;
+	@Autowired ICategoryRepository categoryRepository;
 	
 	@Override
 	public void add(CategoryDTO dtoCategory) {

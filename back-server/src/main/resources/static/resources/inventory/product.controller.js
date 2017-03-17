@@ -41,7 +41,7 @@
         })();
 		
 		function save() {
-			InventoryService.saveProduct(productModalInstanceCtrl);
+			InventoryService.saveProduct(this.productSubmitted);
 		}
 	}
 })();

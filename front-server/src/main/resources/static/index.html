@@ -48,7 +48,7 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li ng-if="globals.currentUser != undefined"><a href="#"><i class="fa fa-user"></i>&nbsp;Welcome {{dtoUser.name}}!</a></li>
+								<li ng-if="globals.currentUser != undefined"><a href="#"><i class="fa fa-user"></i>&nbsp;Welcome {{user.name}}!</a></li>
 								<li ng-if="globals.currentUser != undefined"><a href="#/checkout"><i class="fa fa-crosshairs"></i>&nbsp;My Order</a></li>
 								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i>&nbsp;My Cart&nbsp;({{selectedProductItems.length}})</a></li>
 								<li ng-if="globals.currentUser == undefined"><a href="#/login"><i class="fa fa-lock"></i>&nbsp;Login</a></li>
@@ -61,7 +61,7 @@
 		</div>
 	</header>
 	<ng-view></ng-view>
-	<footer id="footer">
+	<!-- <footer id="footer">
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
@@ -70,7 +70,7 @@
 				</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 	<script type="text/javascript" src="resources/components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="resources/components/angular-animate/angular-animate.min.js"></script>
 	<script type="text/javascript" src="resources/components/angular-sanitize/angular-sanitize.min.js"></script>
@@ -90,8 +90,8 @@
 	<script type="text/javascript" src="resources/services/flash.service.js"></script>
 	<script type="text/javascript" src="resources/services/user.service.js"></script>
 	<script type="text/javascript" src="resources/services/product.service.js"></script>
-	<script type="text/javascript" src="resources/services/cart.service.js"></script>	
-	<script type="text/javascript" src="resources/services/checkout.service.js"></script>
+	<!-- <script type="text/javascript" src="resources/services/cart.service.js"></script>	
+	<script type="text/javascript" src="resources/services/checkout.service.js"></script> -->
 	<!-- controllers -->
 	<script type="text/javascript" src="resources/user/security.controller.js"></script>
 	<script type="text/javascript" src="resources/default/default.controller.js"></script>

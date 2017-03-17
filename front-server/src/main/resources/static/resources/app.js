@@ -44,7 +44,7 @@
 			var loggedIn = $rootScope.globals.currentUser;
 			if (loggedIn) {
 				UserService.getDetailByUsername($rootScope.globals.currentUser.username).then(function(response) {
-					$rootScope.dtoUser = response.data;
+					$rootScope.user = response.data;
 					$rootScope.access = response.data.roles.indexOf('ROLE_ADMIN') == 1;
 				});
 			}

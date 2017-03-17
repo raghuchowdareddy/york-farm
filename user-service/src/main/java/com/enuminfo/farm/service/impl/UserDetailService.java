@@ -26,14 +26,9 @@ import com.enuminfo.farm.wrapper.UserDetailWrapper;
 @Service
 public class UserDetailService implements IUserDetailService {
 
-	@Autowired
-	IUserDetailRepository repository;
-	
-	@Autowired
-	IRoleService roleService;
-	
-	@Autowired
-	IUserService userService;
+	@Autowired IUserDetailRepository repository;
+	@Autowired IRoleService roleService;
+	@Autowired IUserService userService;
 	
 	@Override
 	public void add(UserDTO dtoUser) {

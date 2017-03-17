@@ -23,7 +23,7 @@ public class UserOrderDTO implements Serializable {
 	private String locationName, cityName, stateName, countryName, isdCode;
 	private int countryId, locationId;
 	private long pinCode;
-	private List<UserOrderedItemDTO> dtoOrderedItems;
+	private List<UserOrderedItemDTO> orderedItems;
 	
 	public UserOrderDTO() {
 		// TODO Auto-generated constructor stub
@@ -173,11 +173,11 @@ public class UserOrderDTO implements Serializable {
 		this.pinCode = pinCode;
 	}
 
-	public List<UserOrderedItemDTO> getDtoOrderedItems() {
-		return dtoOrderedItems;
+	public List<UserOrderedItemDTO> getOrderedItems() {
+		return orderedItems;
 	}
 
-	public void setDtoOrderedItems(List<UserOrderedItemDTO> dtoOrderedItems) {
-		this.dtoOrderedItems = dtoOrderedItems;
+	public void setOrderedItems(List<UserOrderedItemDTO> orderedItems) {
+		this.orderedItems = orderedItems;
 	}
 }

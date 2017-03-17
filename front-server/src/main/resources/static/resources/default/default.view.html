@@ -17,9 +17,9 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="../../resources/images/product/{{vegetable.imageName}}" width="315" height="235"/>
+										<img src="../../resources/images/product/{{vegetable.productName | lowercase}}.jpg" width="315" height="235"/>
 										<h2>{{vegetable.price}}</h2>
-										<p>{{vegetable.name}}</p>
+										<p>{{vegetable.productName}}</p>
 										<a href ng-click="defaultCtrl.add2Cart(vegetable)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
@@ -35,9 +35,9 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="../../resources/images/product/{{flower.imageName}}" width="315" height="235"/>
+										<img src="../../resources/images/product/{{flower.productName | lowercase}}.jpg" width="315" height="235"/>
 										<h2>{{flower.price}}</h2>
-										<p>{{flower.name}}</p>
+										<p>{{flower.productName}}</p>
 										<a href ng-click="defaultCtrl.add2Cart(flower)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
@@ -53,9 +53,9 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="../../resources/images/product/{{fruit.imageName}}" width="315" height="235"/>
+										<img src="../../resources/images/product/{{fruit.productName | lowercase}}.jpg" width="315" height="235"/>
 										<h2>{{fruit.price}}</h2>
-										<p>{{fruit.name}}</p>
+										<p>{{fruit.productName}}</p>
 										<a href ng-click="defaultCtrl.add2Cart(fruit)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>

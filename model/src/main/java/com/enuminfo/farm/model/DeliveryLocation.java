@@ -82,7 +82,7 @@ public class DeliveryLocation implements Serializable {
 		this.landmark2 = landmark2;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn (name = ColumnType.LOCATION_ID)
 	public Location getLocation() {
 		return location;

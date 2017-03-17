@@ -13,22 +13,9 @@
 			AuthenticationService.login(securityCtrl.username, securityCtrl.password, function(response) {
 				if (response.success) {
 					AuthenticationService.setCredentials(securityCtrl.username, securityCtrl.password);
-					ProductService.getDraftedProductsByUser(securityCtrl.username).then(function(response){
-						if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length==0){
-							$rootScope.selectedProductItems = response.data;
-						}
-						else{
-							$scope.temperarlyselected = $rootScope.selectedProductItems;
-							$rootScope.selectedProductItems = response.data;
-							angular.forEach($scope.temperarlyselected, function(item, key){
-								$rootScope.selectedProductItems.push(item);
-							})
-						}
-					})
-					
 					if((!angular.isUndefined($rootScope.currentLocation)) && $rootScope.currentLocation != ''){
 						$location.path($rootScope.currentLocation);
-						$rootScope.currentLocation=null;
+						$rootScope.currentLocation = null;
 					}else{
 						$location.path('/');
 					}

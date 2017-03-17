@@ -3,6 +3,9 @@
  */
 package com.enuminfo.farm.model;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -22,11 +26,16 @@ import com.enuminfo.farm.data.TableType;
  */
 @Entity
 @Table (name = TableType.T_USER_DETAIL)
-public class UserDetail {
+public class UserDetail implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name, emailAddress, mobileNumber;
 	private User user;
+	private Collection<UserOrder> orders;
 	
 	private UserDetail() {}
 	
@@ -36,6 +45,7 @@ public class UserDetail {
 		this.emailAddress = builder.emailAddress;
 		this.mobileNumber = builder.mobileNumber;
 		this.user = builder.user;
+		this.orders = builder.orders;
 	}
 	
 	@Id
@@ -60,10 +70,19 @@ public class UserDetail {
 		return mobileNumber;
 	}
 
-	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	public User getUser() {
 		return user;
+	}
+
+	@OneToMany (cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = ColumnType.USER)
+	public Collection<UserOrder> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Collection<UserOrder> orders) {
+		this.orders = orders;
 	}
 
 	public void setId(Integer id) {
@@ -90,6 +109,7 @@ public class UserDetail {
 		private Integer id;
 		private String name, emailAddress, mobileNumber;
 		private User user;
+		private Collection<UserOrder> orders;
 		
 		private Builder() {}
 		
@@ -115,6 +135,11 @@ public class UserDetail {
 		
 		public Builder withUser(User user) {
 			this.user = user;
+			return this;
+		}
+		
+		public Builder withOrders(Collection<UserOrder> orders) {
+			this.orders = orders;
 			return this;
 		}
 		

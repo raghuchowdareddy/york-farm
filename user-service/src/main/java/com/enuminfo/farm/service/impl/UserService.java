@@ -3,14 +3,21 @@
  */
 package com.enuminfo.farm.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enuminfo.farm.data.RoleEnum;
+import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
+import com.enuminfo.farm.model.UserDetail;
+import com.enuminfo.farm.repository.IUserDetailRepository;
 import com.enuminfo.farm.repository.IUserRepository;
+import com.enuminfo.farm.service.IRoleService;
 import com.enuminfo.farm.service.IUserService;
+import com.enuminfo.farm.wrapper.UserDetailWrapper;
 import com.enuminfo.farm.wrapper.UserWrapper;
 
 /**
@@ -19,12 +26,16 @@ import com.enuminfo.farm.wrapper.UserWrapper;
 @Service
 public class UserService implements IUserService {
 
-	@Autowired
-	IUserRepository userRepository;
+	@Autowired IUserRepository userRepository;
+	@Autowired IUserDetailRepository userDetailRepository;
+	@Autowired IRoleService roleService;
 	
 	@Override
 	public void add(UserDTO dtoUser) {
-		
+		List<RoleDTO> dtoRoles = new ArrayList<RoleDTO>();
+		dtoRoles.add(roleService.loadByName(RoleEnum.ROLE_USER.toString()));
+		UserDetail detailUser = UserDetailWrapper.getInstance().convert2ModelWithoutId(dtoUser, dtoRoles);
+		userDetailRepository.save(detailUser);
 	}
 
 	@Override

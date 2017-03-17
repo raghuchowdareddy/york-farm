@@ -10,27 +10,24 @@
 					<td class="total">Total</td>
 					<td>&nbsp;</td>
 				</tr></thead>
-				<tbody ng-if="selectedProductItems.length!=0">
-				  <tr ng-repeat="selectedProductItem in selectedProductItems">
-						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.imageName}}" width="110" height="110"/></a></td>
-						<td class="cart_description"><h4><a href="">{{selectedProductItem.name}}</a></h4></td>
+				<tbody ng-if="selectedProductItems.length != 0">
+					<tr ng-repeat="selectedProductItem in selectedProductItems">
+						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.productName | lowercase}}.jpg" width="110" height="110"/></a></td>
+						<td class="cart_description"><h4><a href="">{{selectedProductItem.productName}}</a></h4></td>
 						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
 						<td class="cart_quantity"><div class="cart_quantity_button">
 							<a href ng-click="cartCtrl.add(selectedProductItem)" class="cart_quantity_up" > + </a>
 							<input class="cart_quantity_input" type="text" name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
 							<a class="cart_quantity_down" href ng-click="cartCtrl.substract(selectedProductItem)"> - </a>
 						</div></td>
-						<td class="cart_total"><p class="cart_total_price" ng-init="selectedProductItem.totalPrice=(selectedProductItem.price*selectedProductItem.quantity)">{{selectedProductItem.totalPrice | currency:"₹"}}</p></td>
+						<td class="cart_total"><p class="cart_total_price">{{(selectedProductItem.price * selectedProductItem.quantity) | currency:"₹"}}</p></td>
 						<td class="cart_delete">
-							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem,$index)"><i class="fa fa-times"></i></a>
+							<a class="cart_quantity_delete" href ng-click="cartCtrl.deleteItem(selectedProductItem, $index)"><i class="fa fa-times"></i></a>
 						</td>
-						
 					</tr>
 				</tbody>
-				<tbody ng-if="selectedProductItems.length==0">
-				 <tr><td>
-				 <div class="col-sm-8" > No items in your cart!!</div>
-				 </td></tr>
+				<tbody ng-if="selectedProductItems.length == 0">
+					<tr><td><div class="col-sm-8" > No items in your cart!!</div></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -41,51 +38,17 @@
 	<div class="container">
 		<div class="heading">
 			<h3>What would you like to do next?</h3>
-			<!-- <p>Choose your delivery location then we shall call to your mobile number for pickup.</p> -->
 		</div>
-		<!-- <div class="row">
-			<div class="col-sm-6">
-				<div class="chose_area">
-					<ul class="user_option">
-						
-					</ul>
-					<ul class="user_info">
-						<li class="single_field">
-							<label>Country:</label>
-							<select><option>India</option></select>
-						</li>
-						<li class="single_field">
-							<label>State:</label>
-							<select><option>Karnataka</option></select>
-						</li>
-						<li class="single_field">
-							<label>City:</label>
-							<select><option>Bangalore</option></select>
-						</li>
-						<li class="single_field">
-							<label>Location:</label>
-							<select><option>Whitefield</option></select>
-						</li>
-						<li class="single_field zip-field">
-							<label>Zip Code:</label>
-							<input type="text">
-						</li>					
-					</ul>
-					<a class="btn btn-default update" href="">Get Quotes</a>
-					<a class="btn btn-default check_out" href="">Continue</a>
-				</div>
-			</div> -->
-			<div class="col-sm-12">
-				<div class="total_area">
-					<ul>
-						<li>Cart Sub Total:&nbsp;<span>{{subTotal | currency:"₹"}}</span></li>
-						<li>Eco Tax:&nbsp;<span>{{tax | currency:"₹"}}</span></li>
-						<li>Shipping Cost:&nbsp;<span>{{shippingCost | currency:"₹"}}</span></li>
-						<li>Total:&nbsp;<span>{{subTotal+tax+shippingCost | currency:"₹"}}</span></li>
-					</ul> 
-					<a class="btn btn-default update" href ng-click="cartCtrl.saveDraft()">Save As Wish list</a>
-					<a class="btn btn-default check_out" href="#/checkout">Order</a>
-				</div>
+		<div class="col-sm-12">
+			<div class="total_area">
+				<ul>
+					<li>Cart Sub Total:&nbsp;<span>{{subTotal | currency:"₹"}}</span></li>
+					<li>Eco Tax:&nbsp;<span>{{tax | currency:"₹"}}</span></li>
+					<li>Shipping Cost:&nbsp;<span>{{shippingCost | currency:"₹"}}</span></li>
+					<li>Total:&nbsp;<span>{{subTotal + tax + shippingCost | currency:"₹"}}</span></li>
+				</ul> 
+				<a class="btn btn-default update" href ng-click="cartCtrl.saveDraft()">Add To Wish list</a>
+				<a class="btn btn-default check_out" href="#/checkout">Place Order</a>
 			</div>
 		</div>
 	</div>

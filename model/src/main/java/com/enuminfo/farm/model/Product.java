@@ -4,6 +4,7 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.enuminfo.farm.data.ColumnType;
@@ -33,6 +35,7 @@ public class Product implements Serializable {
 	private Integer id;
 	private String name, description;
 	private Category category;
+	private Collection<CatalogProduct> catalogProducts;
 
 	private Product() {
 		// TODO Auto-generated constructor stub
@@ -43,6 +46,7 @@ public class Product implements Serializable {
 		this.name = builder.name;
 		this.description = builder.description;
 		this.category = builder.category;
+		this.catalogProducts = builder.catalogProducts;
 	}
 
 	@Id
@@ -68,6 +72,15 @@ public class Product implements Serializable {
 		return category;
 	}
 
+	@OneToMany (cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = ColumnType.PRODUCT)
+	public Collection<CatalogProduct> getCatalogProducts() {
+		return catalogProducts;
+	}
+
+	public void setCatalogProducts(Collection<CatalogProduct> catalogProducts) {
+		this.catalogProducts = catalogProducts;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -88,6 +101,7 @@ public class Product implements Serializable {
 		private Integer id;
 		private String name, description;
 		private Category category;
+		private Collection<CatalogProduct> catalogProducts;
 
 		public Builder withId(Integer id) {
 			this.id = id;
@@ -106,6 +120,11 @@ public class Product implements Serializable {
 
 		public Builder withCategory(Category category) {
 			this.category = category;
+			return this;
+		}
+		
+		public Builder withCatalogProducts(Collection<CatalogProduct> catalogProducts) {
+			this.catalogProducts = catalogProducts;
 			return this;
 		}
 

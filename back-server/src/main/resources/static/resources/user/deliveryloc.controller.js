@@ -22,7 +22,6 @@
         })();
         
         function add() {
-        	console.log('add');
 			$uibModal.open({
 				animation: deliveryLocationCtrl.animationsEnabled,
 				templateUrl: 'resources/user/deliveryloc.modal.html',
@@ -45,7 +44,7 @@
         })();
 		
 		function save() {
-			RegionService.saveDeliveryLocation(deliveryLocationModalInstanceCtrl);
+			RegionService.saveDeliveryLocation(this.deliveryLocationSubmitted);
 		}
 	}
 })();

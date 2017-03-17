@@ -8,12 +8,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enuminfo.farm.dto.LocationDTO;
-import com.enuminfo.farm.dto.LocationLandmarkDTO;
 import com.enuminfo.farm.path.RequestPath;
 import com.enuminfo.farm.service.IRegionService;
 
@@ -56,9 +56,9 @@ public class RegionController {
 		return service.loadAllDeliveryLocations();
 	}
 	
-	@RequestMapping (value = RequestPath.LOCATION_LANDMARKS+ RequestPath.ID, method = RequestMethod.GET)
-	public List<LocationLandmarkDTO> handleInteralRequestForAllLocationLandmarks(@PathVariable String id) {
-		System.out.println("RegionController.handleInteralRequestForAllLocationLandmarks()");
-		return service.loadAllLocationLandmarks(id);
+	@RequestMapping(value = RequestPath.DELIVERY_LOCATIONS, method = RequestMethod.POST)
+	public void handleInternalRequestForSave(@RequestBody LocationDTO dtoLocation) {
+		if (dtoLocation.getLocationId() == 0) service.addDeliveryLocation(dtoLocation);
+		else service.editDeliveryLocation(dtoLocation);
 	}
 }

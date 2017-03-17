@@ -15,9 +15,9 @@ public class UserOrderedItemDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int userOrderItemId;
-	private String productName, description, categoryName;
+	private String productName, description, categoryName, imageName;
 	private int productId, categoryId;
-	private int quantity;
+	private double quantity, price;
 	
 	public UserOrderedItemDTO() {
 		
@@ -71,11 +71,27 @@ public class UserOrderedItemDTO implements Serializable {
 		this.categoryId = categoryId;
 	}
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }

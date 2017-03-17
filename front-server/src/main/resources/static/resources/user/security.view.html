@@ -1,12 +1,12 @@
-<section class="form">
+<section id="form">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-1">
 				<div class="login-form">
 					<h2>Login to your account!</h2>
 					<form>
-						<input autofocus="autofocus"  placeholder="Username" ng-model="securityCtrl.username" value="9686379363" required="required" />
-						<input  type="password" placeholder="Password" ng-model="securityCtrl.password" value="123" required="required" />
+						<input type="text" placeholder="Username" ng-model="securityCtrl.username" required="required" />
+						<input type="password" placeholder="Password" ng-model="securityCtrl.password" required="required" />
 						<!-- <span><input type="checkbox" class="checkbox">Keep me signed in</span> -->
 						<button type="submit" class="btn btn-default" ng-click="securityCtrl.login()">Login</button>
 					</form>

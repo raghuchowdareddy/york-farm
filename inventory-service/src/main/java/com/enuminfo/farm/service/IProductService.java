@@ -19,4 +19,5 @@ public interface IProductService {
 	void edit(ProductDTO dtoProduct);
 	void remove(int id);
 	List<ProductDTO> loadProductsByStock(boolean stock);
+	List<ProductDTO> loadProductsByCategory(String categoryName);
 }

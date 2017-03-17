@@ -18,6 +18,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.enuminfo.farm.data.ColumnType;
 import com.enuminfo.farm.data.TableType;
 
@@ -57,8 +60,9 @@ public class User implements Serializable {
 		return username;
 	}
 
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable (name = TableType.T_USER_ROLE, joinColumns = {@JoinColumn(name = ColumnType.ROLE_ID)}, inverseJoinColumns = {@JoinColumn(name = ColumnType.USER_ID)})
+	@Fetch (value = FetchMode.SUBSELECT)
 	public Collection<Role> getRoles() {
 		return roles;
 	}

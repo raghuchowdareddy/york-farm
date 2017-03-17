@@ -16,6 +16,7 @@ import com.enuminfo.farm.model.Product;
 import com.enuminfo.farm.repository.IProductRepository;
 import com.enuminfo.farm.service.ICategoryService;
 import com.enuminfo.farm.service.IProductService;
+import com.enuminfo.farm.wrapper.CategoryWrapper;
 import com.enuminfo.farm.wrapper.ProductWrapper;
 
 /**
@@ -24,11 +25,8 @@ import com.enuminfo.farm.wrapper.ProductWrapper;
 @Service
 public class ProductService implements IProductService {
 
-	@Autowired
-	IProductRepository productRepository;
-	
-	@Autowired
-	ICategoryService categoryService;
+	@Autowired IProductRepository productRepository;
+	@Autowired ICategoryService categoryService;
 	
 	@Override
 	public void add(ProductDTO dtoProduct) {
@@ -72,5 +70,15 @@ public class ProductService implements IProductService {
 	@Override
 	public List<ProductDTO> loadProductsByStock(boolean stock) {
 		return null;
+	}
+
+	@Override
+	public List<ProductDTO> loadProductsByCategory(String categoryName) {
+		List<ProductDTO> dtoProducts = new ArrayList<ProductDTO>();
+		Iterable<Product> products = productRepository.findByCategory(CategoryWrapper.getInstance().convert2ModelWithId(categoryService.loadByName(categoryName)));
+		for (Iterator<Product> iterator = products.iterator(); iterator.hasNext();) {
+			dtoProducts.add(ProductWrapper.getInstance().convert2DTO(iterator.next()));
+		}
+		return dtoProducts;
 	}
 }

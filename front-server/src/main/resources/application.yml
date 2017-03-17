@@ -3,10 +3,9 @@ server:
 spring:
   application:
     name: front-gui
-  datasource:
-    url: jdbc:hsqldb:hsql://localhost
-    initialize: true
 zuul:
   routes:
     user-service: 
       path: /api/userservice/**
+    inventory-service:
+      path: /api/inventoryservice/**

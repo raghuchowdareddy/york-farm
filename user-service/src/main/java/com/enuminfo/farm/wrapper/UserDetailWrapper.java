@@ -4,6 +4,7 @@
 package com.enuminfo.farm.wrapper;
 
 import java.util.List;
+import java.util.Set;
 
 import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
@@ -31,7 +32,7 @@ public class UserDetailWrapper {
 		return dtoUser;
 	}
 	
-	public UserDetail convert2ModelWithoutId(UserDTO dtoUser, List<RoleDTO> dtoRoles) {
+	public UserDetail convert2ModelWithoutId(UserDTO dtoUser, Set<RoleDTO> dtoRoles) {
 		UserDetail customer = UserDetail.getBuilder()
 				.withName(dtoUser.getName())
 				.withEmailAddress(dtoUser.getEmailId())

@@ -4,8 +4,10 @@
 package com.enuminfo.farm.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,8 @@ import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
 import com.enuminfo.farm.model.UserDetail;
 import com.enuminfo.farm.repository.IUserDetailRepository;
-import com.enuminfo.farm.service.IUserDetailService;
 import com.enuminfo.farm.service.IRoleService;
+import com.enuminfo.farm.service.IUserDetailService;
 import com.enuminfo.farm.service.IUserService;
 import com.enuminfo.farm.wrapper.UserDetailWrapper;
 
@@ -37,9 +39,9 @@ public class UserDetailService implements IUserDetailService {
 	
 	@Override
 	public void add(UserDTO dtoUser) {
-		List<RoleDTO> dtoRoles = new ArrayList<RoleDTO>();
+		Set<RoleDTO> dtoRoles = new HashSet<RoleDTO>();
 		dtoRoles.add(roleService.loadByName(RoleEnum.ROLE_USER.toString()));
-		repository.save(UserDetailWrapper.getInstance().convert2ModelWithoutId(dtoUser, dtoRoles));
+		repository.save(UserDetailWrapper.getInstance().convert2ModelWithId(dtoUser));
 	}
 
 	@Override

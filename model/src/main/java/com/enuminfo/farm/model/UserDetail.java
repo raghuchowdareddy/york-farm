@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -61,7 +62,8 @@ public class UserDetail {
 	}
 
 	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="USER_ID")
+	@PrimaryKeyJoinColumn()
 	public User getUser() {
 		return user;
 	}
@@ -119,7 +121,7 @@ public class UserDetail {
 		}
 		
 		public UserDetail build() {
-			return new UserDetail();
+			return new UserDetail(this);
 		}
 	}
 	

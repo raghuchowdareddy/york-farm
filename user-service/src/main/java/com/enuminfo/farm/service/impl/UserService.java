@@ -3,13 +3,19 @@
  */
 package com.enuminfo.farm.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enuminfo.farm.data.RoleEnum;
+import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
+import com.enuminfo.farm.model.User;
 import com.enuminfo.farm.repository.IUserRepository;
+import com.enuminfo.farm.service.IRoleService;
 import com.enuminfo.farm.service.IUserService;
 import com.enuminfo.farm.wrapper.UserWrapper;
 
@@ -21,10 +27,20 @@ public class UserService implements IUserService {
 
 	@Autowired
 	IUserRepository userRepository;
+	@Autowired
+	IRoleService roleService;
+	@Autowired UserDetailService userDetailService;
 	
 	@Override
 	public void add(UserDTO dtoUser) {
-		
+		dtoUser.setPassword("password");//TODO lets do later.
+		Set<RoleDTO> dtoRoles = new HashSet<RoleDTO>();
+		dtoRoles.add(roleService.loadByName(RoleEnum.ROLE_USER.toString()));
+//		User newUser = userRepository.save(UserWrapper.getInstance().convert2ModelWithId(new UserDTO()));
+//		dtoUser.setUserId(newUser.getId());
+		User persistedUser = userRepository.save(UserWrapper.getInstance().convert2ModelWithoutId(dtoUser, dtoRoles));
+		dtoUser.setUserId(persistedUser.getId());
+		userDetailService.add(dtoUser);
 	}
 
 	@Override

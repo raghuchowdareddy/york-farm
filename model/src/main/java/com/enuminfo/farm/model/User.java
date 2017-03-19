@@ -4,17 +4,14 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -34,7 +31,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String username, password;
-	private Collection<Role> roles;
+	private Set<Role> roles = new HashSet<Role>();
 	
 	private User() {}
 	
@@ -57,9 +54,8 @@ public class User implements Serializable {
 		return username;
 	}
 
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable (name = TableType.T_USER_ROLE, joinColumns = {@JoinColumn(name = ColumnType.ROLE_ID)}, inverseJoinColumns = {@JoinColumn(name = ColumnType.USER_ID)})
-	public Collection<Role> getRoles() {
+	@ManyToMany(mappedBy="users")
+	public Set<Role> getRoles() {
 		return roles;
 	}
 	
@@ -76,7 +72,7 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public void setRoles(Collection<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 
@@ -87,7 +83,7 @@ public class User implements Serializable {
 	public static class Builder {
 		private Integer id;
 		private String username, password;
-		private Collection<Role> roles;
+		private Set<Role> roles;
 		
 		private Builder() {}
 		
@@ -101,7 +97,7 @@ public class User implements Serializable {
 			return this;
 		}
 		
-		public Builder withRoles(Collection<Role> roles) {
+		public Builder withRoles(Set<Role> roles) {
 			this.roles = roles;
 			return this;
 		}

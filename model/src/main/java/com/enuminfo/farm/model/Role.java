@@ -4,12 +4,12 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +34,7 @@ public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
-	private Collection<User> users;
+	private Set<User> users = new HashSet<User>();
 	
 	private Role() {
 		// TODO Auto-generated constructor stub
@@ -58,9 +58,11 @@ public class Role implements Serializable {
 		return name;
 	}
 
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable (name = TableType.T_USER_ROLE, joinColumns = {@JoinColumn(name = ColumnType.USER_ID)}, inverseJoinColumns = {@JoinColumn(name = ColumnType.ROLE_ID)})
-	public Collection<User> getUsers() {
+	@ManyToMany (cascade = CascadeType.ALL)
+	@JoinTable (name = TableType.T_USER_ROLE, 
+	joinColumns = {@JoinColumn(name = ColumnType.ROLE_ID, referencedColumnName="ID")},
+	inverseJoinColumns = {@JoinColumn(name = ColumnType.USER_ID,referencedColumnName="ID")})
+	public Set<User> getUsers() {
 		return users;
 	}
 	
@@ -72,14 +74,14 @@ public class Role implements Serializable {
 		this.name = name;
 	}
 
-	public void setUsers(Collection<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 
 	public static class Builder {
 		private Integer id;
 		private String name;
-		private Collection<User> users;
+		private Set<User> users;
 		
 		public Builder() {
 			// TODO Auto-generated constructor stub
@@ -95,7 +97,7 @@ public class Role implements Serializable {
 			return this;
 		}
 		
-		public Builder withUsers(Collection<User> users) {
+		public Builder withUsers(Set<User> users) {
 			this.users = users;
 			return this;
 		}

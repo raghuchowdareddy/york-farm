@@ -40,24 +40,18 @@
 		
 		function register() {
 			UserService.saveUser(securityCtrl).then(function (response) {
-				Service.saveUser(registerCtrl.user).then(function (response) {
-	            	if (response) {
+			    	if (response) {
 	            		FlashService.success('Registration successful', true);
+	            		swal("Registration successfull ", "!");
 	            		$location.path('/login');
 	            	} else {
 	            		FlashService.error(response.message);
 	            		registerCtrl.dataLoading = false;
 	            	}
-			});
-		});
-	}
+			})};
+		}
  }
-	
-	angular.module('app').controller('RegisterController', RegisterController);
+	//angular.module('app').controller('RegisterController', RegisterController);
 	//SecurityController.$inject = [ 'UserService', 'AuthenticationService', 'FlashService', '$rootScope', '$location' ];
 
-	function RegisterController(UserService, AuthenticationService, FlashService, $rootScope, $location) {
-		
-	}
-	
-})();
+)();

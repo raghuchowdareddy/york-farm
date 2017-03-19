@@ -5,8 +5,10 @@ package com.enuminfo.farm.wrapper;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
@@ -46,16 +48,32 @@ public class UserWrapper {
 		User user = User.getBuilder()
 				.withId(dtoUser.getUserId())
 				.withUsername(dtoUser.getMobileNo())
+				.withPassword(dtoUser.getPassword())
+				//.withRoles(Arrays.asList("ROLE_USER"))
 				.build();
 		return user;
 	}
 	
-	public User convert2ModelWithoutId(UserDTO dtoUser, List<RoleDTO> dtoRoles) {
-		Collection<Role> roles = new ArrayList<Role>();
+	public User convert2ModelWithoutId(UserDTO dtoUser, Set<RoleDTO> dtoRoles) {
+		Set<Role> roles = new HashSet<Role>();
 		for (Iterator<RoleDTO> iterator = dtoRoles.iterator(); iterator.hasNext();) {
 			roles.add(RoleWrapper.getInstance().convert2ModelWithId(iterator.next()));
 		}
 		User user = User.getBuilder()
+				.withUsername(dtoUser.getMobileNo())
+				.withPassword(StringUtil.generatePassword())
+				.withRoles(roles)
+				.build();
+		return user;
+	}
+
+	public User convert2ModelWithoutIdAndUserRoles(UserDTO dtoUser, Set<RoleDTO> dtoRoles) {
+		Set<Role> roles = new HashSet<Role>();
+		for (Iterator<RoleDTO> iterator = dtoRoles.iterator(); iterator.hasNext();) {
+			roles.add(RoleWrapper.getInstance().convert2ModelWithId(iterator.next()));
+		}
+		User user = User.getBuilder()
+				.withId(dtoUser.getUserId())
 				.withUsername(dtoUser.getMobileNo())
 				.withPassword(StringUtil.generatePassword())
 				.withRoles(roles)

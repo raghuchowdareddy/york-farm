@@ -3,13 +3,12 @@
  */
 package com.enuminfo.farm.service.impl;
 
-<<<<<<< Upstream, based on upstream/master
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-=======
+
 import java.util.HashSet;
->>>>>>> 43cd34d implemented registration page partially
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,20 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.data.RoleEnum;
-<<<<<<< Upstream, based on upstream/master
-=======
 import com.enuminfo.farm.dto.RoleDTO;
->>>>>>> 43cd34d implemented registration page partially
 import com.enuminfo.farm.dto.UserDTO;
-<<<<<<< Upstream, based on upstream/master
 import com.enuminfo.farm.model.Role;
 import com.enuminfo.farm.model.User;
 import com.enuminfo.farm.model.UserDetail;
 import com.enuminfo.farm.repository.IRoleRepository;
 import com.enuminfo.farm.repository.IUserDetailRepository;
-=======
-import com.enuminfo.farm.model.User;
->>>>>>> 43cd34d implemented registration page partially
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IRoleService;
 import com.enuminfo.farm.service.IUserService;
@@ -42,37 +34,18 @@ import com.enuminfo.farm.util.StringUtil;
 @Service
 public class UserService implements IUserService {
 
-<<<<<<< Upstream, based on upstream/master
+
 	@Autowired IUserRepository userRepository;
 	@Autowired IUserDetailRepository userDetailRepository;
 	@Autowired IRoleRepository roleRepository;
-=======
+
 	@Autowired
 	IUserRepository userRepository;
 	@Autowired
 	IRoleService roleService;
 	@Autowired UserDetailService userDetailService;
->>>>>>> 43cd34d implemented registration page partially
-	
 	@Override
-	public void add(UserDTO dtoUser) {
-<<<<<<< Upstream, based on upstream/master
-		Collection<Role> roles = new ArrayList<Role>();
-		roles.add(roleRepository.findByName(RoleEnum.ROLE_USER.toString()));
-		User user = User.getBuilder()
-				.withUsername(dtoUser.getMobileNo())
-				.withPassword(StringUtil.defaultPassword())
-				.withRoles(roles)
-				.build();
-		UserDetail detailUser = UserDetail.getBuilder()
-				.withName(dtoUser.getName())
-				.withEmailAddress(dtoUser.getEmailId())
-				.withMobileNumber(dtoUser.getMobileNo())
-				.withUser(user)
-				.build();
-		userDetailRepository.save(detailUser);
-=======
-		dtoUser.setPassword("password");//TODO lets do later.
+	public void add(UserDTO dtoUser) {		dtoUser.setPassword("password");//TODO lets do later.
 		Set<RoleDTO> dtoRoles = new HashSet<RoleDTO>();
 		dtoRoles.add(roleService.loadByName(RoleEnum.ROLE_USER.toString()));
 //		User newUser = userRepository.save(UserWrapper.getInstance().convert2ModelWithId(new UserDTO()));
@@ -99,8 +72,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public void delete(int id) {
-		
->>>>>>> 43cd34d implemented registration page partially
+
 	}
 
 	@Override

@@ -40,8 +40,6 @@
 		
 		function register() {
 			UserService.saveUser(securityCtrl).then(function (response) {
-				swal("Request...", "Thanks, You have successfully registered!", "info");
-           		$location.path('/');
 			    	if (response) {
 	            		FlashService.success('Registration successful', true);
 	            		swal("Registration successfull ", "!");
@@ -52,5 +50,6 @@
 	            	}
 			})};
 		}
-	}	
+ }
+
 )();

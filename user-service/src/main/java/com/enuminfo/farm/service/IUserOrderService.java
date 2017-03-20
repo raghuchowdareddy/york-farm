@@ -12,7 +12,9 @@ import com.enuminfo.farm.dto.UserOrderDTO;
  */
 public interface IUserOrderService {
 
-	void addUserOrder(UserOrderDTO dtoUserOrder);
+	void addDraftedUserOrder(UserOrderDTO dtoUserOrder);
 	List<UserOrderDTO> loadAllUserOrders(String status);
 	UserOrderDTO loadUserOrder(String username, String status);
+	void editDraftedUserOrder(UserOrderDTO dtoUserOrder);
+	void confirmedUserOrder(UserOrderDTO dtoUserOrder);
 }

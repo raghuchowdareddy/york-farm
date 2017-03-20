@@ -43,11 +43,6 @@ public class ProductController {
 		return productService.loadById(id);
 	}
 	
-	@RequestMapping(value = RequestPath.NAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ProductDTO handleInternalRequestForName(@PathVariable String name) {
-		return productService.loadByName(name);
-	}
-	
 	@RequestMapping(value = RequestPath.CATEGORY + RequestPath.NAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProductDTO> handleInternalRequestForCategoryName(@PathVariable String name) {
 		return productService.loadProductsByCategory(name);

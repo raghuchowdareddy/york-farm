@@ -22,4 +22,5 @@ public interface IRegionService {
 	List<LocationDTO> loadAllDeliveryLocations();
 	void addDeliveryLocation(LocationDTO dtoDeliveryLocation);
 	void editDeliveryLocation(LocationDTO dtoDeliveryLocation);
+	List<LocationDTO> loadAllDeliveryLocations(int locationId);
 }

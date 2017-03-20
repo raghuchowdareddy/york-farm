@@ -18,9 +18,6 @@ import com.enuminfo.farm.repository.ICountryRepository;
 import com.enuminfo.farm.repository.IDeliveryLocationRepository;
 import com.enuminfo.farm.repository.ILocationRepository;
 import com.enuminfo.farm.service.IRegionService;
-import com.enuminfo.farm.wrapper.CountryWrapper;
-import com.enuminfo.farm.wrapper.DeliveryLocationWrapper;
-import com.enuminfo.farm.wrapper.LocationWrapper;
 
 /**
  * @author Kumar
@@ -34,7 +31,10 @@ public class RegionService implements IRegionService {
 	
 	@Override
 	public void addCountry(LocationDTO dtoLocation) {
-		Country country = CountryWrapper.getInstance().convert2ModelWithoutId(dtoLocation);
+		Country country = Country.getBuilder()
+				.withName(dtoLocation.getCountryName())
+				.withIsd(dtoLocation.getIsdCode())
+				.build();
 		countryRepository.save(country);
 	}
 
@@ -43,14 +43,20 @@ public class RegionService implements IRegionService {
 		List<LocationDTO> dtoCountries = new ArrayList<LocationDTO>();
 		Iterable<Country> countries = countryRepository.findAll();
 		for (Iterator<Country> iterator = countries.iterator(); iterator.hasNext();) {
-			dtoCountries.add(CountryWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoCountries.add(convert2DTO(iterator.next()));
 		}
 		return dtoCountries;
 	}
 
 	@Override
 	public void addLocation(LocationDTO dtoLocation) {
-		Location location = LocationWrapper.getInstance().convert2ModelWithoutId(dtoLocation);
+		Location location = Location.getBuilder()
+				.withName(dtoLocation.getLocationName())
+				.withPin(dtoLocation.getPinCode())
+				.withCity(dtoLocation.getCityName())
+				.withState(dtoLocation.getStateName())
+				.withCountry(countryRepository.findOne(dtoLocation.getCountryId()))
+				.build();
 		locationRepository.save(location);
 	}
 
@@ -60,7 +66,7 @@ public class RegionService implements IRegionService {
 		Country country = countryRepository.findByName(countryName);
 		Iterable<Location> states = locationRepository.findByCountry(country);
 		for (Iterator<Location> iterator = states.iterator(); iterator.hasNext();) {
-			dtoStates.add(LocationWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoStates.add(convert2DTO(iterator.next()));
 		}
 		return dtoStates;
 	}
@@ -70,7 +76,7 @@ public class RegionService implements IRegionService {
 		List<LocationDTO> dtoCities = new ArrayList<LocationDTO>();
 		Iterable<Location> cities = locationRepository.findByState(stateName);
 		for (Iterator<Location> iterator = cities.iterator(); iterator.hasNext();) {
-			dtoCities.add(LocationWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoCities.add(convert2DTO(iterator.next()));
 		}
 		return dtoCities;
 	}
@@ -80,14 +86,14 @@ public class RegionService implements IRegionService {
 		List<LocationDTO> dtoLocations = new ArrayList<LocationDTO>();
 		Iterable<Location> locations = locationRepository.findByCity(cityName);
 		for (Iterator<Location> iterator = locations.iterator(); iterator.hasNext();) {
-			dtoLocations.add(LocationWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoLocations.add(convert2DTO(iterator.next()));
 		}
 		return dtoLocations;
 	}
 
 	@Override
 	public LocationDTO loadLocation(int locationId) {
-		return LocationWrapper.getInstance().convert2DTO(locationRepository.findOne(locationId));
+		return convert2DTO(locationRepository.findOne(locationId));
 	}
 
 	@Override
@@ -95,22 +101,72 @@ public class RegionService implements IRegionService {
 		List<LocationDTO> dtoDeliveryLocations = new ArrayList<LocationDTO>();
 		Iterable<DeliveryLocation> deliveryLocations = deliveryLocationRepository.findAll();
 		for (Iterator<DeliveryLocation> iterator = deliveryLocations.iterator(); iterator.hasNext();) {
-			dtoDeliveryLocations.add(DeliveryLocationWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoDeliveryLocations.add(convert2DTO(iterator.next()));
 		}
 		return dtoDeliveryLocations;
 	}
 
 	@Override
 	public void addDeliveryLocation(LocationDTO dtoDeliveryLocation) {
-		LocationDTO dtoLocation = LocationWrapper.getInstance().convert2DTO(locationRepository.findByName(dtoDeliveryLocation.getLocationName()));
-		DeliveryLocation deliveryLocation = DeliveryLocationWrapper.getInstance().convert2ModelWithoutId(dtoDeliveryLocation, dtoLocation);
+		DeliveryLocation deliveryLocation = DeliveryLocation.getBuilder()
+				.withStreet(dtoDeliveryLocation.getValue1())
+				.withLandmark1(dtoDeliveryLocation.getValue2())
+				.withLandmark2(dtoDeliveryLocation.getValue3())
+				.withLocation(locationRepository.findByName(dtoDeliveryLocation.getLocationName()))
+				.build();
 		deliveryLocationRepository.save(deliveryLocation);
 	}
 
 	@Override
 	public void editDeliveryLocation(LocationDTO dtoDeliveryLocation) {
-		LocationDTO dtoLocation = LocationWrapper.getInstance().convert2DTO(locationRepository.findByName(dtoDeliveryLocation.getLocationName()));
-		DeliveryLocation deliveryLocation = DeliveryLocationWrapper.getInstance().convert2ModelWithId(dtoDeliveryLocation, dtoLocation);
+		DeliveryLocation deliveryLocation = DeliveryLocation.getBuilder()
+				.withId(dtoDeliveryLocation.getLocationId())
+				.withStreet(dtoDeliveryLocation.getValue1())
+				.withLandmark1(dtoDeliveryLocation.getValue2())
+				.withLandmark2(dtoDeliveryLocation.getValue3())
+				.withLocation(locationRepository.findByName(dtoDeliveryLocation.getLocationName()))
+				.build();
 		deliveryLocationRepository.save(deliveryLocation);
+	}
+	
+	private LocationDTO convert2DTO(Country country) {
+		LocationDTO dtoLocation = new LocationDTO();
+		dtoLocation.setCountryId(country.getId());
+		dtoLocation.setCountryName(country.getName());
+		dtoLocation.setIsdCode(country.getIsd());
+		return dtoLocation;
+	}
+	
+	private LocationDTO convert2DTO(Location location) {
+		LocationDTO dtoLocation = new LocationDTO();
+		dtoLocation.setLocationId(location.getId());
+		dtoLocation.setLocationName(location.getName());
+		dtoLocation.setCityName(location.getCity());
+		dtoLocation.setStateName(location.getState());
+		dtoLocation.setPinCode(location.getPin());
+		dtoLocation.setCountryId(location.getCountry().getId());
+		dtoLocation.setCountryName(location.getCountry().getName());
+		dtoLocation.setIsdCode(location.getCountry().getIsd());
+		return dtoLocation;
+	}
+	
+	public LocationDTO convert2DTO(DeliveryLocation deliveryLocation) {
+		LocationDTO dtoLocation = convert2DTO(deliveryLocation.getLocation());
+		dtoLocation.setLocationId(deliveryLocation.getId());
+		dtoLocation.setValue1(deliveryLocation.getStreet());
+		dtoLocation.setValue2(deliveryLocation.getLandmark1());
+		dtoLocation.setValue3(deliveryLocation.getLandmark2());
+		return dtoLocation;
+	}
+
+	@Override
+	public List<LocationDTO> loadAllDeliveryLocations(int locationId) {
+		List<LocationDTO> dtoDeliveryLocations = new ArrayList<LocationDTO>();
+		Location location = locationRepository.findOne(locationId);
+		Iterable<DeliveryLocation> deliveryLocations = deliveryLocationRepository.findByLocation(location);
+		for (Iterator<DeliveryLocation> iterator = deliveryLocations.iterator(); iterator.hasNext();) {
+			dtoDeliveryLocations.add(convert2DTO(iterator.next()));
+		}
+		return dtoDeliveryLocations;
 	}
 }

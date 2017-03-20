@@ -70,7 +70,7 @@ public class UserDetail implements Serializable {
 		return mobileNumber;
 	}
 
-	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	public User getUser() {
 		return user;

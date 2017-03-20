@@ -4,6 +4,7 @@
 package com.enuminfo.farm.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class UserOrderDTO implements Serializable {
 	private int countryId, locationId;
 	private long pinCode;
 	private List<UserOrderedItemDTO> orderedItems;
+	private Date createdDate, updatedDate, deliveryDate;
 	
 	public UserOrderDTO() {
 		// TODO Auto-generated constructor stub
@@ -179,5 +181,29 @@ public class UserOrderDTO implements Serializable {
 
 	public void setOrderedItems(List<UserOrderedItemDTO> orderedItems) {
 		this.orderedItems = orderedItems;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 }

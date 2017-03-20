@@ -2,9 +2,9 @@
 	'use strict';
 	
 	angular.module('app').controller('SecurityController', SecurityController);
-	SecurityController.$inject = [ 'UserService', 'AuthenticationService', 'FlashService', '$rootScope', '$scope','$location','ProductService' ];
+	SecurityController.$inject = [ 'UserService', 'AuthenticationService', 'FlashService', '$rootScope', '$scope', '$location' ];
 
-	function SecurityController(UserService, AuthenticationService, FlashService, $rootScope, $scope,$location,ProductService) {
+	function SecurityController(UserService, AuthenticationService, FlashService, $rootScope, $scope, $location) {
 		var securityCtrl = this;
 		securityCtrl.login = login;
 		securityCtrl.register = register;
@@ -27,24 +27,9 @@
 		
 		function register() {
 			UserService.saveUser(securityCtrl).then(function (response) {
-				Service.saveUser(registerCtrl.user).then(function (response) {
-	            	if (response) {
-	            		FlashService.success('Registration successful', true);
-	            		$location.path('/login');
-	            	} else {
-	            		FlashService.error(response.message);
-	            		registerCtrl.dataLoading = false;
-	            	}
+				swal("Request...", "Thanks, You have successfully registered!", "info");
+           		$location.path('/');
 			});
-		});
-	}
- }
-	
-	angular.module('app').controller('RegisterController', RegisterController);
-	//SecurityController.$inject = [ 'UserService', 'AuthenticationService', 'FlashService', '$rootScope', '$location' ];
-
-	function RegisterController(UserService, AuthenticationService, FlashService, $rootScope, $location) {
-		
-	}
-	
+		}
+	}	
 })();

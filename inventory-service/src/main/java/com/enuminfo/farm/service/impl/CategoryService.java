@@ -14,7 +14,6 @@ import com.enuminfo.farm.dto.CategoryDTO;
 import com.enuminfo.farm.model.Category;
 import com.enuminfo.farm.repository.ICategoryRepository;
 import com.enuminfo.farm.service.ICategoryService;
-import com.enuminfo.farm.wrapper.CategoryWrapper;
 
 /**
  * @author Kumar
@@ -26,7 +25,9 @@ public class CategoryService implements ICategoryService {
 	
 	@Override
 	public void add(CategoryDTO dtoCategory) {
-		Category category = CategoryWrapper.getInstance().convert2ModelWithoutId(dtoCategory);
+		Category category = Category.getBuilder()
+				.withName(dtoCategory.getCategoryName())
+				.build();
 		categoryRepository.save(category);
 	}
 
@@ -35,30 +36,44 @@ public class CategoryService implements ICategoryService {
 		List<CategoryDTO> dtoCategories = new ArrayList<CategoryDTO>();
 		Iterable<Category> categories = categoryRepository.findAll();
 		for (Iterator<Category> iterator = categories.iterator(); iterator.hasNext();) {
-			dtoCategories.add(CategoryWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoCategories.add(convert2DTO(iterator.next()));
 		}
 		return dtoCategories;
 	}
 
 	@Override
 	public CategoryDTO loadById(int id) {
-		return CategoryWrapper.getInstance().convert2DTO(categoryRepository.findOne(id));
+		return convert2DTO(categoryRepository.findOne(id));
 	}
 
 	@Override
 	public CategoryDTO loadByName(String name) {
-		return CategoryWrapper.getInstance().convert2DTO(categoryRepository.findByName(name));
+		return convert2DTO(categoryRepository.findByName(name));
 	}
 
 	@Override
 	public void edit(CategoryDTO dtoCategory) {
-		Category category = CategoryWrapper.getInstance().convert2ModelWithId(dtoCategory);
+		Category category = Category.getBuilder()
+				.withId(dtoCategory.getCategoryId())
+				.withName(dtoCategory.getCategoryName())
+				.build();
 		categoryRepository.save(category);
 	}
 
 	@Override
 	public void remove(int id) {
-		Category category = CategoryWrapper.getInstance().convert2ModelWithId(CategoryWrapper.getInstance().convert2DTO(categoryRepository.findOne(id)));
+		CategoryDTO dtoCategory = loadById(id);
+		Category category = Category.getBuilder()
+				.withId(dtoCategory.getCategoryId())
+				.withName(dtoCategory.getCategoryName())
+				.build();
 		categoryRepository.delete(category);
+	}
+	
+	private CategoryDTO convert2DTO(Category category) {
+		CategoryDTO dtoCategory = new CategoryDTO();
+		dtoCategory.setCategoryId(category.getId());
+		dtoCategory.setCategoryName(category.getName());
+		return dtoCategory;
 	}
 }

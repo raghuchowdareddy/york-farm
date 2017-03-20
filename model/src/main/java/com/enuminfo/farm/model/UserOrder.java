@@ -4,6 +4,7 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -32,27 +33,33 @@ public class UserOrder implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer userOrderId;
+	private Integer id;
 	private UserDetail user;
 	private Collection<UserOrderedItem> orderedItems;
 	private String status;
 	private Collection<UserOrderDeliveryLocation> deliveryLocations;
+	private Timestamp createdDate;
+	private Timestamp updatedDate;
+	private Timestamp deliveryDate;
 	
 	private UserOrder() {}
 	
 	private UserOrder(Builder builder) {
-		this.userOrderId = builder.userOrderId;
+		this.id = builder.id;
 		this.user = builder.user;
 		this.orderedItems = builder.orderedItems;
 		this.status = builder.status;
 		this.deliveryLocations = builder.deliveryLocations;
+		this.createdDate = builder.createdDate;
+		this.updatedDate = builder.updatedDate;
+		this.deliveryDate = builder.deliveryDate;
 	}
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column (name = ColumnType.ID)
-	public Integer getUserOrderId() {
-		return userOrderId;
+	public Integer getId() {
+		return id;
 	}
 
 	@ManyToOne (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -71,17 +78,44 @@ public class UserOrder implements Serializable {
 		return status;
 	}
 
-	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = ColumnType.USER_ORDER)
+	@OneToMany (cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = ColumnType.USER_ORDER)
 	public Collection<UserOrderDeliveryLocation> getDeliveryLocations() {
 		return deliveryLocations;
+	}
+
+	@Column (name = ColumnType.CREATED_DATE)
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	@Column (name = ColumnType.UPDATED_DATE)
+	public Timestamp getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Timestamp updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	@Column (name = ColumnType.DELIVERY_DATE)
+	public Timestamp getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Timestamp deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 	public void setDeliveryLocations(Collection<UserOrderDeliveryLocation> deliveryLocations) {
 		this.deliveryLocations = deliveryLocations;
 	}
 
-	public void setUserOrderId(Integer userOrderId) {
-		this.userOrderId = userOrderId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setUser(UserDetail user) {
@@ -98,18 +132,21 @@ public class UserOrder implements Serializable {
 
 	public static class Builder {
 		
-		private Integer userOrderId;
+		private Integer id;
 		private UserDetail user;
 		private Collection<UserOrderedItem> orderedItems;
 		private String status;
 		private Collection<UserOrderDeliveryLocation> deliveryLocations;
+		private Timestamp createdDate;
+		private Timestamp updatedDate;
+		private Timestamp deliveryDate;
 		
 		public Builder() {
 			// TODO Auto-generated constructor stub
 		}
 
-		public Builder withUserOrderId(Integer userOrderId) {
-			this.userOrderId = userOrderId;
+		public Builder withId(Integer id) {
+			this.id = id;
 			return this;
 		}
 
@@ -130,6 +167,21 @@ public class UserOrder implements Serializable {
 		
 		public Builder withDeliveryLocations(Collection<UserOrderDeliveryLocation> deliveryLocations) {
 			this.deliveryLocations = deliveryLocations;
+			return this;
+		}
+		
+		public Builder withCreatedDate(Timestamp createdDate) {
+			this.createdDate = createdDate;
+			return this;
+		}
+		
+		public Builder withUpdatedDate(Timestamp updatedDate) {
+			this.updatedDate = updatedDate;
+			return this;
+		}
+		
+		public Builder withDeliveryDate(Timestamp deliveryDate) {
+			this.deliveryDate = deliveryDate;
 			return this;
 		}
 		

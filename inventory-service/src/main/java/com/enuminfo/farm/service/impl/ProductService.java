@@ -10,14 +10,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.enuminfo.farm.dto.CategoryDTO;
 import com.enuminfo.farm.dto.ProductDTO;
 import com.enuminfo.farm.model.Product;
+import com.enuminfo.farm.repository.ICategoryRepository;
 import com.enuminfo.farm.repository.IProductRepository;
-import com.enuminfo.farm.service.ICategoryService;
 import com.enuminfo.farm.service.IProductService;
-import com.enuminfo.farm.wrapper.CategoryWrapper;
-import com.enuminfo.farm.wrapper.ProductWrapper;
 
 /**
  * @author Kumar
@@ -26,12 +23,15 @@ import com.enuminfo.farm.wrapper.ProductWrapper;
 public class ProductService implements IProductService {
 
 	@Autowired IProductRepository productRepository;
-	@Autowired ICategoryService categoryService;
+	@Autowired ICategoryRepository categoryRepository;
 	
 	@Override
 	public void add(ProductDTO dtoProduct) {
-		CategoryDTO dtoCategory = categoryService.loadById(dtoProduct.getCategoryId());
-		Product product = ProductWrapper.getInstance().convert2ModelWithoutId(dtoProduct, dtoCategory);
+		Product product = Product.getBuilder()
+				.withName(dtoProduct.getProductName())
+				.withDescription(dtoProduct.getProductDescription())
+				.withCategory(categoryRepository.findOne(dtoProduct.getCategoryId()))
+				.build();
 		productRepository.save(product);
 	}
 
@@ -40,25 +40,29 @@ public class ProductService implements IProductService {
 		List<ProductDTO> dtoProducts = new ArrayList<ProductDTO>();
 		Iterable<Product> products = productRepository.findAll();
 		for (Iterator<Product> iterator = products.iterator(); iterator.hasNext();) {
-			dtoProducts.add(ProductWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoProducts.add(convert2DTO(iterator.next()));
 		}
 		return dtoProducts;
 	}
 
 	@Override
 	public ProductDTO loadById(int id) {
-		return ProductWrapper.getInstance().convert2DTO(productRepository.findOne(id));
+		return convert2DTO(productRepository.findOne(id));
 	}
 
 	@Override
 	public ProductDTO loadByName(String name) {
-		return ProductWrapper.getInstance().convert2DTO(productRepository.findByName(name));
+		return convert2DTO(productRepository.findByName(name));
 	}
 
 	@Override
 	public void edit(ProductDTO dtoProduct) {
-		CategoryDTO dtoCategory = categoryService.loadById(dtoProduct.getCategoryId());
-		Product product = ProductWrapper.getInstance().convert2ModelWithId(dtoProduct, dtoCategory);
+		Product product = Product.getBuilder()
+				.withId(dtoProduct.getProductId())
+				.withName(dtoProduct.getProductName())
+				.withDescription(dtoProduct.getProductDescription())
+				.withCategory(categoryRepository.findOne(dtoProduct.getCategoryId()))
+				.build();
 		productRepository.save(product);
 	}
 
@@ -75,10 +79,20 @@ public class ProductService implements IProductService {
 	@Override
 	public List<ProductDTO> loadProductsByCategory(String categoryName) {
 		List<ProductDTO> dtoProducts = new ArrayList<ProductDTO>();
-		Iterable<Product> products = productRepository.findByCategory(CategoryWrapper.getInstance().convert2ModelWithId(categoryService.loadByName(categoryName)));
+		Iterable<Product> products = productRepository.findByCategory(categoryRepository.findByName(categoryName));
 		for (Iterator<Product> iterator = products.iterator(); iterator.hasNext();) {
-			dtoProducts.add(ProductWrapper.getInstance().convert2DTO(iterator.next()));
+			dtoProducts.add(convert2DTO(iterator.next()));
 		}
 		return dtoProducts;
+	}
+	
+	private ProductDTO convert2DTO(Product product) {
+		ProductDTO dtoProduct = new ProductDTO();
+		dtoProduct.setProductId(product.getId());
+		dtoProduct.setProductName(product.getName());
+		dtoProduct.setProductDescription(product.getDescription());
+		dtoProduct.setCategoryId(product.getCategory().getId());
+		dtoProduct.setCategoryName(product.getCategory().getName());
+		return dtoProduct;
 	}
 }

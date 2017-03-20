@@ -30,7 +30,7 @@ public class UserOrderedItem implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer userOrderedItemId;
+	private Integer id;
 	private UserOrder userOrder;
 	private Product product;
 	private Double quantity;
@@ -39,7 +39,7 @@ public class UserOrderedItem implements Serializable {
 	private UserOrderedItem() {}
 	
 	private UserOrderedItem(Builder builder) {
-		this.userOrderedItemId = builder.userOrderedItemId;
+		this.id = builder.id;
 		this.userOrder = builder.userOrder;
 		this.product = builder.product;
 		this.quantity = builder.quantity;
@@ -49,8 +49,8 @@ public class UserOrderedItem implements Serializable {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column (name = ColumnType.ID)
-	public Integer getUserOrderedItemId() {
-		return userOrderedItemId;
+	public Integer getId() {
+		return id;
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -75,8 +75,8 @@ public class UserOrderedItem implements Serializable {
 		return price;
 	}
 
-	public void setUserOrderedItemId(Integer userOrderedItemId) {
-		this.userOrderedItemId = userOrderedItemId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setUserOrder(UserOrder userOrder) {
@@ -97,7 +97,7 @@ public class UserOrderedItem implements Serializable {
 
 	public static class Builder {
 		
-		private Integer userOrderedItemId;
+		private Integer id;
 		private UserOrder userOrder;
 		private Product product;
 		private Double quantity;
@@ -107,8 +107,8 @@ public class UserOrderedItem implements Serializable {
 			// TODO Auto-generated constructor stub
 		}
 
-		public Builder withUserOrderedItemId(Integer userOrderedItemId) {
-			this.userOrderedItemId = userOrderedItemId;
+		public Builder withId(Integer id) {
+			this.id = id;
 			return this;
 		}
 

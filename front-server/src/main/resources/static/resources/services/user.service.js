@@ -13,6 +13,8 @@
         service.saveDraftedProducts = saveDraftedProducts;
         service.getOrderedProductsByUsername = getOrderedProductsByUsername;
         service.saveOrderedProducts = saveOrderedProducts;
+        service.getLocationsByCity = getLocationsByCity;
+        service.getDeliveryLocationsByLocation = getDeliveryLocationsByLocation;
         return service;
         
         function getByUsername(username) {
@@ -41,6 +43,14 @@
         
         function saveOrderedProducts(order) {
         	return $http.post('/api/userservice/user/ordered/items', order);
+        }
+        
+        function getLocationsByCity() {
+        	return $http.get('/api/userservice/region/locations/Bangalore');
+        }
+        
+        function getDeliveryLocationsByLocation(locationId) {
+        	return $http.get('/api/userservice/region/deliverylocations/location/' + locationId);
         }
     }
 })();

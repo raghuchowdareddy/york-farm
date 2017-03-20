@@ -30,14 +30,14 @@ public class UserOrderDeliveryLocation implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer userOrderDeliveryLocationId;
+	private Integer id;
 	private UserOrder userOrder;
 	private DeliveryLocation deliveryLocation;
 	
 	private UserOrderDeliveryLocation () {}
 	
 	private UserOrderDeliveryLocation (Builder builder) {
-		this.userOrderDeliveryLocationId = builder.userOrderDeliveryLocationId;
+		this.id = builder.id;
 		this.userOrder = builder.userOrder;
 		this.deliveryLocation = builder.deliveryLocation;
 	}
@@ -45,24 +45,24 @@ public class UserOrderDeliveryLocation implements Serializable {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	@Column (name = ColumnType.ID)
-	public Integer getUserOrderDeliveryLocationId() {
-		return userOrderDeliveryLocationId;
+	public Integer getId() {
+		return id;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn (name = ColumnType.USER_ORDER_ID)
 	public UserOrder getUserOrder() {
 		return userOrder;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn (name = ColumnType.DELIVERY_LOCATION_ID)
 	public DeliveryLocation getDeliveryLocation() {
 		return deliveryLocation;
 	}
 
-	public void setUserOrderDeliveryLocationId(Integer userOrderDeliveryLocationId) {
-		this.userOrderDeliveryLocationId = userOrderDeliveryLocationId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setUserOrder(UserOrder userOrder) {
@@ -75,7 +75,7 @@ public class UserOrderDeliveryLocation implements Serializable {
 
 	public static class Builder {
 		
-		private Integer userOrderDeliveryLocationId;
+		private Integer id;
 		private UserOrder userOrder;
 		private DeliveryLocation deliveryLocation;
 		
@@ -83,8 +83,8 @@ public class UserOrderDeliveryLocation implements Serializable {
 			// TODO Auto-generated constructor stub
 		}
 
-		public Builder withUserOrderDeliveryLocationId(Integer userOrderDeliveryLocationId) {
-			this.userOrderDeliveryLocationId = userOrderDeliveryLocationId;
+		public Builder withId(Integer id) {
+			this.id = id;
 			return this;
 		}
 

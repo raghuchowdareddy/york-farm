@@ -13,18 +13,13 @@ import org.springframework.stereotype.Service;
 
 import com.enuminfo.farm.dto.CatalogDTO;
 import com.enuminfo.farm.dto.CatalogProductDTO;
-import com.enuminfo.farm.dto.CategoryDTO;
-import com.enuminfo.farm.dto.ProductDTO;
 import com.enuminfo.farm.model.Catalog;
 import com.enuminfo.farm.model.CatalogProduct;
 import com.enuminfo.farm.repository.ICatalogProductRepository;
 import com.enuminfo.farm.repository.ICatalogRepository;
+import com.enuminfo.farm.repository.IProductRepository;
 import com.enuminfo.farm.service.ICatalogService;
-import com.enuminfo.farm.service.ICategoryService;
-import com.enuminfo.farm.service.IProductService;
 import com.enuminfo.farm.util.DateTimeUtil;
-import com.enuminfo.farm.wrapper.CatalogProductWrapper;
-import com.enuminfo.farm.wrapper.CatalogWrapper;
 
 /**
  * @author Kumar
@@ -34,19 +29,24 @@ public class CatalogService implements ICatalogService {
 
 	@Autowired ICatalogRepository catalogRepository;
 	@Autowired ICatalogProductRepository catalogProductRepository;
-	@Autowired IProductService productService;
-	@Autowired ICategoryService categoryService;
+	@Autowired IProductRepository productRepository;
 	
 	@Override
 	public void add(CatalogDTO dtoCatalog) {
-		Catalog catalog = CatalogWrapper.getInstance().convert2ModelWithoutId(dtoCatalog);
-		catalog = catalogRepository.save(catalog);
+		Catalog catalog = Catalog.getBuilder()
+				.withStartDate(DateTimeUtil.convertString2UtilDate(dtoCatalog.getStartDate()))
+				.withEndDate(DateTimeUtil.convertString2UtilDate(dtoCatalog.getEndDate()))
+				.build();
+		Catalog savedCatalog = catalogRepository.save(catalog);
 		for (Iterator<CatalogProductDTO> iterator = dtoCatalog.getCatalogProducts().iterator(); iterator.hasNext();) {
 			CatalogProductDTO dtoCatalogProduct = iterator.next();
-			ProductDTO dtoProduct = productService.loadById(dtoCatalogProduct.getProductId());
-			CategoryDTO dtoCategory = categoryService.loadById(dtoProduct.getCategoryId());
-			CatalogProduct catalogProduct = CatalogProductWrapper.getInstance().convert2ModelWithoutId(dtoCatalogProduct, dtoProduct, dtoCategory);
-			catalogProduct.setCatalog(catalog);
+			CatalogProduct catalogProduct = CatalogProduct.getBuilder()
+					.withId(dtoCatalogProduct.getCatalogProductId())
+					.withCatalog(savedCatalog)
+					.withProduct(productRepository.findOne(dtoCatalogProduct.getProductId()))
+					.withQuantity(dtoCatalogProduct.getQuantity())
+					.withPrice(dtoCatalogProduct.getPrice())
+					.build();
 			catalogProductRepository.save(catalogProduct);
 		}
 	}
@@ -57,12 +57,12 @@ public class CatalogService implements ICatalogService {
 		Iterable<Catalog> catalogs = catalogRepository.findAll();
 		for (Iterator<Catalog> iteratorCatalog = catalogs.iterator(); iteratorCatalog.hasNext();) {
 			Catalog catalog = iteratorCatalog.next();
-			CatalogDTO dtoCatalog = CatalogWrapper.getInstance().convert2DTO(catalog);
+			CatalogDTO dtoCatalog = convert2DTO(catalog);
 			List<CatalogProductDTO> dtoCatalogProducts = new ArrayList<CatalogProductDTO>();
 			Iterable<CatalogProduct> catalogProducts = catalogProductRepository.findByCatalog(catalog);
 			for (Iterator<CatalogProduct> iteratorCatalogProduct = catalogProducts.iterator(); iteratorCatalogProduct.hasNext();) {
 				CatalogProduct catalogProduct = iteratorCatalogProduct.next();
-				dtoCatalogProducts.add(CatalogProductWrapper.getInstance().convert2DTO(catalogProduct));
+				dtoCatalogProducts.add(convert2DTO(catalogProduct));
 			}
 			dtoCatalog.setCatalogProducts(dtoCatalogProducts);
 			dtoCatalogs.add(dtoCatalog);
@@ -102,10 +102,30 @@ public class CatalogService implements ICatalogService {
 				for (Iterator<CatalogProduct> iteratorCatalogProduct = catalogProducts.iterator(); iteratorCatalogProduct.hasNext();) {
 					CatalogProduct catalogProduct = iteratorCatalogProduct.next();
 					if (catalogProduct.getProduct().getCategory().getName().equalsIgnoreCase(categoryName))
-						weekCatalogProducts.add(CatalogProductWrapper.getInstance().convert2DTO(catalogProduct));
+						weekCatalogProducts.add(convert2DTO(catalogProduct));
 				}
 			}
 		}
 		return weekCatalogProducts;
+	}
+	
+	private CatalogDTO convert2DTO(Catalog catalog) {
+		CatalogDTO dtoCatalog = new CatalogDTO();
+		dtoCatalog.setCatalogId(catalog.getId());
+		dtoCatalog.setStartDate(catalog.getStartDate().toString());
+		dtoCatalog.setEndDate(catalog.getEndDate().toString());
+		return dtoCatalog;
+	}
+	
+	private CatalogProductDTO convert2DTO(CatalogProduct catalogProduct) {
+		CatalogProductDTO dtoCatalogProduct = new CatalogProductDTO();
+		dtoCatalogProduct.setCatalogProductId(catalogProduct.getId());
+		dtoCatalogProduct.setProductId(catalogProduct.getProduct().getId());
+		dtoCatalogProduct.setProductName(catalogProduct.getProduct().getName());
+		dtoCatalogProduct.setCategoryId(catalogProduct.getProduct().getCategory().getId());
+		dtoCatalogProduct.setCategoryName(catalogProduct.getProduct().getCategory().getName());
+		dtoCatalogProduct.setQuantity(catalogProduct.getQuantity());
+		dtoCatalogProduct.setPrice(catalogProduct.getPrice());
+		return dtoCatalogProduct;
 	}
 }

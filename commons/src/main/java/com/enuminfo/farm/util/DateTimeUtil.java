@@ -71,6 +71,11 @@ public class DateTimeUtil {
 		return timestamp;
 	}
 	
+	public static java.sql.Timestamp convertUtilDate2Timestamp(java.util.Date utilDate) {
+		Timestamp timestamp = new Timestamp(utilDate.getTime());
+		return timestamp;
+	}
+	
 	public static Date convertGMT2ISTDateTime(String datetime) {
 		Date date = null;
 		DateTimeFormatter parser = ISODateTimeFormat.dateTime();

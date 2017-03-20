@@ -19,8 +19,8 @@ import com.enuminfo.farm.path.RequestPath;
 public interface InventoryService {
 
 	@RequestMapping(method = RequestMethod.GET, value = RequestPath.PRODUCT + RequestPath.ID)
-	public ProductDTO callProductServiceById(@PathVariable(RequestPath.ID) int id);
+	public ProductDTO callProductServiceById(@PathVariable ("id") int id);
 	
 	@RequestMapping(method = RequestMethod.GET, value = RequestPath.CATEGORY + RequestPath.ID)
-	public CategoryDTO callCategoryServiceById(@PathVariable (RequestPath.ID) int id);
+	public CategoryDTO callCategoryServiceById(@PathVariable ("id") int id);
 }

@@ -56,6 +56,11 @@ public class RegionController {
 		return service.loadAllDeliveryLocations();
 	}
 	
+	@RequestMapping (value = RequestPath.DELIVERY_LOCATIONS + RequestPath.LOCATION + RequestPath.ID, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<LocationDTO> handleInteralRequestForAllDeliveryLocationsByLocation(@PathVariable Integer id) {
+		return service.loadAllDeliveryLocations(id);
+	}
+	
 	@RequestMapping(value = RequestPath.DELIVERY_LOCATIONS, method = RequestMethod.POST)
 	public void handleInternalRequestForSave(@RequestBody LocationDTO dtoLocation) {
 		if (dtoLocation.getLocationId() == 0) service.addDeliveryLocation(dtoLocation);

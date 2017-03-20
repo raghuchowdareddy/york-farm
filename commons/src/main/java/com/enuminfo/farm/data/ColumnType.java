@@ -48,23 +48,8 @@ public interface ColumnType {
 	public static final String USER_ORDER_ID = "USER_ORDER_ID";
 	public static final String DELIVERY_LOCATION_ID = "DELIVERY_LOCATION_ID";
 	
-	public static final String USER_MOBILE_NO = "USER_MOBILE_NO";
-	public static final String ITEM_NAME = "ITEM_NAME";
-	
-	public static final String CREATE_DATE = "CREATE_DATE";
-	public static final String UPDATE_DATE = "UPDATE_DATE";
+	public static final String CREATED_DATE = "CREATED_DATE";
+	public static final String UPDATED_DATE = "UPDATED_DATE";
 	public static final String DELIVERY_DATE = "DELIVERY_DATE";
 	public static final String STATUS = "STATUS";
-
-	public static final String USER_SELECTE_ITEM_ID = "USER_SELECTE_ITEM_ID";
-	public static final String IMAGE_NAME = "IMAGE_NAME";
-	public static final String USER_CONTACT_INFO_ID = "USER_CONTACT_INFO_ID";
-	public static final String EMAIL_ID = "EMAIL_ID";
-	public static final String FLAT_NUMBER = "FLAT_NUMBER";
-	public static final String STREET = "STREET";
-	public static final String LANDMARK = "LANDMARK";
-	public static final String POSTALCODE = "POSTALCODE";
-	public static final String ORDER_DATE = "ORDER_DATE";
-	public static final String ORDER_PRICE = "ORDER_PRICE";
-	public static final String ORDER_QUANTITY = "ORDER_QUANTITY";
 }

@@ -49,7 +49,8 @@ public class UserController {
 	public void handleInternalRequestForSaveUserDraftedIteams(@RequestBody UserOrderDTO[] dtoUserOrderObj) {
 		for (UserOrderDTO dtoUserOrder : dtoUserOrderObj) {
 			dtoUserOrder.setStatus(StatusTypeEnum.DRAFTED.toString());
-			orderService.addUserOrder(dtoUserOrder);
+			if (dtoUserOrder.getOrderId() == 0) orderService.addDraftedUserOrder(dtoUserOrder);
+			else orderService.editDraftedUserOrder(dtoUserOrder);
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class UserController {
 	public void handleInternalRequestForSaveUserOrderedIteams(@RequestBody UserOrderDTO[] dtoUserOrderObj) {
 		for (UserOrderDTO dtoUserOrder : dtoUserOrderObj) {
 			dtoUserOrder.setStatus(StatusTypeEnum.ORDERED.toString());
-			orderService.addUserOrder(dtoUserOrder);
+			orderService.confirmedUserOrder(dtoUserOrder);
 		}
 	}
 	

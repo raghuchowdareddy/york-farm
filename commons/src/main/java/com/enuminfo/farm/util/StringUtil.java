@@ -40,4 +40,8 @@ public class StringUtil {
 	    }
 	    return titleCase.toString();
 	}
+	
+	public static String defaultPassword() {
+		return "p@55w0rd";
+	}
 }

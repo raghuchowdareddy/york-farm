@@ -9,7 +9,7 @@
 		defaultCtrl.flowers = [];
 		defaultCtrl.fruits = [];
 		defaultCtrl.vegetables = [];
-		if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length == 0){
+		if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length == 0) {
 			$rootScope.selectedProductItems = [];
 		}
 		initController();
@@ -25,6 +25,21 @@
 			ProductService.getVegetables().then(function(response) {
 				defaultCtrl.vegetables = response.data;
 			});
+			if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length == 0) {
+				if(!angular.isUndefined($cookieStore.get('globals'))) {
+					UserService.getDraftedProductsByUsername($cookieStore.get('globals').currentUser.username).then(function(response) {
+						$rootScope.userOrder = response.data;
+						angular.forEach($rootScope.userOrder.orderedItems, function(item, key) {
+							$rootScope.selectedProductItems.push({
+								'productId': item.productId,
+								'productName': item.productName,
+								'price': item.price,
+								'quantity': item.quantity
+							});
+						});
+					});
+				}
+			}
 		}
 		
 		function add2Cart(selectedItem) {

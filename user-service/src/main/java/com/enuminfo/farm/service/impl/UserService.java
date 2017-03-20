@@ -38,11 +38,7 @@ public class UserService implements IUserService {
 	@Autowired IUserRepository userRepository;
 	@Autowired IUserDetailRepository userDetailRepository;
 	@Autowired IRoleRepository roleRepository;
-
-	@Autowired
-	IUserRepository userRepository;
-	@Autowired
-	IRoleService roleService;
+	@Autowired IRoleService roleService;
 	@Autowired UserDetailService userDetailService;
 	@Override
 	public void add(UserDTO dtoUser) {		dtoUser.setPassword("password");//TODO lets do later.

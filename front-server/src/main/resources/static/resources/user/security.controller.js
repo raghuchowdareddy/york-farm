@@ -51,5 +51,11 @@
 			})};
 		}
  }
+<<<<<<< HEAD
 
+=======
+	//angular.module('app').controller('RegisterController', RegisterController);
+	//SecurityController.$inject = [ 'UserService', 'AuthenticationService', 'FlashService', '$rootScope', '$location' ];
+
+>>>>>>> branch 'testing' of https://github.com/raghuchowdareddy/york-farm.git
 )();

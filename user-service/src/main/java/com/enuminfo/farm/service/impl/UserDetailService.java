@@ -6,7 +6,6 @@ package com.enuminfo.farm.service.impl;
 import java.util.ArrayList;
 
 import java.util.Collection;
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -22,13 +21,10 @@ import com.enuminfo.farm.model.UserDetail;
 import com.enuminfo.farm.repository.IRoleRepository;
 import com.enuminfo.farm.repository.IUserDetailRepository;
 
-
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IUserDetailService;
 
-
 import com.enuminfo.farm.service.IRoleService;
-
 import com.enuminfo.farm.service.IUserService;
 import com.enuminfo.farm.wrapper.UserDetailWrapper;
 

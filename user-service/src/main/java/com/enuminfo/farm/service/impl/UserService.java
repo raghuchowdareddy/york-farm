@@ -3,11 +3,14 @@
  */
 package com.enuminfo.farm.service.impl;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 import java.util.HashSet;
+=======
+>>>>>>> branch 'testing' of https://github.com/raghuchowdareddy/york-farm.git
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,11 +21,15 @@ import org.springframework.stereotype.Service;
 import com.enuminfo.farm.data.RoleEnum;
 import com.enuminfo.farm.dto.RoleDTO;
 import com.enuminfo.farm.dto.UserDTO;
+<<<<<<< HEAD
 import com.enuminfo.farm.model.Role;
 import com.enuminfo.farm.model.User;
 import com.enuminfo.farm.model.UserDetail;
 import com.enuminfo.farm.repository.IRoleRepository;
 import com.enuminfo.farm.repository.IUserDetailRepository;
+=======
+import com.enuminfo.farm.model.User;
+>>>>>>> branch 'testing' of https://github.com/raghuchowdareddy/york-farm.git
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IRoleService;
 import com.enuminfo.farm.service.IUserService;
@@ -34,14 +41,28 @@ import com.enuminfo.farm.util.StringUtil;
 @Service
 public class UserService implements IUserService {
 
+<<<<<<< HEAD
 
 	@Autowired IUserRepository userRepository;
 	@Autowired IUserDetailRepository userDetailRepository;
 	@Autowired IRoleRepository roleRepository;
 	@Autowired IRoleService roleService;
 	@Autowired UserDetailService userDetailService;
+=======
+	@Autowired
+	IUserRepository userRepository;
+	@Autowired
+	IRoleService roleService;
+	@Autowired UserDetailService userDetailService;
+	
+>>>>>>> branch 'testing' of https://github.com/raghuchowdareddy/york-farm.git
 	@Override
+<<<<<<< HEAD
 	public void add(UserDTO dtoUser) {		dtoUser.setPassword("password");//TODO lets do later.
+=======
+	public void add(UserDTO dtoUser) {
+		dtoUser.setPassword("password");//TODO lets do later.
+>>>>>>> branch 'testing' of https://github.com/raghuchowdareddy/york-farm.git
 		Set<RoleDTO> dtoRoles = new HashSet<RoleDTO>();
 		dtoRoles.add(roleService.loadByName(RoleEnum.ROLE_USER.toString()));
 //		User newUser = userRepository.save(UserWrapper.getInstance().convert2ModelWithId(new UserDTO()));

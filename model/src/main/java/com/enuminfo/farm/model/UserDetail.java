@@ -13,9 +13,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 
 import javax.persistence.OneToMany;
 
+=======
+>>>>>>> branch 'testing' of https://github.com/raghuchowdareddy/york-farm.git
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;

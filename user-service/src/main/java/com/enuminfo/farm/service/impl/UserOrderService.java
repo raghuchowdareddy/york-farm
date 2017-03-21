@@ -12,10 +12,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.enuminfo.farm.dto.ProductDTO;
 import com.enuminfo.farm.dto.UserOrderDTO;
 import com.enuminfo.farm.dto.UserOrderedItemDTO;
-import com.enuminfo.farm.model.Category;
 import com.enuminfo.farm.model.DeliveryLocation;
 import com.enuminfo.farm.model.Product;
 import com.enuminfo.farm.model.User;
@@ -24,13 +22,13 @@ import com.enuminfo.farm.model.UserOrder;
 import com.enuminfo.farm.model.UserOrderDeliveryLocation;
 import com.enuminfo.farm.model.UserOrderedItem;
 import com.enuminfo.farm.repository.IDeliveryLocationRepository;
+import com.enuminfo.farm.repository.IProductRepository;
 import com.enuminfo.farm.repository.IUserDetailRepository;
 import com.enuminfo.farm.repository.IUserOrderDeliveryLocationRepository;
 import com.enuminfo.farm.repository.IUserOrderRepository;
 import com.enuminfo.farm.repository.IUserOrderedItemRepository;
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IUserOrderService;
-import com.enuminfo.farm.service.feign.InventoryService;
 import com.enuminfo.farm.util.DateTimeUtil;
 import com.google.common.collect.Lists;
 
@@ -43,7 +41,7 @@ public class UserOrderService implements IUserOrderService {
 	@Autowired IUserRepository userRepository;
 	@Autowired IUserOrderRepository userOrderRepository;
 	@Autowired IUserOrderedItemRepository userOrderedItemRepository;
-	@Autowired InventoryService inventoryService;
+	@Autowired IProductRepository productRepository;
 	@Autowired IUserDetailRepository userDetailRepository;
 	@Autowired IDeliveryLocationRepository deliveryLocationRepository;
 	@Autowired IUserOrderDeliveryLocationRepository userOrderDeliveryLocationRepository;
@@ -59,20 +57,9 @@ public class UserOrderService implements IUserOrderService {
 		UserOrder savedUserOrder = userOrderRepository.save(userOrder);
 		for (Iterator<UserOrderedItemDTO> iterator = dtoUserOrder.getOrderedItems().iterator(); iterator.hasNext();) {
 			UserOrderedItemDTO dtoUserorderedItem = iterator.next();
-			ProductDTO dtoProduct = inventoryService.callProductServiceById(dtoUserorderedItem.getProductId());
-			Category category = Category.getBuilder()
-					.withId(dtoProduct.getCategoryId())
-					.withName(dtoProduct.getCategoryName())
-					.build();
-			Product product = Product.getBuilder()
-					.withId(dtoProduct.getProductId())
-					.withName(dtoProduct.getProductName())
-					.withDescription(dtoProduct.getProductDescription())
-					.withCategory(category)
-					.build();
 			UserOrderedItem userOrderedItem = UserOrderedItem.getBuilder()
 					.withUserOrder(savedUserOrder)
-					.withProduct(product)
+					.withProduct(productRepository.findOne(dtoUserorderedItem.getProductId()))
 					.withQuantity(dtoUserorderedItem.getQuantity())
 					.withPrice(dtoUserorderedItem.getPrice())
 					.build();
@@ -143,21 +130,10 @@ public class UserOrderService implements IUserOrderService {
 		UserOrder savedUserOrder = userOrderRepository.save(userOrder);		
 		for (Iterator<UserOrderedItemDTO> iterator = dtoUserOrder.getOrderedItems().iterator(); iterator.hasNext();) {
 			UserOrderedItemDTO dtoUserorderedItem = iterator.next();
-			ProductDTO dtoProduct = inventoryService.callProductServiceById(dtoUserorderedItem.getProductId());
-			Category category = Category.getBuilder()
-					.withId(dtoProduct.getCategoryId())
-					.withName(dtoProduct.getCategoryName())
-					.build();
-			Product product = Product.getBuilder()
-					.withId(dtoProduct.getProductId())
-					.withName(dtoProduct.getProductName())
-					.withDescription(dtoProduct.getProductDescription())
-					.withCategory(category)
-					.build();
 			UserOrderedItem userOrderedItem = UserOrderedItem.getBuilder()
 					.withId(dtoUserorderedItem.getUserOrderItemId())
 					.withUserOrder(savedUserOrder)
-					.withProduct(product)
+					.withProduct(productRepository.findOne(dtoUserorderedItem.getProductId()))
 					.withQuantity(dtoUserorderedItem.getQuantity())
 					.withPrice(dtoUserorderedItem.getPrice())
 					.build();
@@ -197,5 +173,17 @@ public class UserOrderService implements IUserOrderService {
 				.withDeliveryLocation(deliveryLocation)
 				.build();
 		userOrderDeliveryLocationRepository.save(orderDeliveryLocation);
+	}
+
+	@Override
+	public List<UserOrderedItemDTO> loadAllUserOrderedItemsByProduct(int productId) {
+		List<UserOrderedItemDTO> dtoUserOrderedItems = new ArrayList<UserOrderedItemDTO>();
+		Product product = productRepository.findOne(productId);
+		Iterable<UserOrderedItem> orderedItems = userOrderedItemRepository.findByProduct(product);
+		for (Iterator<UserOrderedItem> iterator = orderedItems.iterator(); iterator.hasNext();) {
+			UserOrderedItem orderedItem = iterator.next();
+			dtoUserOrderedItems.add(convert2DTO(orderedItem));
+		}
+		return dtoUserOrderedItems;
 	}
 }

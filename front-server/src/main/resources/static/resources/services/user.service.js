@@ -52,5 +52,9 @@
         function getDeliveryLocationsByLocation(locationId) {
         	return $http.get('/api/userservice/region/deliverylocations/location/' + locationId);
         }
+        
+        function getUserSelectedProductsByProduct(productId) {
+        	return $http.get('/api/userservice/user/items/product/' + productId);
+        }
     }
 })();

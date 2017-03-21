@@ -3,6 +3,8 @@
  */
 package com.enuminfo.farm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enuminfo.farm.dto.UserDTO;
 import com.enuminfo.farm.dto.UserOrderDTO;
+import com.enuminfo.farm.dto.UserOrderedItemDTO;
 import com.enuminfo.farm.path.RequestPath;
 import com.enuminfo.farm.service.IUserDetailService;
 import com.enuminfo.farm.service.IUserOrderService;
@@ -46,7 +49,7 @@ public class UserController {
 	}
 	
 	@RequestMapping (value = RequestPath.DRAFTED + RequestPath.ITEMS, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void handleInternalRequestForSaveUserDraftedIteams(@RequestBody UserOrderDTO[] dtoUserOrderObj) {
+	public void handleInternalRequestForSaveUserDraftedItems(@RequestBody UserOrderDTO[] dtoUserOrderObj) {
 		for (UserOrderDTO dtoUserOrder : dtoUserOrderObj) {
 			dtoUserOrder.setStatus(StatusTypeEnum.DRAFTED.toString());
 			if (dtoUserOrder.getOrderId() == 0) orderService.addDraftedUserOrder(dtoUserOrder);
@@ -55,7 +58,7 @@ public class UserController {
 	}
 	
 	@RequestMapping (value = RequestPath.DRAFTED + RequestPath.ITEMS + RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserOrderDTO handleInternalRequestForUserDraftedIteams(@PathVariable String username) {
+	public UserOrderDTO handleInternalRequestForUserDraftedItems(@PathVariable String username) {
 		return orderService.loadUserOrder(username, StatusTypeEnum.DRAFTED.toString());
 	}
 	
@@ -68,7 +71,12 @@ public class UserController {
 	}
 	
 	@RequestMapping (value = RequestPath.ORDERED + RequestPath.ITEMS + RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserOrderDTO handleInternalRequestForUserOrderedIteams(@PathVariable String username) {
+	public UserOrderDTO handleInternalRequestForUserOrderedItems(@PathVariable String username) {
 		return orderService.loadUserOrder(username, StatusTypeEnum.ORDERED.toString());
+	}
+	
+	@RequestMapping (value = RequestPath.ITEMS + RequestPath.PRODUCT + RequestPath.ID, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<UserOrderedItemDTO> handleInternalRequestForUserOrderedItemsByProductId(@PathVariable int id) {
+		return orderService.loadAllUserOrderedItemsByProduct(id);
 	}
 }

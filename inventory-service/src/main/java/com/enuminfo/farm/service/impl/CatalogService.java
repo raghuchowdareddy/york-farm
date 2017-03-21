@@ -15,9 +15,11 @@ import com.enuminfo.farm.dto.CatalogDTO;
 import com.enuminfo.farm.dto.CatalogProductDTO;
 import com.enuminfo.farm.model.Catalog;
 import com.enuminfo.farm.model.CatalogProduct;
+import com.enuminfo.farm.model.UserOrderedItem;
 import com.enuminfo.farm.repository.ICatalogProductRepository;
 import com.enuminfo.farm.repository.ICatalogRepository;
 import com.enuminfo.farm.repository.IProductRepository;
+import com.enuminfo.farm.repository.IUserOrderedItemRepository;
 import com.enuminfo.farm.service.ICatalogService;
 import com.enuminfo.farm.util.DateTimeUtil;
 
@@ -30,6 +32,7 @@ public class CatalogService implements ICatalogService {
 	@Autowired ICatalogRepository catalogRepository;
 	@Autowired ICatalogProductRepository catalogProductRepository;
 	@Autowired IProductRepository productRepository;
+	@Autowired IUserOrderedItemRepository userOrderedItemRepository;
 	
 	@Override
 	public void add(CatalogDTO dtoCatalog) {
@@ -101,8 +104,17 @@ public class CatalogService implements ICatalogService {
 				Iterable<CatalogProduct> catalogProducts = catalogProductRepository.findByCatalog(catalog);
 				for (Iterator<CatalogProduct> iteratorCatalogProduct = catalogProducts.iterator(); iteratorCatalogProduct.hasNext();) {
 					CatalogProduct catalogProduct = iteratorCatalogProduct.next();
-					if (catalogProduct.getProduct().getCategory().getName().equalsIgnoreCase(categoryName))
-						weekCatalogProducts.add(convert2DTO(catalogProduct));
+					if (catalogProduct.getProduct().getCategory().getName().equalsIgnoreCase(categoryName)) {
+						CatalogProductDTO dtoCatalogProduct = convert2DTO(catalogProduct);
+						double selectedProductQuantity = dtoCatalogProduct.getQuantity();
+						Iterable<UserOrderedItem> orderedItems = userOrderedItemRepository.findByProduct(catalogProduct.getProduct());
+						for (Iterator<UserOrderedItem> iterator = orderedItems.iterator(); iterator.hasNext();) {
+							UserOrderedItem orderedItem = iterator.next();
+							selectedProductQuantity = selectedProductQuantity - orderedItem.getQuantity();
+						}
+						dtoCatalogProduct.setQuantity(selectedProductQuantity);
+						weekCatalogProducts.add(dtoCatalogProduct);
+					}
 				}
 			}
 		}

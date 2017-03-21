@@ -23,17 +23,17 @@
 		
 		function add(item) {
 			var currentQuantity = item.quantity;
-			item.quantity = currentQuantity + 1;
+			item.quantity = currentQuantity + 0.5;
 			$scope.subTotal = $scope.subTotal + (item.price * item.quantity);
 		}
 		
 		function substract(item) {
 			var currentQuantity = item.quantity;
-			if(currentQuantity == 1){
+			if(currentQuantity == 1) {
 				alert("Quantity should not be 0!!");
 				return;
 			}
-			item.quantity = currentQuantity - 1;
+			item.quantity = currentQuantity - 0.5;
 			$scope.subTotal = $rootScope.subTotal + (item.price * item.quantity);
 		}
 		

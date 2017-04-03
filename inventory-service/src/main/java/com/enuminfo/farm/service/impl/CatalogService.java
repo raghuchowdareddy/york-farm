@@ -97,25 +97,19 @@ public class CatalogService implements ICatalogService {
 	public List<CatalogProductDTO> loadAllWeekCatalogProductsByCategory(String categoryName) {
 		List<CatalogProductDTO> weekCatalogProducts = new ArrayList<CatalogProductDTO>();
 		List<Date> weekDates = DateTimeUtil.getWeekStartNEndDates();
-		Iterable<Catalog> catalogs = catalogRepository.findAll();
-		for (Iterator<Catalog> iteratorCatalog = catalogs.iterator(); iteratorCatalog.hasNext();) {
-			Catalog catalog = iteratorCatalog.next();
-			if (catalog.getStartDate().after(weekDates.get(0)) && catalog.getEndDate().before(weekDates.get(1))) {
-				Iterable<CatalogProduct> catalogProducts = catalogProductRepository.findByCatalog(catalog);
-				for (Iterator<CatalogProduct> iteratorCatalogProduct = catalogProducts.iterator(); iteratorCatalogProduct.hasNext();) {
-					CatalogProduct catalogProduct = iteratorCatalogProduct.next();
-					if (catalogProduct.getProduct().getCategory().getName().equalsIgnoreCase(categoryName)) {
-						CatalogProductDTO dtoCatalogProduct = convert2DTO(catalogProduct);
-						double selectedProductQuantity = dtoCatalogProduct.getQuantity();
-						Iterable<UserOrderedItem> orderedItems = userOrderedItemRepository.findByProduct(catalogProduct.getProduct());
-						for (Iterator<UserOrderedItem> iterator = orderedItems.iterator(); iterator.hasNext();) {
-							UserOrderedItem orderedItem = iterator.next();
-							selectedProductQuantity = selectedProductQuantity - orderedItem.getQuantity();
-						}
-						dtoCatalogProduct.setQuantity(selectedProductQuantity);
-						weekCatalogProducts.add(dtoCatalogProduct);
-					}
+		Iterable<CatalogProduct> catalogProducts = catalogProductRepository.findByCatalog(catalogRepository.findByDatesBetween(weekDates.get(0), weekDates.get(1)));
+		for (Iterator<CatalogProduct> iteratorCatalogProduct = catalogProducts.iterator(); iteratorCatalogProduct.hasNext();) {
+			CatalogProduct catalogProduct = iteratorCatalogProduct.next();
+			if (catalogProduct.getProduct().getCategory().getName().equalsIgnoreCase(categoryName)) {
+				CatalogProductDTO dtoCatalogProduct = convert2DTO(catalogProduct);
+				double selectedProductQuantity = dtoCatalogProduct.getQuantity();
+				Iterable<UserOrderedItem> orderedItems = userOrderedItemRepository.findByProduct(catalogProduct.getProduct());
+				for (Iterator<UserOrderedItem> iterator = orderedItems.iterator(); iterator.hasNext();) {
+					UserOrderedItem orderedItem = iterator.next();
+					selectedProductQuantity = selectedProductQuantity - orderedItem.getQuantity();
 				}
+				dtoCatalogProduct.setQuantity(selectedProductQuantity);
+				weekCatalogProducts.add(dtoCatalogProduct);
 			}
 		}
 		return weekCatalogProducts;

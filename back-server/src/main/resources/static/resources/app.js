@@ -25,6 +25,10 @@
 			controller: 'DeliveryLocationController',
 			templateUrl: 'resources/user/deliveryloc.view.html',
 			controllerAs: 'deliveryLocationCtrl'
+		}).when('/order', {
+			controller: 'OrderController',
+			templateUrl: '/resources/user/order.view.html',
+			controllerAs: 'orderCtrl'
 		}).otherwise({
 			redirectTo: '/'
 		});

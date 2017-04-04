@@ -8,5 +8,5 @@ package com.enuminfo.farm.util;
  */
 public enum StatusTypeEnum {
 
-	DRAFTED, ORDERED
+	DRAFTED, ORDERED, CANCELLED
 }

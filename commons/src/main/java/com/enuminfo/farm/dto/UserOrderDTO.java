@@ -4,7 +4,6 @@
 package com.enuminfo.farm.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +24,8 @@ public class UserOrderDTO implements Serializable {
 	private int countryId, locationId;
 	private long pinCode;
 	private List<UserOrderedItemDTO> orderedItems;
-	private Date createdDate, updatedDate, deliveryDate;
+	private String draftedDate, orderedDate, cancelledDate;
+	private double quantity;
 	
 	public UserOrderDTO() {
 		// TODO Auto-generated constructor stub
@@ -183,27 +183,35 @@ public class UserOrderDTO implements Serializable {
 		this.orderedItems = orderedItems;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
+	public String getDraftedDate() {
+		return draftedDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setDraftedDate(String draftedDate) {
+		this.draftedDate = draftedDate;
 	}
 
-	public Date getUpdatedDate() {
-		return updatedDate;
+	public String getOrderedDate() {
+		return orderedDate;
 	}
 
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setOrderedDate(String orderedDate) {
+		this.orderedDate = orderedDate;
 	}
 
-	public Date getDeliveryDate() {
-		return deliveryDate;
+	public String getCancelledDate() {
+		return cancelledDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	public void setCancelledDate(String cancelledDate) {
+		this.cancelledDate = cancelledDate;
+	}
+
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 }

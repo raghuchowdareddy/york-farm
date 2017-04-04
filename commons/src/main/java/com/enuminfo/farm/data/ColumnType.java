@@ -48,8 +48,8 @@ public interface ColumnType {
 	public static final String USER_ORDER_ID = "USER_ORDER_ID";
 	public static final String DELIVERY_LOCATION_ID = "DELIVERY_LOCATION_ID";
 	
-	public static final String CREATED_DATE = "CREATED_DATE";
-	public static final String UPDATED_DATE = "UPDATED_DATE";
-	public static final String DELIVERY_DATE = "DELIVERY_DATE";
+	public static final String DRAFTED_DATE = "DRAFTED_DATE";
+	public static final String ORDERED_DATE = "ORDERED_DATE";
+	public static final String CANCELLED_DATE = "CANCELLED_DATE";
 	public static final String STATUS = "STATUS";
 }

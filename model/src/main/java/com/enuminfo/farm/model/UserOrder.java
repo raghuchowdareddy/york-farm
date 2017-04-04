@@ -4,8 +4,8 @@
 package com.enuminfo.farm.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,9 +38,9 @@ public class UserOrder implements Serializable {
 	private Collection<UserOrderedItem> orderedItems;
 	private String status;
 	private Collection<UserOrderDeliveryLocation> deliveryLocations;
-	private Timestamp createdDate;
-	private Timestamp updatedDate;
-	private Timestamp deliveryDate;
+	private Date draftedDate;
+	private Date orderedDate;
+	private Date cancelledDate;
 	
 	private UserOrder() {}
 	
@@ -50,9 +50,9 @@ public class UserOrder implements Serializable {
 		this.orderedItems = builder.orderedItems;
 		this.status = builder.status;
 		this.deliveryLocations = builder.deliveryLocations;
-		this.createdDate = builder.createdDate;
-		this.updatedDate = builder.updatedDate;
-		this.deliveryDate = builder.deliveryDate;
+		this.draftedDate = builder.draftedDate;
+		this.orderedDate = builder.orderedDate;
+		this.cancelledDate = builder.cancelledDate;
 	}
 	
 	@Id
@@ -83,31 +83,31 @@ public class UserOrder implements Serializable {
 		return deliveryLocations;
 	}
 
-	@Column (name = ColumnType.CREATED_DATE)
-	public Timestamp getCreatedDate() {
-		return createdDate;
+	@Column (name = ColumnType.DRAFTED_DATE)
+	public Date getDraftedDate() {
+		return draftedDate;
 	}
 
-	public void setCreatedDate(Timestamp createdDate) {
-		this.createdDate = createdDate;
+	public void setDraftedDate(Date draftedDate) {
+		this.draftedDate = draftedDate;
 	}
 
-	@Column (name = ColumnType.UPDATED_DATE)
-	public Timestamp getUpdatedDate() {
-		return updatedDate;
+	@Column (name = ColumnType.ORDERED_DATE)
+	public Date getOrderedDate() {
+		return orderedDate;
 	}
 
-	public void setUpdatedDate(Timestamp updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setOrderedDate(Date orderedDate) {
+		this.orderedDate = orderedDate;
 	}
 
-	@Column (name = ColumnType.DELIVERY_DATE)
-	public Timestamp getDeliveryDate() {
-		return deliveryDate;
+	@Column (name = ColumnType.CANCELLED_DATE)
+	public Date getCancelledDate() {
+		return cancelledDate;
 	}
 
-	public void setDeliveryDate(Timestamp deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	public void setCancelledDate(Date cancelledDate) {
+		this.cancelledDate = cancelledDate;
 	}
 
 	public void setDeliveryLocations(Collection<UserOrderDeliveryLocation> deliveryLocations) {
@@ -137,9 +137,9 @@ public class UserOrder implements Serializable {
 		private Collection<UserOrderedItem> orderedItems;
 		private String status;
 		private Collection<UserOrderDeliveryLocation> deliveryLocations;
-		private Timestamp createdDate;
-		private Timestamp updatedDate;
-		private Timestamp deliveryDate;
+		private Date draftedDate;
+		private Date orderedDate;
+		private Date cancelledDate;
 		
 		public Builder() {
 			// TODO Auto-generated constructor stub
@@ -170,18 +170,18 @@ public class UserOrder implements Serializable {
 			return this;
 		}
 		
-		public Builder withCreatedDate(Timestamp createdDate) {
-			this.createdDate = createdDate;
+		public Builder withDraftedDate(Date draftedDate) {
+			this.draftedDate = draftedDate;
 			return this;
 		}
 		
-		public Builder withUpdatedDate(Timestamp updatedDate) {
-			this.updatedDate = updatedDate;
+		public Builder withOrderedDate(Date orderedDate) {
+			this.orderedDate = orderedDate;
 			return this;
 		}
 		
-		public Builder withDeliveryDate(Timestamp deliveryDate) {
-			this.deliveryDate = deliveryDate;
+		public Builder withCancelledDate(Date cancelledDate) {
+			this.cancelledDate = cancelledDate;
 			return this;
 		}
 		

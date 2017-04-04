@@ -70,7 +70,7 @@
 					'mobileNumber': $rootScope.user.mobileNo,
 					'emailAddress': $rootScope.user.emailId,
 					'orderedItems': $rootScope.selectedProductItems,
-					'createdDate': $rootScope.createdDate
+					'draftedDate': $rootScope.userOrder.draftedDate
 				}];
 			}
 			UserService.saveDraftedProducts($scope.order).then(function(response) {

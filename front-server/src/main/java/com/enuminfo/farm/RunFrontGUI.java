@@ -24,6 +24,7 @@ public class RunFrontGUI {
 	public static void main(String[] args) {
 		SpringApplication.run(RunFrontGUI.class, args);
 	}
+	
 	@Bean
 	@LoadBalanced
     public RestTemplate loadRestTemplate() {

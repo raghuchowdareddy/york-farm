@@ -15,6 +15,7 @@
         service.saveOrderedProducts = saveOrderedProducts;
         service.getLocationsByCity = getLocationsByCity;
         service.getDeliveryLocationsByLocation = getDeliveryLocationsByLocation;
+        service.cancelOrderedProducts = cancelOrderedProducts;
         return service;
         
         function getByUsername(username) {
@@ -43,6 +44,10 @@
         
         function saveOrderedProducts(order) {
         	return $http.post('/api/userservice/user/ordered/items', order);
+        }
+        
+        function cancelOrderedProducts(order) {
+        	return $http.post('/api/userservice/user/cancelled/items', order);
         }
         
         function getLocationsByCity() {

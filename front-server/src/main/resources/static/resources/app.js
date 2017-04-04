@@ -29,10 +29,6 @@
 			controller: 'CheckoutController',
 			templateUrl: 'resources/user/checkout.view.html',
 			controllerAs: 'checkoutCtrl'
-		}).when('/myorder', {
-			controller: 'MyOrderController',
-			templateUrl: 'resources/user/myorder.view.html',
-			controllerAs: 'myOrderCtrl'
 		}).otherwise({
 			redirectTo: '/'
 		});

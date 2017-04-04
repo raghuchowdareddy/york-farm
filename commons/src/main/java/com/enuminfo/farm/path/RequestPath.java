@@ -39,6 +39,7 @@ public interface RequestPath {
 	public static final String ITEMS = "/items";
 	public static final String WEEKLY = "/weekly";
 	public static final String ORDERED = "/ordered";
+	public static final String CANCELLED = "/cancelled";
 	
 	public static final String LOCATION_LANDMARKS = "/locationlandmarks";
 	

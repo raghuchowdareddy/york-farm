@@ -86,7 +86,19 @@
 		}
 		
 		function cancelOrder(order, index) {
-			UserService.cancelOrderedProducts(order);
+			$scope.order = [{
+				'orderId': order.orderId,
+				'status': order.status,
+				'userId': order.userId,
+				'userName': order.userName,
+				'mobileNumber': order.mobileNumber,
+				'emailAddress': order.emailAddress,
+				'orderedItems': $rootScope.selectedProductItems,
+				'deliveryLocationId': order.deliveryLocationId,
+				'draftedDate': order.draftedDate,
+				'orderedDate': order.orderedDate
+			}];
+			UserService.cancelOrderedProducts($scope.order);
 			checkoutCtrl.orders.splice(index,1);
 		}
 	}

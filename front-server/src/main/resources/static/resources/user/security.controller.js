@@ -10,6 +10,10 @@
 		securityCtrl.register = register;
 
 		function login() {
+			if(angular.isUndefined(securityCtrl.username) || angular.isUndefined(securityCtrl.password)) {
+				swal("Request...", "Please fill your credentials", "error");
+				return;
+			}
 			AuthenticationService.login(securityCtrl.username, securityCtrl.password, function(response) {
 				if (response.success) {
 					AuthenticationService.setCredentials(securityCtrl.username, securityCtrl.password);

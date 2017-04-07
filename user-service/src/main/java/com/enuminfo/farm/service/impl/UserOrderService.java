@@ -28,6 +28,7 @@ import com.enuminfo.farm.repository.IUserOrderRepository;
 import com.enuminfo.farm.repository.IUserOrderedItemRepository;
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IUserOrderService;
+import com.enuminfo.farm.util.DateTimeUtil;
 import com.google.common.collect.Lists;
 
 /**
@@ -124,6 +125,7 @@ public class UserOrderService implements IUserOrderService {
 	private UserOrderDTO convert2DTO(UserOrder userOrder) {
 		UserOrderDTO dtoUserOrder = new UserOrderDTO();
 		dtoUserOrder.setOrderId(userOrder.getId());
+		dtoUserOrder.setUserId(userOrder.getUser().getId());
 		dtoUserOrder.setUserName(userOrder.getUser().getName());
 		dtoUserOrder.setMobileNumber(userOrder.getUser().getMobileNumber());
 		dtoUserOrder.setEmailAddress(userOrder.getUser().getEmailAddress());
@@ -150,7 +152,7 @@ public class UserOrderService implements IUserOrderService {
 				.withId(dtoUserOrder.getOrderId())
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
-				.withDraftedDate(new Date())
+				.withDraftedDate(DateTimeUtil.convertString2UtilDate(new Date().toString()))
 				.build();
 		List<UserOrderedItem> orderedItemsFromDB = Lists.newArrayList(userOrderedItemRepository.findByUserOrder(userOrder));
 		List<UserOrderedItem> orderedItemsFromScreen = new ArrayList<UserOrderedItem>();		
@@ -190,36 +192,21 @@ public class UserOrderService implements IUserOrderService {
 				.withId(dtoUserOrder.getOrderId())
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
+				.withDraftedDate(dtoUserOrder.getDraftedDate() != null? DateTimeUtil.convertString2UtilDate(dtoUserOrder.getDraftedDate()) : null)
 				.withOrderedDate(new Date())
 				.build();
-		List<UserOrderedItem> orderedItemsFromDB = Lists.newArrayList(userOrderedItemRepository.findByUserOrder(userOrder));
-		List<UserOrderedItem> orderedItemsFromScreen = new ArrayList<UserOrderedItem>();
 		UserOrder savedUserOrder = userOrderRepository.save(userOrder);
-		for (Iterator<UserOrderedItemDTO> iterator = dtoUserOrder.getOrderedItems().iterator(); iterator.hasNext();) {
-			UserOrderedItemDTO dtoUserorderedItem = iterator.next();
-			UserOrderedItem userOrderedItem = UserOrderedItem.getBuilder()
-					.withId(dtoUserorderedItem.getUserOrderItemId())
-					.withUserOrder(savedUserOrder)
-					.withProduct(productRepository.findOne(dtoUserorderedItem.getProductId()))
-					.withQuantity(dtoUserorderedItem.getQuantity())
-					.withPrice(dtoUserorderedItem.getPrice())
-					.build();
-			orderedItemsFromScreen.add(userOrderedItem);
-		}
-		for (Iterator<UserOrderedItem> iteratorFromScreen = orderedItemsFromScreen.iterator(); iteratorFromScreen.hasNext();) {
-			UserOrderedItem orderedItemFromScreen = iteratorFromScreen.next();
-			if (orderedItemFromScreen.getId() == 0)
-				userOrderedItemRepository.save(orderedItemFromScreen);
-		}
-		for (Iterator<UserOrderedItem> iteratorFromScreen = orderedItemsFromDB.iterator(); iteratorFromScreen.hasNext();) {
-			UserOrderedItem orderedItemFromDB = iteratorFromScreen.next();
-			if (!orderedItemsFromScreen.contains(orderedItemFromDB))
-				userOrderedItemRepository.delete(orderedItemFromDB);
-		}
-		for (Iterator<UserOrderedItem> iteratorFromScreen = orderedItemsFromScreen.iterator(); iteratorFromScreen.hasNext();) {
-			UserOrderedItem orderedItemFromScreen = iteratorFromScreen.next();
-			if (orderedItemsFromDB.contains(orderedItemFromScreen))
-				userOrderedItemRepository.save(orderedItemFromScreen);
+		if (dtoUserOrder.getDraftedDate() == null) {
+			for (Iterator<UserOrderedItemDTO> iterator = dtoUserOrder.getOrderedItems().iterator(); iterator.hasNext();) {
+				UserOrderedItemDTO dtoUserorderedItem = iterator.next();
+				UserOrderedItem userOrderedItem = UserOrderedItem.getBuilder()
+						.withUserOrder(savedUserOrder)
+						.withProduct(productRepository.findOne(dtoUserorderedItem.getProductId()))
+						.withQuantity(dtoUserorderedItem.getQuantity())
+						.withPrice(dtoUserorderedItem.getPrice())
+						.build();
+				userOrderedItemRepository.save(userOrderedItem);
+			}
 		}
 		DeliveryLocation deliveryLocation = deliveryLocationRepository.findOne(dtoUserOrder.getDeliveryLocationId());
 		UserOrderDeliveryLocation orderDeliveryLocation = UserOrderDeliveryLocation.getBuilder()
@@ -248,6 +235,8 @@ public class UserOrderService implements IUserOrderService {
 				.withId(dtoUserOrder.getOrderId())
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
+				.withDraftedDate(dtoUserOrder.getDraftedDate() != null? DateTimeUtil.convertString2UtilDate(dtoUserOrder.getDraftedDate()) : null)
+				.withOrderedDate(DateTimeUtil.convertString2UtilDate(dtoUserOrder.getOrderedDate()))
 				.withCancelledDate(new Date())
 				.build();
 		userOrderRepository.save(userOrder);

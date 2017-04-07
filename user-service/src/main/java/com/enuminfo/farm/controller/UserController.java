@@ -76,9 +76,11 @@ public class UserController {
 	}
 	
 	@RequestMapping (value = RequestPath.CANCELLED + RequestPath.ITEMS, method = RequestMethod.POST)
-	public void handleInternalRequestForCancelledUserOrderedItems(@RequestBody UserOrderDTO dtoUserOrder) {
-		dtoUserOrder.setStatus(StatusTypeEnum.CANCELLED.toString());
-		orderService.cancelledUserOrder(dtoUserOrder);
+	public void handleInternalRequestForCancelledUserOrderedItems(@RequestBody UserOrderDTO[] dtoUserOrderObj) {
+		for (UserOrderDTO dtoUserOrder : dtoUserOrderObj) {
+			dtoUserOrder.setStatus(StatusTypeEnum.CANCELLED.toString());
+			orderService.cancelledUserOrder(dtoUserOrder);
+		}
 	}
 	
 	@RequestMapping (value = RequestPath.ITEMS + RequestPath.PRODUCT + RequestPath.ID, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

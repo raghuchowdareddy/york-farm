@@ -16,6 +16,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableDiscoveryClient
 @EnableZuulProxy
 @EnableHystrix
+
 public class RunBackGUI {
 
 	public static void main(String[] args) {

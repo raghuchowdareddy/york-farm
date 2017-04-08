@@ -37,6 +37,7 @@ public class UserOrder implements Serializable {
 	private UserDetail user;
 	private Collection<UserOrderedItem> orderedItems;
 	private String status;
+	private String deliveryStatus;
 	private Collection<UserOrderDeliveryLocation> deliveryLocations;
 	private Date draftedDate;
 	private Date orderedDate;
@@ -49,6 +50,7 @@ public class UserOrder implements Serializable {
 		this.user = builder.user;
 		this.orderedItems = builder.orderedItems;
 		this.status = builder.status;
+		this.deliveryStatus = builder.deliveryStatus;
 		this.deliveryLocations = builder.deliveryLocations;
 		this.draftedDate = builder.draftedDate;
 		this.orderedDate = builder.orderedDate;
@@ -76,6 +78,11 @@ public class UserOrder implements Serializable {
 	@Column (name = ColumnType.STATUS)
 	public String getStatus() {
 		return status;
+	}
+	
+	@Column (name = ColumnType.DELIVERY_STATUS)
+	public String getDeliveryStatus() {
+		return deliveryStatus;
 	}
 
 	@OneToMany (cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = ColumnType.USER_ORDER)
@@ -129,6 +136,10 @@ public class UserOrder implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public void setDeliveryStatus(String deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
 
 	public static class Builder {
 		
@@ -136,6 +147,7 @@ public class UserOrder implements Serializable {
 		private UserDetail user;
 		private Collection<UserOrderedItem> orderedItems;
 		private String status;
+		private String deliveryStatus;
 		private Collection<UserOrderDeliveryLocation> deliveryLocations;
 		private Date draftedDate;
 		private Date orderedDate;
@@ -162,6 +174,11 @@ public class UserOrder implements Serializable {
 
 		public Builder withStatus(String status) {
 			this.status = status;
+			return this;
+		}
+		
+		public Builder withDeliveryStatus(String deliveryStatus) {
+			this.deliveryStatus = deliveryStatus;
 			return this;
 		}
 		

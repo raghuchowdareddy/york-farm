@@ -66,13 +66,14 @@ public class UserController {
 	public void handleInternalRequestForSaveUserOrderedIteams(@RequestBody UserOrderDTO[] dtoUserOrderObj) {
 		for (UserOrderDTO dtoUserOrder : dtoUserOrderObj) {
 			dtoUserOrder.setStatus(StatusTypeEnum.ORDERED.toString());
+			dtoUserOrder.setDeliveryStatus(StatusTypeEnum.INPROGRESS.toString());
 			orderService.confirmedUserOrder(dtoUserOrder);
 		}
 	}
 	
 	@RequestMapping (value = RequestPath.ORDERED + RequestPath.ITEMS + RequestPath.USERNAME, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<UserOrderDTO> handleInternalRequestForUserOrderedItems(@PathVariable String username) {
-		return orderService.loadUserOrders(username, StatusTypeEnum.ORDERED.toString());
+		return orderService.loadUserOrders( StatusTypeEnum.ORDERED.toString(),StatusTypeEnum.INPROGRESS.toString(),username);
 	}
 	
 	@RequestMapping (value = RequestPath.CANCELLED + RequestPath.ITEMS, method = RequestMethod.POST)

@@ -17,7 +17,7 @@
 						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
 						<td class="cart_quantity"><div class="cart_quantity_button">
 							<a href ng-click="cartCtrl.add(selectedProductItem)" class="cart_quantity_up" > + </a>
-							<input class="cart_quantity_input" type="text" name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
+							<input class="cart_quantity_input" type="text" readonly name="quantity" value="{{selectedProductItem.quantity}}" autocomplete="off" size="2">
 							<a class="cart_quantity_down" href ng-click="cartCtrl.substract(selectedProductItem)"> - </a>
 						</div></td>
 						<td class="cart_total"><p class="cart_total_price">{{(selectedProductItem.price * selectedProductItem.quantity) | currency:"₹"}}</p></td>
@@ -45,7 +45,7 @@
 					<li>Total:&nbsp;<span>{{subTotal + tax + shippingCost | currency:"₹"}}</span></li>
 				</ul> 
 				<a class="btn btn-default update" href ng-click="cartCtrl.saveDraft()">Add To Wish list</a>
-				<a class="btn btn-default check_out" href="#/checkout">Place Order</a>
+				<a class="btn btn-default check_out" href ng-click="cartCtrl.checkout()">Place Order</a>
 			</div>
 		</div>
 	</div>

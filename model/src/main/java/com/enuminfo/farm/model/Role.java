@@ -58,8 +58,7 @@ public class Role implements Serializable {
 		return name;
 	}
 
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable (name = TableType.T_USER_ROLE, joinColumns = {@JoinColumn(name = ColumnType.USER_ID)}, inverseJoinColumns = {@JoinColumn(name = ColumnType.ROLE_ID)})
+	@ManyToMany (mappedBy="roles")
 	public Collection<User> getUsers() {
 		return users;
 	}

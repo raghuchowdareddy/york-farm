@@ -36,17 +36,21 @@ public class UserService implements IUserService {
 	public void add(UserDTO dtoUser) {
 		Collection<Role> roles = new ArrayList<Role>();
 		roles.add(roleRepository.findByName(RoleEnum.ROLE_USER.toString()));
-		User user = User.getBuilder()
-				.withUsername(dtoUser.getMobileNo())
-				.withPassword(StringUtil.defaultPassword())
-				.withRoles(roles)
-				.build();
+		
+		
+		User savedUser = userRepository.save(User.getBuilder().build());
+		savedUser.setPassword(StringUtil.defaultPassword());
+		savedUser.setUsername(dtoUser.getMobileNo());
+		savedUser.setRoles(roles);
+		
+		userRepository.save(savedUser);
 		UserDetail detailUser = UserDetail.getBuilder()
 				.withName(dtoUser.getName())
 				.withEmailAddress(dtoUser.getEmailId())
 				.withMobileNumber(dtoUser.getMobileNo())
-				.withUser(user)
+				.withUser(savedUser)
 				.build();
+		
 		userDetailRepository.save(detailUser);
 	}
 

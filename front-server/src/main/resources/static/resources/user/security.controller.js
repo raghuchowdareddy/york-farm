@@ -21,6 +21,7 @@
 					}
 				} else {
 					FlashService.error(response.message);
+					
 				}
 			});
 		}
@@ -28,7 +29,7 @@
 		function register() {
 			UserService.saveUser(securityCtrl).then(function (response) {
 				swal("Request...", "Thanks, You have successfully registered!", "info");
-           		$location.path('/');
+				$location.path('/login');
 			});
 		}
 	}	

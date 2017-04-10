@@ -21,7 +21,7 @@
 								<td class="clearfix col-sm-5">₹ {{subTotal + tax + shippingCost}}</td>
 							</tr></tbody>
 							<tbody ng-if="selectedProductItems.length == 0">
-								<tr><td><p>No items to display!!</p></td></tr>
+								<tr class="row"><td><p>No items to display!!</p></td></tr>
 							</tbody>
 						</table>
 					</div>
@@ -63,7 +63,7 @@
 					<td class="date">Order Date</td>
 					<td class="items">Total Items</td>
 					<td class="status">Status</td>
-					<td class="deliveryStatus">Delivery Status</td>
+					<td class="deliveryStatus">Del-Status</td>
 					<td>&nbsp;</td>
 				</tr></thead>
 				<tbody><tr ng-repeat="order in userOrders">

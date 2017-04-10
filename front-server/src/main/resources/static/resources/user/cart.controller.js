@@ -107,6 +107,7 @@
 							'quantity': item.quantity
 						});
 					});
+					swal("Alert!", "Saved in my bag!", "success");
 				});
 				console.log(" orders drafted successfully");
 			});

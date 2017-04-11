@@ -52,4 +52,5 @@ public interface ColumnType {
 	public static final String ORDERED_DATE = "ORDERED_DATE";
 	public static final String CANCELLED_DATE = "CANCELLED_DATE";
 	public static final String STATUS = "STATUS";
+	public static final String DELIVERY_STATUS = "DELIVERY_STATUS";
 }

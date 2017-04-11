@@ -4,6 +4,7 @@
 package com.enuminfo.farm.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,13 +19,14 @@ public class UserOrderDTO implements Serializable {
 	private int orderId, userId;
 	private String userName, emailAddress, mobileNumber;
 	private String status;
+	private String deliveryStatus;
 	private int deliveryLocationId;
 	private String landmark1, landmark2, landmark3;
 	private String locationName, cityName, stateName, countryName, isdCode;
 	private int countryId, locationId;
 	private long pinCode;
 	private List<UserOrderedItemDTO> orderedItems;
-	private String draftedDate, orderedDate, cancelledDate;
+	private Date draftedDate, orderedDate, cancelledDate;
 	private double quantity;
 	
 	public UserOrderDTO() {
@@ -77,6 +79,14 @@ public class UserOrderDTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getDeliveryStatus() {
+		return deliveryStatus;
+	}
+
+	public void setDeliveryStatus(String deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
 	}
 
 	public int getDeliveryLocationId() {
@@ -183,27 +193,27 @@ public class UserOrderDTO implements Serializable {
 		this.orderedItems = orderedItems;
 	}
 
-	public String getDraftedDate() {
+	public Date getDraftedDate() {
 		return draftedDate;
 	}
 
-	public void setDraftedDate(String draftedDate) {
+	public void setDraftedDate(Date draftedDate) {
 		this.draftedDate = draftedDate;
 	}
 
-	public String getOrderedDate() {
+	public Date getOrderedDate() {
 		return orderedDate;
 	}
 
-	public void setOrderedDate(String orderedDate) {
+	public void setOrderedDate(Date orderedDate) {
 		this.orderedDate = orderedDate;
 	}
 
-	public String getCancelledDate() {
+	public Date getCancelledDate() {
 		return cancelledDate;
 	}
 
-	public void setCancelledDate(String cancelledDate) {
+	public void setCancelledDate(Date cancelledDate) {
 		this.cancelledDate = cancelledDate;
 	}
 

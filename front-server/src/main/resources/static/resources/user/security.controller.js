@@ -10,7 +10,7 @@
 		securityCtrl.register = register;
 
 		function login() {
-			if(angular.isUndefined(securityCtrl.username) || angular.isUndefined(securityCtrl.password)) {
+			if(angular.isUndefined(securityCtrl.username)) {
 				swal("Request...", "Please fill your credentials", "error");
 				return;
 			}
@@ -25,6 +25,7 @@
 					}
 				} else {
 					FlashService.error(response.message);
+					
 				}
 			});
 		}
@@ -32,7 +33,7 @@
 		function register() {
 			UserService.saveUser(securityCtrl).then(function (response) {
 				swal("Request...", "Thanks, You have successfully registered!", "info");
-           		$location.path('/');
+				$location.path('/login');
 			});
 		}
 	}	

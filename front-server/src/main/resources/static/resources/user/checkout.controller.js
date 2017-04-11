@@ -15,13 +15,15 @@
 		checkoutCtrl.locations = [];
 		checkoutCtrl.landmarksByLocation = landmarksByLocation;
 		checkoutCtrl.landmarks = [];
-		checkoutCtrl.orders = [];
+		$scope.userOrders = {};
 		checkoutCtrl.saveOrder = saveOrder;
 		checkoutCtrl.userDetail = {};
 		checkoutCtrl.openItemsWindow = openItemsWindow;
 		checkoutCtrl.cancelOrder = cancelOrder;
+		checkoutCtrl.loadDraftedProducts = loadDraftedProducts;
 		
 		function init() {
+			loadDraftedProducts();
 			$scope.subTotal = 0;
 			$scope.totalQuantity = 0;
 			angular.forEach($rootScope.selectedProductItems, function(item, key) {
@@ -32,7 +34,7 @@
 				checkoutCtrl.locations = response.data;
 			});
 			UserService.getOrderedProductsByUsername($cookieStore.get('globals').currentUser.username).then(function(response) {
-				checkoutCtrl.orders = response.data;
+				$scope.userOrders = response.data;
 			});
 		}
 		
@@ -71,12 +73,36 @@
 					'orderedItems': $rootScope.selectedProductItems,
 					'deliveryLocationId': checkoutCtrl.landmark,
 					'draftedDate': $rootScope.userOrder.draftedDate
+			
 				}];
 			}
 			UserService.saveOrderedProducts($scope.order).then(function(response) {
-           		$location.path('/#');
+				UserService.getOrderedProductsByUsername($cookieStore.get('globals').currentUser.username).then(function(response) {
+					$scope.userOrders = response.data;
+				});
+				$rootScope.selectedProductItems=[];
+           		//$location.path('/#');
 			});
 		}
+		function loadDraftedProducts(){
+			if(angular.isUndefined($rootScope.selectedProductItems) || $rootScope.selectedProductItems.length == 0) {
+				$rootScope.selectedProductItems = [];
+				UserService.getDraftedProductsByUsername($cookieStore.get('globals').currentUser.username).then(function(response) {
+					$rootScope.userOrder = response.data;
+					angular.forEach($rootScope.userOrder.orderedItems, function(item, key) {
+						$rootScope.selectedProductItems.push({
+							'productId': item.productId,
+							'productName': item.productName,
+							'price': item.price,
+							'quantity': item.quantity
+						});
+					});
+				});
+			}
+			
+		}
+	
+
 		
 		function openItemsWindow(order) {
 			$scope.order = order;
@@ -98,8 +124,13 @@
 				'draftedDate': order.draftedDate,
 				'orderedDate': order.orderedDate
 			}];
-			UserService.cancelOrderedProducts($scope.order);
-			checkoutCtrl.orders.splice(index,1);
+		    var message = confirm("Are you sure you want to delete order!!");
+		    if (message == true) {
+				UserService.cancelOrderedProducts($scope.order);
+				checkoutCtrl.orders.splice(index,1);
+		    } else {
+		        return;
+		    }
 		}
 	}
 })();

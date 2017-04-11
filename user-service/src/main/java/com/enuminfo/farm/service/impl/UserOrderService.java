@@ -28,7 +28,7 @@ import com.enuminfo.farm.repository.IUserOrderRepository;
 import com.enuminfo.farm.repository.IUserOrderedItemRepository;
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IUserOrderService;
-import com.enuminfo.farm.util.DateTimeUtil;
+import com.enuminfo.farm.util.StatusTypeEnum;
 import com.google.common.collect.Lists;
 
 /**
@@ -51,6 +51,7 @@ public class UserOrderService implements IUserOrderService {
 		UserOrder userOrder = UserOrder.getBuilder()
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
+				.withDeliveryStatus(dtoUserOrder.getDeliveryStatus())
 				.withDraftedDate(new Date())
 				.build();
 		UserOrder savedUserOrder = userOrderRepository.save(userOrder);
@@ -73,11 +74,13 @@ public class UserOrderService implements IUserOrderService {
 		return dtoUserOrders;
 	}
 	
+	
 	@Override
-	public List<UserOrderDTO> loadUserOrders(String username, String status) {
+	public List<UserOrderDTO> loadUserOrders(String status, String deliveryStatus,String username) {
 		List<UserOrderDTO> dtoUserOrders = new ArrayList<UserOrderDTO>();
 		User user = userRepository.findByUsername(username);
-		Iterable<UserOrder> userOrders = userOrderRepository.findByUserAndStatus(userDetailRepository.findOne(user.getId()), status);
+		Iterable<UserOrder> userOrders = userOrderRepository.findByUserAndStatusOrderByOrderedDateDesc(userDetailRepository.findOne(user.getId()), status);
+		//Iterable<UserOrder> userOrders = userOrderRepository.findByStatusOrDeliveryStatus(status,deliveryStatus);
 		for (Iterator<UserOrder> iteratorOrder = userOrders.iterator(); iteratorOrder.hasNext();) {
 			UserOrderDTO dtoUserOrder = new UserOrderDTO();
 			UserOrder userOrder = iteratorOrder.next();
@@ -91,6 +94,7 @@ public class UserOrderService implements IUserOrderService {
 			}
 			dtoUserOrder.setOrderedItems(dtoUserOrderedItems);
 			dtoUserOrders.add(dtoUserOrder);
+			
 			UserOrderDeliveryLocation orderDeliveryLocation = userOrderDeliveryLocationRepository.findByUserOrder(userOrder);
 			dtoUserOrder.setDeliveryLocationId(orderDeliveryLocation.getDeliveryLocation().getId());
 			dtoUserOrder.setLocationId(orderDeliveryLocation.getDeliveryLocation().getLocation().getId());
@@ -106,7 +110,7 @@ public class UserOrderService implements IUserOrderService {
 	public UserOrderDTO loadUserOrder(String username, String status) {
 		UserOrderDTO dtoUserOrder = new UserOrderDTO();
 		User user = userRepository.findByUsername(username);
-		Iterable<UserOrder> userOrders = userOrderRepository.findByUserAndStatus(userDetailRepository.findOne(user.getId()), status);
+		Iterable<UserOrder> userOrders = userOrderRepository.findByUserAndStatusOrderByOrderedDateDesc(userDetailRepository.findOne(user.getId()), status);
 		for (Iterator<UserOrder> iteratorOrder = userOrders.iterator(); iteratorOrder.hasNext();) {
 			UserOrder userOrder = iteratorOrder.next();
 			dtoUserOrder = convert2DTO(userOrder);
@@ -130,9 +134,10 @@ public class UserOrderService implements IUserOrderService {
 		dtoUserOrder.setMobileNumber(userOrder.getUser().getMobileNumber());
 		dtoUserOrder.setEmailAddress(userOrder.getUser().getEmailAddress());
 		dtoUserOrder.setStatus(userOrder.getStatus());
-		if (userOrder.getDraftedDate() != null) dtoUserOrder.setDraftedDate(userOrder.getDraftedDate().toString());
-		if (userOrder.getOrderedDate() != null) dtoUserOrder.setOrderedDate(userOrder.getOrderedDate().toString());
-		if (userOrder.getCancelledDate() != null) dtoUserOrder.setCancelledDate(userOrder.getCancelledDate().toString());
+		dtoUserOrder.setDeliveryStatus(userOrder.getDeliveryStatus());
+		if (userOrder.getDraftedDate() != null) dtoUserOrder.setDraftedDate(userOrder.getDraftedDate());
+		if (userOrder.getOrderedDate() != null) dtoUserOrder.setOrderedDate(userOrder.getOrderedDate());
+		if (userOrder.getCancelledDate() != null) dtoUserOrder.setCancelledDate(userOrder.getCancelledDate());
 		return dtoUserOrder;
 	}
 	
@@ -152,7 +157,8 @@ public class UserOrderService implements IUserOrderService {
 				.withId(dtoUserOrder.getOrderId())
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
-				.withDraftedDate(DateTimeUtil.convertString2UtilDate(new Date().toString()))
+				.withDeliveryStatus(dtoUserOrder.getDeliveryStatus())
+				.withDraftedDate(new Date())
 				.build();
 		List<UserOrderedItem> orderedItemsFromDB = Lists.newArrayList(userOrderedItemRepository.findByUserOrder(userOrder));
 		List<UserOrderedItem> orderedItemsFromScreen = new ArrayList<UserOrderedItem>();		
@@ -192,8 +198,9 @@ public class UserOrderService implements IUserOrderService {
 				.withId(dtoUserOrder.getOrderId())
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
-				.withDraftedDate(dtoUserOrder.getDraftedDate() != null? DateTimeUtil.convertString2UtilDate(dtoUserOrder.getDraftedDate()) : null)
 				.withOrderedDate(new Date())
+				.withDraftedDate(dtoUserOrder.getDraftedDate())
+				.withDeliveryStatus(dtoUserOrder.getDeliveryStatus())
 				.build();
 		UserOrder savedUserOrder = userOrderRepository.save(userOrder);
 		if (dtoUserOrder.getDraftedDate() == null) {
@@ -235,10 +242,13 @@ public class UserOrderService implements IUserOrderService {
 				.withId(dtoUserOrder.getOrderId())
 				.withUser(detailUser)
 				.withStatus(dtoUserOrder.getStatus())
-				.withDraftedDate(dtoUserOrder.getDraftedDate() != null? DateTimeUtil.convertString2UtilDate(dtoUserOrder.getDraftedDate()) : null)
-				.withOrderedDate(DateTimeUtil.convertString2UtilDate(dtoUserOrder.getOrderedDate()))
+				.withDeliveryStatus(dtoUserOrder.getDeliveryStatus())
+				.withDraftedDate(dtoUserOrder.getDraftedDate())
+				.withOrderedDate(dtoUserOrder.getOrderedDate())
 				.withCancelledDate(new Date())
 				.build();
 		userOrderRepository.save(userOrder);
 	}
+
+	
 }

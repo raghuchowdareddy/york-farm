@@ -21,7 +21,7 @@
 								<td class="clearfix col-sm-5">₹ {{subTotal + tax + shippingCost}}</td>
 							</tr></tbody>
 							<tbody ng-if="selectedProductItems.length == 0">
-								<tr><td><p>No items to display!!</p></td></tr>
+								<tr class="row"><td><p>No items to display!!</p></td></tr>
 							</tbody>
 						</table>
 					</div>
@@ -63,13 +63,15 @@
 					<td class="date">Order Date</td>
 					<td class="items">Total Items</td>
 					<td class="status">Status</td>
+					<td class="deliveryStatus">Del-Status</td>
 					<td>&nbsp;</td>
 				</tr></thead>
-				<tbody><tr ng-repeat="order in checkoutCtrl.orders">
+				<tbody><tr ng-repeat="order in userOrders">
 					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderId}}</a></td>
-					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderedDate}}</a></td>
+					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderedDate | date:'medium'}}</a></td>
 					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderedItems.length}}</a></td>
 					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.status}}</a></td>
+					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.deliveryStatus}}</a></td>
 					<td class="cart_delete"><a class="cart_quantity_delete" href ng-click="checkoutCtrl.cancelOrder(order, $index)"><i class="fa fa-times"></i></a></td>
 				</tr></tbody>
 				<tbody ng-if="orders.length == 0">

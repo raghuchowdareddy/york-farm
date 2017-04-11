@@ -12,7 +12,7 @@
 				</tr></thead>
 				<tbody>
 					<tr ng-repeat="selectedProductItem in selectedProductItems">
-						<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.productName | lowercase}}.jpg" width="110" height="110"/></a></td>
+						<td class="cart_product"><img src="../../resources/images/product/{{selectedProductItem.productName | lowercase}}.jpg" width="110" height="110"/></a></td>
 						<td class="cart_description"><h4><a href="">{{selectedProductItem.productName}}</a></h4></td>
 						<td class="cart_price"><p>{{selectedProductItem.price | currency:"₹"}}</p></td>
 						<td class="cart_quantity"><div class="cart_quantity_button">

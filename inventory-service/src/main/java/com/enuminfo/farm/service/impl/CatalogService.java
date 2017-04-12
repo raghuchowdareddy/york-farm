@@ -40,6 +40,13 @@ public class CatalogService implements ICatalogService {
 				.withStartDate(DateTimeUtil.convertString2UtilDate(dtoCatalog.getStartDate()))
 				.withEndDate(DateTimeUtil.convertString2UtilDate(dtoCatalog.getEndDate()))
 				.build();
+		//update if catalog is already exists for current week
+		List<Date> weekDates = DateTimeUtil.getWeekStartNEndDates();
+		Catalog findByDatesBetween = catalogRepository.findByDatesBetween(weekDates.get(0), weekDates.get(1));
+		if(findByDatesBetween != null){
+			catalog.setId(findByDatesBetween.getId());
+		}
+
 		Catalog savedCatalog = catalogRepository.save(catalog);
 		for (Iterator<CatalogProductDTO> iterator = dtoCatalog.getCatalogProducts().iterator(); iterator.hasNext();) {
 			CatalogProductDTO dtoCatalogProduct = iterator.next();

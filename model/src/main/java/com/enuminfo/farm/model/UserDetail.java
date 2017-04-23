@@ -144,7 +144,7 @@ public class UserDetail implements Serializable {
 		}
 		
 		public UserDetail build() {
-			return new UserDetail();
+			return new UserDetail(this);
 		}
 	}
 	

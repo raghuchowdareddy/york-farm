@@ -42,6 +42,6 @@ public class StringUtil {
 	}
 	
 	public static String defaultPassword() {
-		return "p@55w0rd";
+		return "password";
 	}
 }

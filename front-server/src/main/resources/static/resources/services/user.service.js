@@ -19,7 +19,12 @@
         return service;
         
         function getByUsername(username) {
-        	return $http.get('/api/userservice/user/loggedIn/' + username);
+        	return $http.get('/api/userservice/user/loggedIn/' + username).success(function(data){
+        		return data;
+        	}).error(function(error){
+        		swal("Warning..", "Username wrongly entered", "info");
+        		return null;
+        	});
         }
 	    
 	    function getDetailByUsername(username) {

@@ -4,7 +4,7 @@
 package com.enuminfo.farm.dto;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Kumar
@@ -16,8 +16,7 @@ public class CatalogDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int catalogId;
-	private String catalogName;
-	private Collection<ProductDTO> dtoProducts;
+	private List<CatalogProductDTO> catalogProducts;
 	private String startDate, endDate;
 	
 	public CatalogDTO() {
@@ -32,20 +31,12 @@ public class CatalogDTO implements Serializable {
 		this.catalogId = catalogId;
 	}
 
-	public String getCatalogName() {
-		return catalogName;
+	public List<CatalogProductDTO> getCatalogProducts() {
+		return catalogProducts;
 	}
 
-	public void setCatalogName(String catalogName) {
-		this.catalogName = catalogName;
-	}
-
-	public Collection<ProductDTO> getDtoProducts() {
-		return dtoProducts;
-	}
-
-	public void setDtoProducts(Collection<ProductDTO> dtoProducts) {
-		this.dtoProducts = dtoProducts;
+	public void setCatalogProducts(List<CatalogProductDTO> catalogProducts) {
+		this.catalogProducts = catalogProducts;
 	}
 
 	public String getStartDate() {

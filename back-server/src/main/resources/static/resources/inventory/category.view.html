@@ -1,0 +1,25 @@
+<section class="content-header">
+	<h1>Category<small>control panel</small></h1>
+	<ol class="breadcrumb">
+        <li><button type="button" ng-click="categoryCtrl.add()" class="btn btn-sm btn-info">
+        	<i class="glyphicon glyphicon-plus"></i>&nbsp;Add New
+        </button></li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row"><div class="col-xs-12">
+		<div class="box">
+			<div class="box-header"></div>
+			<div class="box-body">
+				<table id="table" class="table table-bordered table-striped table-hover table-condensed">
+					<thead style="background-color: #31b0d5;"><tr>
+                        <th>Name</th>
+					</tr></thead>
+					<tbody><tr ng-repeat="category in categoryCtrl.categories">
+						<td>{{category.categoryName}}</td>
+					</tr></tbody>
+				</table>
+			</div>
+		</div>
+	</div></div>
+</section>

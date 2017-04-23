@@ -1,0 +1,33 @@
+<section class="content-header">
+	<h1>Delivery Locations<small>control panel</small></h1>
+	<ol class="breadcrumb">
+        <li><button type="button" ng-click="deliveryLocationCtrl.add()" class="btn btn-sm btn-info">
+        	<i class="glyphicon glyphicon-plus"></i>&nbsp;Add New
+        </button></li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row"><div class="col-xs-12">
+		<div class="box">
+			<div class="box-header"></div>
+			<div class="box-body">
+				<table id="table" class="table table-bordered table-striped table-hover table-condensed">
+					<thead style="background-color: #31b0d5;"><tr>
+						<th>Landmark1</th>
+						<th>Landmark2</th>
+						<th>Landmark3</th>
+                        <th>Location</th>
+                        <th>Pin</th>
+					</tr></thead>
+					<tbody><tr ng-repeat="location in deliveryLocationCtrl.locations">
+						<td>{{location.value1}}</td>
+						<td>{{location.value2}}</td>
+						<td>{{location.value3}}</td>
+						<td>{{location.locationName}}</td>
+						<td>{{location.pinCode}}</td>
+					</tr></tbody>
+				</table>
+			</div>
+		</div>
+	</div></div>
+</section>

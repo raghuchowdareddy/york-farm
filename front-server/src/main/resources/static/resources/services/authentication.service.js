@@ -2,9 +2,9 @@
 	'use strict';
 	
 	angular.module('app').factory('AuthenticationService', AuthenticationService);
-	AuthenticationService.$inject = [ '$http', '$cookieStore', '$rootScope', '$timeout', 'UserService' ];
+	AuthenticationService.$inject = [ '$http', '$cookieStore', '$rootScope', '$timeout','$location', 'UserService' ];
 
-	function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+	function AuthenticationService($http, $cookieStore, $rootScope, $timeout,$location, UserService) {
 		var service = {};
 		service.login = login;
 		service.setCredentials = setCredentials;
@@ -43,10 +43,12 @@
 		}
 
 		function clearCredentials() {
+			$rootScope.selectedProductItems = [];
 			$rootScope.globals = {};
 			$cookieStore.remove('globals');
 			$rootScope.access = null;
 			$http.defaults.headers.common.Authorization = 'Basic';
+			$location.path('/#');
 		}
 	}
 

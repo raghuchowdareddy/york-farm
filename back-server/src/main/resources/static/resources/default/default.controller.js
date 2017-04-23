@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app').controller('DefaultController', DefaultController);
-    DefaultController.$inject = [ '$location' ];
+    DefaultController.$inject = [ '$scope' ];
     
-    function DefaultController($location) {
+    function DefaultController($scope) {
         var defaultCtrl = this;
         (function initController() {
         	

@@ -1,126 +1,116 @@
 <section id="cart_items">
 	<div class="container">
-		<div class="checkout-options">
-			<h3>&nbsp;</h3>
-			<ul class="nav">
-				<li><label><input type="checkbox">&nbsp;Register Account</label></li>
-				<li><label><input type="checkbox">&nbsp;Guest Checkout</label></li>
-				<li><a href="#"><i class="fa fa-times"></i>&nbsp;Cancel</a></li>
-			</ul>
-		</div>
-		<div class="register-req">
-			<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-		</div>
 		<div class="shopper-informations">
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="shopper-info">
-						<p>Shopper Information</p>
-						<form>
-							<input type="text" placeholder="Display Name">
-							<input type="text" placeholder="Username">
-						</form>
-						<a class="btn btn-primary" href="">Get Quotes</a>
-						<a class="btn btn-primary" href="">Continue</a>
+				<div class="col-sm-7">
+				<p>My Cart</p>
+					<div class="scroll table-responsive cart_info">
+						<table class="table table-responsive">
+							<thead><tr class="cart_menu">
+								<td class="image">Item</td>
+								<td class="quantity">KGs</td>
+								<td class="total">Total</td>
+							</tr></thead>
+							<tbody ng-if="selectedProductItems.length != 0"><tr ng-repeat="selectedProductItem in selectedProductItems">
+								<td class="cart_product"><a href="#"><img src="../../resources/images/product/{{selectedProductItem.productName | lowercase}}.jpg" width="110" height="110" /></a></td>
+								<td class="cart_quantity"><p class="center">{{selectedProductItem.quantity}}</p></td>
+								<td class="cart_total"><p class="cart_total_price">{{(selectedProductItem.price * selectedProductItem.quantity) | currency:"₹"}}</p></td>
+							</tr><tr class="info">
+								<td class="clearfix">Items- {{selectedProductItems.length}}</td>
+								<td class="clearfix col-sm-3">Kgs- {{totalQuantity}}</td>
+								<td class="clearfix col-sm-5">₹ {{subTotal + tax + shippingCost}}</td>
+							</tr></tbody>
+							<tbody ng-if="selectedProductItems.length == 0">
+								<tr><td><p>No items to display!!</p></td></tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-12">
+						<a class="btn btn-default pull-right check_out" href ng-click="checkoutCtrl.saveOrder()"><span>Place Order</span></a>
 					</div>
 				</div>
 				<div class="col-sm-5 clearfix">
+				<p>Deliver To</p>
 					<div class="bill-to">
-						<p>Bill To</p>
 						<div class="form-one">
 							<form>
-								<input type="text" placeholder="Email ID*">
-								<input type="text" placeholder="Name *">
-								<input type="text" placeholder="House/Flat Number *">
-								<input type="text" placeholder="Street Name">
-								<input type="text" placeholder="Landmark">
+								<input type="text" value="{{user.emailId}}" disabled="disabled"> 
+								<input type="text" value="{{user.name}}" disabled="disabled">
 							</form>
 						</div>
 						<div class="form-two">
 							<form>
-								<select>
-									<option>--- City ---</option>
-									<option>Bangalore</option>
-								</select>
-								<select>
+								<select required="required" ng-model="checkoutCtrl.locationId" ng-change="checkoutCtrl.landmarksByLocation()">
 									<option>--- Location ---</option>
-									<option>Whitefield</option>
+									<option ng-repeat="location in checkoutCtrl.locations" value="{{location.locationId}}">{{location.locationName}}</option>
 								</select>
-								<input type="text" placeholder="Zip / Postal Code *">
-								<input type="text" placeholder="Mobile Phone">
+								<select required="required" ng-model="checkoutCtrl.landmark">
+									<option>--- Landmark ---</option>
+									<option ng-repeat="landmark in checkoutCtrl.landmarks" value="{{landmark.locationId}}">{{landmark.value1}} - {{landmark.value2}}</option>
+								</select>
+								<input type="text" value="{{user.mobileNo}}" disabled="disabled">
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
-					<div class="order-message">
-						<p>Shipping Order</p>
-						<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="10"></textarea>
-						<label><input type="checkbox"> Shipping to bill address</label>
-					</div>
-				</div>
 			</div>
 		</div>
-		<div class="review-payment"><h2>Review &amp; Payment</h2></div>
-		<div class="table-responsive cart_info">
-			<table class="table table-condensed">
+		<div>My Orders</div>
+		<div class="table-responsive cart_info scroll">
+			<table class="table table-condensed table-striped">
 				<thead><tr class="cart_menu">
-					<td class="image">Item</td>
-					<td class="description"></td>
-					<td class="price">Price</td>
-					<td class="quantity">Quantity</td>
-					<td class="total">Total</td>
+					<td class="number">Order #</td>
+					<td class="date">Order Date</td>
+					<td class="items">Total Items</td>
+					<td class="status">Status</td>
+					<td>&nbsp;</td>
 				</tr></thead>
-				<tbody>
-					<tr>
-						<td class="cart_product"><a href="#"><img src="../../resources/images/product/apples.jpg" width="110" height="110"/></a></td>
-						<td class="cart_description"><h4><a href="">Apple</a></h4></td>
-						<td class="cart_price"><p>10.00</p></td>
-						<td class="cart_quantity"><div class="cart_quantity_button">
-							<a class="cart_quantity_up" href=""> + </a>
-							<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-							<a class="cart_quantity_down" href=""> - </a>
-						</div></td>
-						<td class="cart_total"><p class="cart_total_price">10.00</p></td>
-					</tr>
-					<tr>
-						<td class="cart_product"><a href="#"><img src="../../resources/images/product/roses.jpg" width="110" height="110"/></a></td>
-						<td class="cart_description"><h4><a href="">Rose</a></h4></td>
-						<td class="cart_price"><p>10.00</p></td>
-						<td class="cart_quantity"><div class="cart_quantity_button">
-							<a class="cart_quantity_up" href=""> + </a>
-							<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-							<a class="cart_quantity_down" href=""> - </a>
-						</div></td>
-						<td class="cart_total"><p class="cart_total_price">10.00</p></td>
-					</tr>
-					<tr>
-						<td class="cart_product"><a href="#"><img src="../../resources/images/product/tomatoes.jpg" width="110" height="110"/></a></td>
-						<td class="cart_description"><h4><a href="">Tomato</a></h4></td>
-						<td class="cart_price"><p>10.00</p></td>
-						<td class="cart_quantity"><div class="cart_quantity_button">
-							<a class="cart_quantity_up" href=""> + </a>
-							<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-							<a class="cart_quantity_down" href=""> - </a>
-						</div></td>
-						<td class="cart_total"><p class="cart_total_price">10.00</p></td>
-					</tr>
-					<tr>
-						<td colspan="4">&nbsp;</td>
-						<td colspan="2"><table class="table table-condensed total-result">
-							<tr><td>Cart Sub Total</td><td>30.00</td></tr>
-							<tr><td>Eco Tax</td><td>5.00</td></tr>
-							<tr class="shipping-cost"><td>Shipping Cost</td><td>0.00</td></tr>
-							<tr><td>Total</td><td><span>35.00</span></td></tr>
-						</table></td>
-					</tr>
+				<tbody><tr ng-repeat="order in checkoutCtrl.orders">
+					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderId}}</a></td>
+					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderedDate}}</a></td>
+					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.orderedItems.length}}</a></td>
+					<td><a href ng-click="checkoutCtrl.openItemsWindow(order)">{{order.status}}</a></td>
+					<td class="cart_delete"><a class="cart_quantity_delete" href ng-click="checkoutCtrl.cancelOrder(order, $index)"><i class="fa fa-times"></i></a></td>
+				</tr></tbody>
+				<tbody ng-if="orders.length == 0">
+					<tr><td><div class="col-sm-8">No items in your cart!!</div></td></tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="payment-options">
-			<span><label><input type="checkbox">&nbsp;Direct Bank Transfer</label></span>
-			<span><label><input type="checkbox">&nbsp;Cash Payment</label></span>
-			<span><label><input type="checkbox">&nbsp;Paypal</label></span>
+	</div>
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header header-padding">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><p class="modal-title">Items</p>
+				</div>
+				<div class="modal-body body-padding">
+				<div class="row-fluid">
+				<div class="span-12">
+					<span class = "label label-default label-background"> Contact-</span><span>{{order.mobileNumber}}</span>
+					<span class = "label label-default label-background"> Name-</span><span>{{order.userName}}</span>
+					<span class = "label label-default label-background"> Location-</span><span>{{order.locationName}}</span>
+					<span class = "label label-default label-background"> Land Mark-</span><span>{{order.landmark1}} {{order.landmark2}} {{order.landmark3}}</span>
+				</div>
+				</div>
+				<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead><tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="price">Price/Kg</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+					</tr></thead>
+					<tbody><tr ng-repeat="orderItem in order.orderedItems">
+						<td class="cart_product"><img src="../../resources/images/product/{{orderItem.productName | lowercase}}.jpg" width="90" height="90" /></td>
+						<td class="cart_price">{{orderItem.price | currency:"₹"}}</td>
+						<td class="cart_quantity">{{orderItem.quantity}} Kg</td>
+						<td class="cart_total"><p class="cart_total_price">{{(orderItem.price * orderItem.quantity) | currency:"₹"}}</p></td>
+					</tr></tbody>
+				</table>
+				</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>

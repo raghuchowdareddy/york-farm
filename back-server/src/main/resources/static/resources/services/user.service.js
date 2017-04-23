@@ -16,7 +16,7 @@
         }
 	    
 	    function getDetailByUsername(username) {
-	    	return $http.get('/api/userservice/user/' + username)
+	    	return $http.get('/api/userservice/user/' + username);
 	    }
 	    
 	    function saveUser(user) {

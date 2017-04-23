@@ -7,3 +7,5 @@ zuul:
   routes:
     user-service: 
       path: /api/userservice/**
+    inventory-service:
+      path: /api/inventoryservice/**

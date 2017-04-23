@@ -15,7 +15,8 @@ public class LocationDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int locationId, countryId;
-	private String locationName, stateName, cityName, countryName;
+	private String value1, value2, value3;
+	private String locationName, stateName, cityName, countryName, isdCode;
 	private long pinCode;
 	
 	public LocationDTO() {
@@ -70,11 +71,43 @@ public class LocationDTO implements Serializable {
 		this.countryId = countryId;
 	}
 
+	public String getIsdCode() {
+		return isdCode;
+	}
+
+	public void setIsdCode(String isdCode) {
+		this.isdCode = isdCode;
+	}
+
 	public String getCountryName() {
 		return countryName;
 	}
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
+	}
+
+	public String getValue1() {
+		return value1;
+	}
+
+	public void setValue1(String value1) {
+		this.value1 = value1;
+	}
+
+	public String getValue2() {
+		return value2;
+	}
+
+	public void setValue2(String value2) {
+		this.value2 = value2;
+	}
+
+	public String getValue3() {
+		return value3;
+	}
+
+	public void setValue3(String value3) {
+		this.value3 = value3;
 	}
 }

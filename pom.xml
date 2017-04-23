@@ -23,6 +23,7 @@
 		<module>user-service</module>
 		<module>model</module>
 		<module>back-server</module>
+		<module>inventory-service</module>
 	</modules>
 	<dependencies>
 		<dependency>

@@ -28,7 +28,6 @@ import com.enuminfo.farm.repository.IUserOrderRepository;
 import com.enuminfo.farm.repository.IUserOrderedItemRepository;
 import com.enuminfo.farm.repository.IUserRepository;
 import com.enuminfo.farm.service.IUserOrderService;
-import com.enuminfo.farm.util.StatusTypeEnum;
 import com.google.common.collect.Lists;
 
 /**

@@ -7,8 +7,6 @@ import java.util.List;
 
 import com.enuminfo.farm.dto.UserOrderDTO;
 import com.enuminfo.farm.dto.UserOrderedItemDTO;
-import com.enuminfo.farm.model.UserDetail;
-import com.enuminfo.farm.model.UserOrder;
 
 /**
  * @author Kumar
